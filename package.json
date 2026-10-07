@@ -1,0 +1,8 @@
+{
+  "name": "emberfall",
+  "private": true,
+  "scripts": {
+    "test": "node tests/run.cjs",
+    "test:browser": "node tests/browser-narrative.cjs"
+  }
+}
