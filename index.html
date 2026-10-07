@@ -1,0 +1,802 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EMBERFALL II · 深淵之書</title><style>
+:root{color-scheme:dark;--bg:#070b13;--panel:#111b2a;--line:#28364c;--ink:#e5ecf8;--muted:#93a4be;--gold:#f1c480;--mint:#73e2c3;--red:#ff8896;--blue:#84beff}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% 0,#20334a 0,transparent 65%),#070b13;color:var(--ink);font:14px system-ui,-apple-system,sans-serif}button,input,select{font:inherit}button{border:1px solid var(--line);border-radius:8px;background:#1b2a3f;color:var(--ink);cursor:pointer;padding:9px 12px;transition:background .15s,border .15s}button:hover{background:#293e54;border-color:var(--mint)}button:disabled{opacity:.4;cursor:not-allowed}button.primary{background:var(--mint);color:#092c24;font-weight:800}button.danger{border-color:#9b4d60;color:#ffadb7}button.selected{border-color:var(--mint);background:#204037}button.link{background:none;border:none;color:var(--mint);padding:4px}input,select{background:#0b1421;border:1px solid #3b4e67;border-radius:7px;color:var(--ink);padding:9px;max-width:100%}input[type=checkbox]{accent-color:var(--mint)}header{flex-wrap:wrap;padding:19px 24px;max-width:1590px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:12px}h1{font-size:24px;letter-spacing:5px;color:var(--gold);margin:0}h1 span{font-size:12px;color:var(--mint);letter-spacing:1px;margin-left:8px}.sub{font-size:10px;letter-spacing:3px;color:var(--muted);margin-top:6px}.toptools{display:flex;align-items:center;gap:6px;flex-wrap:wrap}.layout{max-width:1590px;margin:auto;display:grid;grid-template-columns:222px minmax(380px,1fr) 260px;gap:13px;padding:0 24px 25px}.panel{border:1px solid var(--line);border-radius:13px;background:linear-gradient(140deg,#152235f2,#0c1420f2);padding:15px;min-width:0}.label{font-size:10px;color:var(--muted);letter-spacing:2px;margin:0 0 12px}.hero{display:flex;gap:11px;align-items:center;margin:13px 0}.heroicon{border:1px solid #45556a;border-radius:11px;color:var(--gold);padding:8px 13px;font-size:29px;background:#243244}.hero strong{font-size:17px}.muted{color:var(--muted)}small{color:var(--muted)}.meterlabel{display:flex;justify-content:space-between;font-size:11px}.bar{height:6px;background:#060c15;margin:6px 0 12px;border-radius:8px;overflow:hidden}.bar>div{height:100%;transition:width .2s}.hp{background:linear-gradient(90deg,#de617b,#ffb2ac)}.mp{background:linear-gradient(90deg,#608fe8,#8eddff)}.hunger{background:linear-gradient(90deg,#9b8550,#f1c480)}.xp{background:var(--mint)}.stats{display:grid;grid-template-columns:1fr 1fr;gap:9px;font-size:12px}.stats span{color:var(--muted)}.stats b{display:block;font-size:15px;color:var(--ink);margin-top:3px}.divider{border-top:1px solid var(--line);margin:14px 0}.skill{display:flex;align-items:center;justify-content:space-between;gap:6px;width:100%;padding:9px 10px;margin-bottom:6px;text-align:left;font-size:12px}.skill small{font-size:10px;flex-shrink:0}.skill span{min-width:0}.statuses{display:flex;flex-wrap:wrap;gap:5px;margin-top:9px}.tag{font-size:10px;background:#29364b;padding:4px 7px;border-radius:5px}.tag.bad{background:#4e2534;color:#ffb1bb}.tag.good{background:#24403c;color:#9ff0cf}.stage{padding:0;overflow:hidden;position:relative;align-self:start}.stagehead{display:flex;justify-content:space-between;align-items:center;padding:13px 16px;border-bottom:1px solid var(--line);font-size:13px;gap:8px}.stagehead small{display:block;font-size:10px;margin-top:3px}.turn{font:11px ui-monospace,monospace;color:var(--muted)}#game{display:block;width:100%;height:auto;aspect-ratio:10/7;background:#060b12;touch-action:none;outline:none}#guidebar{background:linear-gradient(100deg,#173630,#172d40);padding:12px 15px;border-bottom:1px solid #34594e;font-size:12px;line-height:1.65;display:flex;gap:15px;align-items:center}#guidebar strong{color:var(--mint)}#guidebar button{white-space:nowrap;padding:7px 9px;font-size:11px}.guidecopy{flex:1}.guideprogress{height:3px;background:#304439;margin-top:8px}.guideprogress>div{height:100%;background:var(--mint)}.under{padding:10px 15px;font-size:11px;line-height:1.65;color:var(--muted);min-height:40px}.legend{border-top:1px solid var(--line);padding:8px 15px;font-size:10px;display:flex;gap:10px;flex-wrap:wrap;color:var(--muted)}.touch{display:flex;gap:5px;justify-content:center;padding:0 12px 10px}.touch button{font-size:12px;padding:7px 10px}.minimap{width:100%;height:auto;background:#060d18;border:1px solid #2b3d54;border-radius:8px;margin-bottom:12px}.quest{font-size:12px;line-height:1.8}.quest b{color:var(--gold)}.log{height:260px;overflow:auto;font-size:11px;line-height:1.6}.log p{margin:0 0 8px;border-left:2px solid #3f526b;padding-left:8px}.enemyinfo{background:#1c2b3e;padding:10px;border-radius:8px;font-size:11px;line-height:1.7;min-height:56px}.overlay{position:fixed;inset:0;z-index:20;display:flex;justify-content:center;align-items:center;padding:20px;background:#030812df;backdrop-filter:blur(12px)}.hidden{display:none!important}.modal{width:min(1030px,100%);max-height:93vh;overflow:auto;padding:28px;border:1px solid #425775;border-radius:18px;background:linear-gradient(135deg,#1b2b43,#0d1624);box-shadow:0 25px 100px #0008}.modal h2{font-size:27px;color:var(--gold);margin:0 0 10px}.modal h3{font-size:16px;color:#d3dff1}.modal p{color:#afc0d4;line-height:1.8}.eyebrow{font-size:10px;letter-spacing:4px;color:var(--mint);margin-bottom:10px}.bigtitle{font-weight:900;font-size:clamp(33px,6vw,63px);letter-spacing:7px;color:var(--gold);line-height:1.2}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.grid.two{grid-template-columns:1fr 1fr}.cards{margin:14px 0}.card{border:1px solid var(--line);border-radius:10px;padding:14px;font-size:12px;line-height:1.7;background:#142238}.card b{color:var(--gold);font-size:15px;display:block;margin-bottom:5px}.card p{font-size:12px;margin:5px 0}.choice{width:100%;text-align:left}.choice.selected{border-color:var(--mint)}.footer{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0 17px}.tabs button{font-size:12px;padding:7px 10px}.inventory{display:grid;grid-template-columns:1fr 1fr;gap:9px}.inventory .card{display:flex;justify-content:space-between;align-items:center;gap:8px}.itemtext{flex:1;min-width:0}.actions{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end;max-width:130px}.actions button{font-size:11px;padding:5px 7px}kbd{font:10px system-ui;background:#2c3f57;border:1px solid #506581;padding:2px 5px;border-radius:4px;color:#edf5ff}table{width:100%;border-collapse:collapse;font-size:12px}td,th{padding:10px;border-bottom:1px solid var(--line);text-align:left;line-height:1.7}th{color:var(--gold)}.note{padding:12px;border-left:3px solid var(--mint);background:#142e30;border-radius:4px;color:#b6ead6;line-height:1.8;font-size:12px}.warning{border-color:var(--gold);background:#342c1c;color:#f8db9f}.progresslist{display:grid;grid-template-columns:1fr 1fr;gap:6px}.progresslist div{padding:8px 10px;background:#132135;border-radius:6px;font-size:12px}.progresslist .done{color:var(--mint)}.helpbody{min-height:260px}.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.creation{display:grid;grid-template-columns:1fr 1fr;gap:20px}.selectgrid{display:grid;grid-template-columns:1fr 1fr;gap:7px}.selectgrid button{padding:9px;font-size:12px;text-align:left}.selectgrid b{display:block;color:var(--gold);font-size:13px}.characterpreview{background:#102336;border:1px solid #365770;border-radius:11px;padding:16px;margin-top:14px}.seedrow{display:flex;gap:8px;align-items:center;margin:12px 0}.seedrow input{width:190px}.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);z-index:50;background:#243f42;border:1px solid var(--mint);padding:12px 22px;border-radius:10px;max-width:90%;font-size:12px}.routefloor{font-size:11px;line-height:1.8}.highlight{color:var(--mint)}@media(max-width:1200px){.layout{grid-template-columns:190px 1fr}.right{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:15px}.right .log{height:170px}.right .divider{display:none}}@media(max-width:750px){.toptools select{max-width:165px;font-size:11px;padding:7px}header{padding:14px;align-items:start}h1{font-size:18px}.toptools button{font-size:11px;padding:7px}.layout{display:flex;flex-direction:column;padding:0 10px}.stage{order:0;width:100%}.left{order:1}.right{order:2;display:block}.left .skill{width:49%;display:inline-flex;vertical-align:top}.left .hero{margin-top:4px}.grid,.grid.two,.creation{grid-template-columns:1fr}.inventory{grid-template-columns:1fr}.modal{padding:18px}.overlay{padding:9px}.progresslist{grid-template-columns:1fr}.sub{letter-spacing:1px}.bigtitle{letter-spacing:3px}#guidebar{gap:8px}.stats{grid-template-columns:repeat(4,1fr)}}@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body><header><div><h1>EMBERFALL <span>II</span></h1><div class="sub">深淵之書 · THE BOOK OF THE ABYSS</div></div><div class="toptools"><button id="inventoryBtn">背包 <kbd>i</kbd></button><button id="journalBtn">日誌 <kbd>j</kbd></button><button id="helpBtn">手冊 <kbd>h</kbd></button><button id="saveBtn">存檔</button><button id="menuBtn">選單</button></div></header>
+<main class="layout"><aside class="panel left"><div class="label">CHARACTER / 探險者</div><div class="hero"><div class="heroicon" id="heroIcon">♜</div><div><strong id="heroName">餘燼行者</strong><div class="muted" id="heroSub"></div></div></div><div class="meterlabel"><span>生命</span><span id="hpText"></span></div><div class="bar"><div id="hpBar" class="hp"></div></div><div class="meterlabel"><span>魔力</span><span id="mpText"></span></div><div class="bar"><div id="mpBar" class="mp"></div></div><div class="meterlabel"><span id="hungerName">飽食</span><span id="hungerText"></span></div><div class="bar"><div id="hungerBar" class="hunger"></div></div><div class="meterlabel"><span id="xpLabel">經驗</span><span id="xpText"></span></div><div class="bar"><div id="xpBar" class="xp"></div></div><div class="stats" id="stats"></div><div id="statuses" class="statuses"></div><div class="divider"></div><div class="label">ABILITIES / 每一步都有代價</div><div id="skills"></div><button class="skill" id="rangedBtn"><span>➶ 遠程射擊 <kbd>f</kbd></span><small>2 魔力</small></button><button class="skill" id="potionBtn"><span>♥ 喝生命藥水 <kbd>q</kbd></span><small id="potCount"></small></button><button class="skill" id="foodBtn"><span>◈ 進食 <kbd>r</kbd></span><small id="foodCount"></small></button><button class="skill" id="searchBtn"><span>⌕ 搜尋陷阱 / 暗門 <kbd>c</kbd></span></button><button class="skill" id="waitBtn"><span>◷ 等待 <kbd>space</kbd></span><small>額外回魔</small></button><small style="font-size:10px;line-height:1.8">你思考時，世界也會等待。<br>無效操作不扣回合；打開背包不扣回合。</small></aside>
+<section class="panel stage"><div class="stagehead"><div><strong id="floorTitle">深淵之書</strong><small id="floorDesc">隨機世界 · 永久死亡 · 戰術探索</small></div><span class="turn" id="turnText">TURN 0</span></div><div id="guidebar"><div class="guidecopy" id="guideCopy"></div><button id="guideHint">提示</button></div><canvas id="game" width="1000" height="700" tabindex="0" aria-label="回合制地下城。使用 WASD 或方向鍵移動。"></canvas><div id="context" class="under"></div><div class="touch"><button data-move="0,-1">↑</button><button data-move="-1,0">←</button><button data-move="0,1">↓</button><button data-move="1,0">→</button><button id="interactBtn">互動 e</button><button id="autoBtn">探索 x</button></div><div class="legend"><span style="color:#8af6d5">◆ 你</span><span style="color:#ff9cac">字母：敵人</span><span style="color:#ffc779">▣ 寶箱 / $ 商人</span><span style="color:#b998ff">▼ 下樓 / ▲ 上樓</span><span style="color:#8ddbeb">✚ 聖壇 / ♥ 泉水</span><span>+ 門 · ▒ 迷霧</span></div></section>
+<aside class="panel right"><div><div class="label">MAP & OBJECTIVE / 探索</div><canvas id="mini" class="minimap" width="280" height="196"></canvas><div id="quest" class="quest"></div><div class="divider"></div><div class="label">TARGET / 目標情報</div><div id="enemyInfo" class="enemyinfo">點選可見敵人瞄準。</div><div class="divider"></div><div class="label">LOADOUT / 裝備</div><div id="equipment" class="quest"></div></div><div><div class="divider"></div><div class="label">CHRONICLE / 最近事件</div><div id="log" class="log" aria-live="polite"></div></div></aside></main><div id="overlay" class="overlay hidden"><div id="modal" class="modal"></div></div><div id="toast" class="toast hidden"></div><script>
+'use strict';
+const VERSION=2, W=40,H=28,T=25, MAX_DEPTH=24, KEY='emberfall-v2-save',PROFILE_KEY='emberfall-v2-profile';
+const $=id=>document.getElementById(id),esc=t=>String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const RACES={human:{name:'人類',icon:'♙',hp:0,mp:0,atk:0,def:0,desc:'靈活的學習者。經驗獲得 +20%，每次升級額外恢復 8 生命。',short:'經驗 +20%'},elf:{name:'精靈',icon:'♧',hp:-5,mp:8,atk:0,def:0,desc:'親近秘法。法術傷害 +20%，視野 +1，毒傷減半。',short:'魔法 / 視野強化'},dwarf:{name:'矮人',icon:'▣',hp:8,mp:-3,atk:0,def:2,desc:'礦坑的主人。護甲 +2，負重上限 +10，自動發現鄰接陷阱。',short:'高護甲 / 探陷阱'},goblin:{name:'哥布林',icon:'♜',hp:-3,mp:2,atk:0,def:0,desc:'交易鬼才。商店價格降低 20%，初始金幣 +30，食物效果 +25%。',short:'便宜購物 / 補給'},orc:{name:'獸人',icon:'♟',hp:10,mp:-5,atk:3,def:0,desc:'狂戰士血統。攻擊 +3，生命低於 35% 時近戰傷害 +30%。',short:'低血狂暴'},troll:{name:'巨魔',icon:'♞',hp:18,mp:-6,atk:1,def:0,desc:'再生體質。非飢餓時每 6 回合恢復 3 生命，但飽食消耗較快。',short:'再生 / 食量大'},vampire:{name:'吸血鬼',icon:'◈',hp:-2,mp:6,atk:1,def:0,desc:'以戰養戰。擊殺恢復 4 生命和 70 血飽；普通食物效果減半。免疫中毒。',short:'吸血 / 以殺止飢'},construct:{name:'魔像',icon:'⬡',hp:12,mp:-7,atk:1,def:1,desc:'不需要食物，免疫中毒。每 10 回合修復 2 生命；生命藥水效果減半。',short:'免飢餓 / 免毒'}};
+const JOBS={warden:{name:'守燼者',icon:'♜',hp:65,mp:21,atk:8,def:3,ult:'鋼鐵壁壘',cost:7,desc:'生命與護甲最高。專屬技能獲得護盾與短期減傷。'},mage:{name:'織焰師',icon:'✦',hp:45,mp:37,atk:5,def:1,ult:'秘法洪流',cost:10,desc:'法術傷害 +30%。專屬技能對可見近敵造成範圍傷害。'},rogue:{name:'夜行者',icon:'◇',hp:50,mp:27,atk:7,def:2,ult:'影遁',cost:6,desc:'暴擊率 25%，閃步耗魔減半。影遁給 4 回合隱匿與暴擊。'},ranger:{name:'巡林者',icon:'➶',hp:53,mp:27,atk:7,def:2,ult:'穿心連射',cost:8,desc:'遠程傷害 +4。專屬技能對同一目標連射兩次。'},cleric:{name:'聖諭者',icon:'✚',hp:58,mp:31,atk:6,def:2,ult:'淨化祈禱',cost:9,desc:'專屬技能恢復生命並解除中毒 / 燃燒 / 遲緩。聖壇祝福更強。'},necro:{name:'喚骨者',icon:'☽',hp:48,mp:33,atk:6,def:1,ult:'骸骨契約',cost:10,desc:'召喚骸骨盟友 40 回合。盟友擋路時可交換位置，最多 2 隻。'}};
+const BIOMES=[{id:'mine',name:'餘燼礦坑',range:'1–4',floor:'#1b2937',wall:'#35475b',accent:'#dda86f',hint:'礦工留下寶箱與暗門。第四層的監工會預告重擊。',pool:['rat','goblin','bat','shaman'],boss:'foreman'}, {id:'crypt',name:'骸骨陵墓',range:'5–8',floor:'#202438',wall:'#3d4059',accent:'#b4a3da',hint:'骸骨不畏黑暗；弓手需要視線。巫妖會召喚援軍。',pool:['skeleton','archer','wraith','shaman'],boss:'lich'}, {id:'fungal',name:'菌霧沼澤',range:'9–12',floor:'#1b302d',wall:'#32544a',accent:'#9bd47d',hint:'毒霧與蜘蛛會消耗補給。抗毒種族或解毒藥很重要。',pool:['spider','slime','stalker','shaman'],boss:'queen'}, {id:'ice',name:'霜裂迷宮',range:'13–16',floor:'#1b2e40',wall:'#385f77',accent:'#8fdcf0',hint:'冰面可能使你遲緩。冰霜生物對寒冰傷害有抗性。',pool:['wolf','frostmage','sentinel','archer'],boss:'colossus'}, {id:'fire',name:'黑曜熔城',range:'17–20',floor:'#34232c',wall:'#594049',accent:'#f99b69',hint:'熔岩與燃燒很危險。火焰敵人對火球有抗性。',pool:['imp','golem','demon','sorcerer'],boss:'infernal'}, {id:'void',name:'星隕深淵',range:'21–24',floor:'#24223b',wall:'#494163',accent:'#c7a3ff',hint:'哨兵與法師守著餘燼之心。最終守衛會換位與召喚。',pool:['sentinel','sorcerer','mimic','demon'],boss:'abyss'}];
+const BRANCHES={forge:{name:'矮人鍛造坑',entry:6,length:2,accent:'#f9ad70',pool:['goblin','golem','shaman'],boss:'smith',reward:'forgeHeart',desc:'尋回熔鑄之心：護甲 +3、火抗 50%。'},archive:{name:'沉沒書庫',entry:11,length:2,accent:'#82d9df',pool:['wraith','spider','sorcerer'],boss:'librarian',reward:'tome',desc:'尋回潮汐秘典：魔力上限 +10、技能耗魔 -1。'},court:{name:'失落王廷',entry:18,length:3,accent:'#d5a4fb',pool:['sentinel','archer','demon'],boss:'king',reward:'crown',desc:'尋回失落王冠：攻擊 +4、生命上限 +20。'}};
+const ENEMIES={
+rat:{name:'洞窟獵犬',glyph:'r',hp:14,atk:5,xp:8,ai:'melee',color:'#d7ae88',desc:'會追蹤腳步；適合引到狹窄走廊。'},goblin:{name:'礦坑哥布林',glyph:'g',hp:21,atk:6,xp:11,ai:'melee',color:'#9cc875',doors:true,desc:'會開門、繞牆追擊。'},bat:{name:'嗜血蝙蝠',glyph:'b',hp:12,atk:4,xp:8,ai:'fast',color:'#b496d2',desc:'每 3 回合可能移動兩格；生命較少。'},shaman:{name:'腐化祭司',glyph:'m',hp:22,atk:6,xp:14,ai:'caster',color:'#b690e0',doors:true,desc:'視線內施法；攻擊可能施加中毒。'},skeleton:{name:'骸骨士兵',glyph:'s',hp:28,atk:8,xp:14,ai:'melee',color:'#d4dbe7',doors:true,desc:'結實的近戰守衛。'},archer:{name:'墓穴弓手',glyph:'a',hp:21,atk:8,xp:14,ai:'ranged',color:'#b8a3db',doors:true,desc:'五格內有視線時射擊，貼身後近戰。'},wraith:{name:'無名怨靈',glyph:'w',hp:25,atk:8,xp:17,ai:'caster',color:'#8fa7d7',desc:'攻擊會抽取 2 魔力，不能穿過牆壁。'},spider:{name:'劇毒蜘蛛',glyph:'p',hp:25,atk:7,xp:16,ai:'poison',color:'#acd187',desc:'近戰命中會施加中毒。'},slime:{name:'分裂黏液',glyph:'o',hp:32,atk:7,xp:18,ai:'split',color:'#91d7a5',desc:'首次低於半血時分裂；優先用爆破處理。'},stalker:{name:'菌霧獵手',glyph:'h',hp:30,atk:10,xp:19,ai:'fast',color:'#d3d69b',desc:'會快速逼近，別在開闊地被圍住。'},wolf:{name:'霜牙狼',glyph:'W',hp:32,atk:10,xp:20,ai:'fast',color:'#c6e4eb',resist:'cold',desc:'寒冰抗性 65%；火球很有效。'},frostmage:{name:'冰霜術士',glyph:'F',hp:30,atk:10,xp:22,ai:'coldcaster',color:'#93cfea',resist:'cold',doors:true,desc:'遠距攻擊造成遲緩。'},sentinel:{name:'符文哨兵',glyph:'S',hp:46,atk:12,xp:25,ai:'melee',color:'#b9c8e3',doors:true,armor:2,desc:'自帶護甲。法術無視這層物理護甲。'},imp:{name:'熔火小鬼',glyph:'i',hp:29,atk:10,xp:22,ai:'firecaster',color:'#efa878',resist:'fire',desc:'火抗 65%；會施加燃燒。'},golem:{name:'黑曜魔像',glyph:'G',hp:58,atk:14,xp:29,ai:'melee',color:'#b9a7a1',resist:'fire',armor:3,desc:'高生命、高護甲，動作比較遲緩。'},demon:{name:'裂隙惡魔',glyph:'D',hp:46,atk:14,xp:28,ai:'melee',color:'#e18aab',resist:'fire',doors:true,desc:'強力近戰，火抗很高。'},sorcerer:{name:'星隕法師',glyph:'M',hp:36,atk:13,xp:27,ai:'caster',color:'#b798ef',doors:true,desc:'六格內施法；可用門與牆切斷視線。'},mimic:{name:'寶箱擬態怪',glyph:'C',hp:44,atk:13,xp:27,ai:'melee',color:'#e2bf7e',desc:'不是所有金色東西都值得摸。'},
+foreman:{name:'鐵鎚監工',glyph:'Ω',hp:135,atk:12,xp:85,ai:'boss',color:'#e4b07e',boss:true,desc:'鎖定玩家位置，下一回合落下 3×3 重擊。'},lich:{name:'白骨巫妖',glyph:'L',hp:190,atk:14,xp:130,ai:'boss',color:'#bda8ec',boss:true,desc:'重擊與召喚骸骨；低生命時狂暴。'},queen:{name:'菌潮母皇',glyph:'Q',hp:230,atk:17,xp:165,ai:'boss',color:'#b6db94',boss:true,desc:'重擊附帶毒素，召喚蜘蛛。'},colossus:{name:'霜裂巨像',glyph:'Ω',hp:280,atk:19,xp:195,ai:'boss',color:'#9cdcf2',boss:true,resist:'cold',desc:'重擊附帶遲緩；寒冰抗性。'},infernal:{name:'熔城暴君',glyph:'R',hp:330,atk:21,xp:225,ai:'boss',color:'#ffac7d',boss:true,resist:'fire',desc:'重擊附帶燃燒，召喚小鬼。'},abyss:{name:'深淵編織者',glyph:'Æ',hp:420,atk:24,xp:300,ai:'boss',color:'#d3a9ff',boss:true,desc:'換位、召喚、狂暴與預告重擊；守護餘燼之心。'},smith:{name:'失控熔爐',glyph:'B',hp:180,atk:15,xp:120,ai:'boss',color:'#ec9d70',boss:true,resist:'fire',desc:'鍛造坑守衛，擊敗可取熔鑄之心。'},librarian:{name:'溺亡館長',glyph:'B',hp:245,atk:18,xp:165,ai:'boss',color:'#89d5dd',boss:true,desc:'守護潮汐秘典，召喚怨靈。'},king:{name:'無冕之王',glyph:'K',hp:340,atk:23,xp:230,ai:'boss',color:'#d1a5ed',boss:true,desc:'王廷守衛，擊敗可取失落王冠。'},dummy:{name:'訓練木偶',glyph:'t',hp:22,atk:2,xp:10,ai:'dummy',color:'#e1bc86',desc:'專門陪你學習，不會移動。'}};
+const ITEMS={
+heal:{name:'生命藥水',kind:'potion',effect:'heal',desc:'恢復 38 + 等級×2 生命。',price:24,weight:1},mana:{name:'魔力藥水',kind:'potion',effect:'mana',desc:'恢復 24 魔力。',price:22,weight:1},antidote:{name:'淨化藥水',kind:'potion',effect:'cleanse',desc:'解除中毒、燃燒與遲緩。',price:18,weight:1},might:{name:'巨力藥水',kind:'potion',effect:'might',desc:'12 回合內近戰傷害 +35%。',price:25,weight:1},poison:{name:'腐毒藥水',kind:'potion',effect:'poison',desc:'飲用會中毒；先鑑定比較好。',price:4,weight:1},food:{name:'旅行口糧',kind:'food',desc:'恢復 420 飽食。',price:16,weight:1},identify:{name:'鑑定卷軸',kind:'scroll',effect:'identify',desc:'鑑定一件物品，揭示品類與詛咒。',price:30,weight:1},mapping:{name:'測繪卷軸',kind:'scroll',effect:'mapping',desc:'揭露本層地形，不揭露未見敵人。',price:30,weight:1},teleport:{name:'傳送卷軸',kind:'scroll',effect:'teleport',desc:'傳送到本層隨機安全地板。',price:26,weight:1},enchant:{name:'附魔卷軸',kind:'scroll',effect:'enchant',desc:'目前武器強化 +2。',price:40,weight:1},uncurse:{name:'淨咒卷軸',kind:'scroll',effect:'uncurse',desc:'解除所有已裝備物品的詛咒。',price:32,weight:1},fear:{name:'威懾卷軸',kind:'scroll',effect:'fear',desc:'可見敵人停止行動 4 回合。',price:24,weight:1},wandFire:{name:'火焰魔杖',kind:'wand',effect:'fire',desc:'六格內火焰爆破。每次消耗 1 充能。',price:65,weight:2},wandFrost:{name:'冰霜魔杖',kind:'wand',effect:'cold',desc:'六格內攻擊並凍結目標。',price:65,weight:2},wandHeal:{name:'修復魔杖',kind:'wand',effect:'heal',desc:'恢復 28 生命，每次 1 充能。',price:60,weight:2},sword:{name:'燼鐵劍',kind:'weapon',desc:'均衡近戰武器。',price:50,weight:4},axe:{name:'裂石斧',kind:'weapon',desc:'較高攻擊，重量較大。',price:65,weight:6},dagger:{name:'幽影匕首',kind:'weapon',desc:'輕量武器，暴擊率 +10%。',price:48,weight:2},staff:{name:'符文法杖',kind:'weapon',desc:'裝備時法術傷害 +20%。',price:58,weight:3},leather:{name:'獵人皮甲',kind:'armor',desc:'重量較輕。',price:45,weight:4},plate:{name:'符文板甲',kind:'armor',desc:'較高護甲，重量較大。',price:75,weight:8},ringGuard:{name:'守護之戒',kind:'ring',effect:'guard',desc:'護甲 +2。',price:70,weight:1},ringSight:{name:'遠視之戒',kind:'ring',effect:'sight',desc:'視野 +2。',price:60,weight:1},ringRegen:{name:'再生之戒',kind:'ring',effect:'regen',desc:'非飢餓時每 8 回合恢復 3 生命。',price:80,weight:1},ringSatiety:{name:'飽足之戒',kind:'ring',effect:'satiety',desc:'飽食消耗減半。',price:65,weight:1}};
+const RELICS=[{id:'fang',name:'獵人之牙',desc:'基礎攻擊 +2。'},{id:'heart',name:'不熄火種',desc:'生命上限 +12，恢復 30 生命。'},{id:'well',name:'秘法之泉',desc:'魔力上限 +6，回滿魔力。'},{id:'stone',name:'玄武碎片',desc:'基礎護甲 +1。'},{id:'kit',name:'旅者之袋',desc:'口糧 ×2、生命藥水 ×2。'},{id:'spark',name:'餘燼護符',desc:'法術傷害永久 +10%。'},{id:'soul',name:'靈魂容器',desc:'每次擊殺額外恢復 2 魔力。'},{id:'feather',name:'風羽',desc:'永久暴擊率 +5%，負重上限 +3。'}];
+const LESSONS=[
+{title:'01 · 世界會等你',goal:'成功移動 3 格。',why:'每個有效動作消耗一回合；你不動，敵人就不動。',hint:'按 w/a/s/d 或方向鍵。先在起點附近走三步。',event:'move',need:3},
+{title:'02 · 碰撞不是死亡',goal:'走向一面牆，試著撞它一次。',why:'撞牆不消耗回合；關閉的門則會被打開並消耗回合。',hint:'起點東北方有一根石柱（10,10）。走到相鄰格再向石柱移動。',event:'wall',at:{x:10,y:10}},
+{title:'03 · 互動與寶箱',goal:'到金色寶箱旁按 e。',why:'互動適用於腳下或相鄰物件。物品會進入背包。',hint:'寶箱在（11,12）。靠近後按 e 或點下方「互動」。',event:'chest',at:{x:11,y:12}},
+{title:'04 · 裝備不是自動變強',goal:'開背包 i，裝備「訓練長劍」。',why:'背包裡的武器沒有加成；要裝備才會影響攻擊。',hint:'按 i，找到訓練長劍，點「裝備」，再返回遊戲。',event:'equip'},
+{title:'05 · 近戰與生命',goal:'走向訓練木偶並擊敗它。',why:'朝敵人移動會改為近戰；敵人會在你的回合後反擊。',hint:'木偶在（15,12）。可以先打，再用藥水恢復；訓練場不會永久死亡。',event:'kill',at:{x:15,y:12}},
+{title:'06 · 瞄準與技能',goal:'對第二個木偶使用 1「餘燼爆破」。',why:'技能消耗魔力並有冷卻。點敵人設定目標；無目標會找最近可見敵人。',hint:'第二個木偶在（18,12）。走到 6 格內、有視線的位置，點它，再按 1。',event:'fire',at:{x:18,y:12}},
+{title:'07 · 補給與回合風險',goal:'按 q 喝一瓶生命藥水。',why:'喝藥需要一回合，戰鬥中也會讓敵人行動；不要等到剩 1 HP。',hint:'你的生命已降低。按 q 或左側生命藥水按鈕。',event:'heal'},
+{title:'08 · 不只管血條',goal:'按 r 吃一份口糧。',why:'飽食隨回合減少；飢餓會阻止再生，耗盡時會造成傷害。',hint:'訓練用角色是人類，所以需要食物。按 r。正式遊戲的魔像不需要吃。',event:'food'},
+{title:'09 · 搜尋與陷阱',goal:'靠近（12,17），按 c 搜尋並揭露陷阱。',why:'沒有發現的陷阱走上去才會觸發。搜尋半徑 3 格，會消耗一回合。',hint:'走到標記陷阱的 3 格範圍內，按 c。正式遊戲不會替你標出隱藏陷阱。',event:'searchTrap',at:{x:12,y:17}},
+{title:'10 · 未知物品與鑑定',goal:'用鑑定卷軸，鑑定背包中的未知戒指。',why:'外觀與真名每局重新對應。鑑定會揭露種類與詛咒；裝備詛咒物會被綁定。',hint:'按 i → 鑑定卷軸「使用」→ 點未知戒指「鑑定」。',event:'identify'},
+{title:'11 · 詛咒不是裝飾',goal:'裝備剛鑑定的詛咒戒指，再用淨咒卷軸解除。',why:'詛咒裝備不能替換或卸下；先讀淨咒卷軸，才能正常卸下。',hint:'背包中裝備標示「詛咒」的戒指，再使用淨咒卷軸。',event:'uncurse'},
+{title:'12 · 聖壇與祝福',goal:'到聖壇旁按 e，選擇祝福。',why:'聖壇可恢復生命或祝福裝備，但每座只能使用一次。',hint:'聖壇在（19,18）。移動過去，按 e，選擇一種祝福。',event:'shrine',at:{x:19,y:18}},
+{title:'13 · 準備深入地下',goal:'到紫色階梯旁按 e，完成訓練。',why:'正式世界有 24 層主線、三條支線、六位區域守衛。樓層會保留，隨時可以上樓。',hint:'階梯在（25,19）。完成後可選種族 / 職業開始正式冒險。',event:'exit',at:{x:25,y:19}}
+];
+let s=null,view='',target=null,particles=[],auto=false,autoClock=0,rngState=1,lastTime=0,selection={race:'human',job:'warden',mode:'explorer',seed:''},invTab='all',helpTab='controls',toastUntil=0;
+const canvas=$('game'),ctx=canvas.getContext('2d'),mini=$('mini').getContext('2d');
+function rand(){rngState|=0;rngState^=rngState<<13;rngState^=rngState>>>17;rngState^=rngState<<5;return(rngState>>>0)/4294967296}function ri(a,b){return a+Math.floor(rand()*(b-a+1))}function pick(a){return a[ri(0,a.length-1)]}function hash(t){let n=2166136261;for(const c of String(t))n=Math.imul(n^c.charCodeAt(0),16777619);return n|0||12345}function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){const j=ri(0,i);[a[i],a[j]]=[a[j],a[i]]}return a}
+const dirs=[[1,0],[-1,0],[0,1],[0,-1]];function key(x,y){return y*W+x}function inside(x,y){return Number.isInteger(x)&&Number.isInteger(y)&&x>=0&&y>=0&&x<W&&y<H}function level(){return s.floors[s.floor]}function tile(x,y){return inside(x,y)?level().map[key(x,y)]:1}function terrainPass(t){return[0,2,3,4,5].includes(t)}function walkable(x,y){return inside(x,y)&&[0,3,4,5].includes(tile(x,y))}function distance(a,b){return Math.abs(a.x-b.x)+Math.abs(a.y-b.y)}function enemyAt(x,y){return level().enemies.find(e=>e.hp>0&&e.x===x&&e.y===y)}function allyAt(x,y){return level().allies.find(e=>e.hp>0&&e.x===x&&e.y===y)}function objectAt(x,y){return level().objects.find(o=>o.x===x&&o.y===y&&!o.used)}function visible(o){return level().visible[key(o.x,o.y)]}function job(){return JOBS[s.job]}function race(){return RACES[s.race]}function ringEffect(t){const a=equipped('ring');return a&&ITEMS[a.type].effect===t}function equipped(slot){return s.p.inventory.find(i=>i.id===s.p.equipment[slot])}function weight(){return s.p.inventory.reduce((n,i)=>n+ITEMS[i.type].weight*i.count,0)}function capacity(){return 35+(s.race==='dwarf'?10:0)+s.p.capacityBonus}function atk(){const w=equipped('weapon');return s.p.atk+(w?.power||0)}function armor(){return s.p.def+(equipped('armor')?.power||0)+(ringEffect('guard')?2:0)}function maxXp(){return s.p.lv*36}function magicMult(){return(1+(s.job==='mage'?.3:0)+(s.race==='elf'?.2:0)+(equipped('weapon')?.type==='staff'?.2:0)+s.p.magicBonus)}
+function log(t,color=''){if(!s)return;s.logs.unshift({t,color,turn:s.turn});s.logs=s.logs.slice(0,75)}function toast(t){$('toast').textContent=t;$('toast').classList.remove('hidden');toastUntil=Date.now()+3500}function modal(html,type){auto=false;view=type;$('modal').innerHTML=html;$('overlay').classList.remove('hidden')}function close(){view='';$('overlay').classList.add('hidden');canvas.focus();if(s)update()}function bind(id,fn){if($(id))$(id).onclick=fn}function all(selector,fn){document.querySelectorAll(selector).forEach(fn)}function burst(x,y,color,n=12){for(let i=0;i<n;i++)particles.push({x:(x+.5)*T,y:(y+.5)*T,vx:(Math.random()-.5)*100,vy:(Math.random()-.5)*100,life:.6,max:.6,color})}function allowed(){return s&&s.status==='playing'&&!view}function stopAuto(){auto=false}
+function item(type,tier=0,opts={}){const d=ITEMS[type];const gear=['weapon','armor','ring'].includes(d.kind);let power=d.kind==='weapon'?2+tier*2+(type==='axe'?2:0):d.kind==='armor'?1+Math.floor(tier/2)+(type==='plate'?2:0):0;return{id:s.nextId++,type,count:1,power,charges:d.kind==='wand'?ri(3,6):0,cursed:gear&&rand()<.12,known:!gear&&['food'].includes(d.kind),...opts}}
+function itemKnown(i){return i.known||s.identified.includes(i.type)}function itemName(i){const d=ITEMS[i.type];if(i.name)return i.name;if(itemKnown(i)||['weapon','armor','food'].includes(d.kind))return d.name;return s.appearances[i.type]||'未知物品'}function itemDetail(i){const d=ITEMS[i.type],known=itemKnown(i);let t=known?d.desc:'尚未鑑定；可用鑑定卷軸確認。';if(['weapon','armor'].includes(d.kind))t+=` ${d.kind==='weapon'?'攻擊':'護甲'} +${i.power}`;if(d.kind==='wand')t+=` · 充能 ${i.charges}`;if(i.known&&i.cursed)t+=' · 詛咒綁定';return t}
+function addItem(i,announce=true){if(['potion','scroll','food'].includes(ITEMS[i.type].kind)){const a=s.p.inventory.find(a=>a.type===i.type&&a.known===i.known&&!a.name&&!i.name);if(a){a.count+=i.count;if(announce)log(`獲得 ${itemName(i)} ×${i.count}。`,'#f1c480');return true}}if(s.p.inventory.length>=36){log('背包格數已滿！先丟棄或出售物品。','#ffad98');return false}s.p.inventory.push(i);if(announce)log(`獲得 ${itemName(i)}${i.count>1?' ×'+i.count:''}。`,'#f1c480');return true}
+function countItem(t){return s.p.inventory.filter(i=>i.type===t).reduce((n,i)=>n+i.count,0)}function consume(i){if(--i.count<=0)s.p.inventory=s.p.inventory.filter(a=>a.id!==i.id)}function randomLoot(tier){const category=ri(0,99);let type=category<30?pick(['heal','mana','antidote','might','poison']):category<48?'food':category<69?pick(['identify','mapping','teleport','enchant','uncurse','fear']):category<82?pick(['sword','axe','dagger','staff','leather','plate']):category<92?pick(['ringGuard','ringSight','ringRegen','ringSatiety']):pick(['wandFire','wandFrost','wandHeal']);return item(type,tier)}
+function floorMeta(id){const [zone,ns]=id.split('-'),n=Number(ns);if(zone==='main')return{id,zone,n,depth:n,biome:Math.floor((n-1)/4),name:BIOMES[Math.floor((n-1)/4)].name,boss:n%4===0?BIOMES[Math.floor((n-1)/4)].boss:null};if(zone==='training')return{id,zone,n:1,depth:1,biome:0,name:'餘燼學院 · 安全訓練場',boss:null};const b=BRANCHES[zone];return{id,zone,n,depth:b.entry+n-1,biome:Math.floor((b.entry-1)/4),name:b.name,boss:n===b.length?b.boss:null}}
+function makeEnemy(type,pos,depth=level().depth){const d=ENEMIES[type],extra=d.boss?0:(depth-1)*2,hp=d.hp+extra;return{id:s.nextId++,type,...pos,hp,maxHp:hp,atk:d.atk+(d.boss?0:Math.floor(depth/3)),xp:d.xp+Math.floor(depth/2),freeze:0,alert:0,lastSeen:null,phase:0,charge:null,split:false}}
+function generateFloor(id){const f={...floorMeta(id),map:Array(W*H).fill(1),seen:Array(W*H).fill(false),visible:Array(W*H).fill(false),rooms:[],objects:[],enemies:[],allies:[],bossDead:false,visited:false};s.floors[id]=f;const old=s.floor;s.floor=id;
+for(let tries=0;tries<250&&f.rooms.length<10;tries++){const r={x:ri(2,W-11),y:ri(2,H-9),w:ri(5,9),h:ri(4,7)};if(f.rooms.some(a=>r.x<a.x+a.w+1&&r.x+r.w+1>a.x&&r.y<a.y+a.h+1&&r.y+r.h+1>a.y))continue;for(let y=r.y;y<r.y+r.h;y++)for(let x=r.x;x<r.x+r.w;x++)f.map[key(x,y)]=0;r.cx=r.x+Math.floor(r.w/2);r.cy=r.y+Math.floor(r.h/2);if(f.rooms.length){const a=f.rooms.at(-1);let x=a.cx,y=a.cy;const horizontal=rand()<.5;if(horizontal){while(x!==r.cx){f.map[key(x,y)]=0;x+=Math.sign(r.cx-x)}while(y!==r.cy){f.map[key(x,y)]=0;y+=Math.sign(r.cy-y)}}else{while(y!==r.cy){f.map[key(x,y)]=0;y+=Math.sign(r.cy-y)}while(x!==r.cx){f.map[key(x,y)]=0;x+=Math.sign(r.cx-x)}}f.map[key(x,y)]=0}f.rooms.push(r)}
+const first=f.rooms[0],last=f.rooms.at(-1);f.start={x:first.cx,y:first.cy};f.end={x:last.cx,y:last.cy};const occupied=new Set([key(first.cx,first.cy),key(last.cx,last.cy)]);const reserve=(r)=>{for(let j=0;j<100;j++){const x=ri(r.x,r.x+r.w-1),y=ri(r.y,r.y+r.h-1),k=key(x,y);if(!occupied.has(k)){occupied.add(k);return{x,y}}}return null};
+if(f.zone==='main'){if(f.n>1)f.objects.push({...f.start,type:'up',to:`main-${f.n-1}`,used:false});else f.objects.push({...f.start,type:'camp',used:false});f.objects.push({...f.end,type:f.n===24?'heart':'down',to:f.n===24?null:`main-${f.n+1}`,used:false});const branch=Object.entries(BRANCHES).find(([k,b])=>b.entry===f.n);if(branch){const a=reserve(f.rooms[Math.min(2,f.rooms.length-1)]);if(a)f.objects.push({...a,type:'portal',to:`${branch[0]}-1`,label:branch[1].name,used:false})}}
+else{f.objects.push({...f.start,type:f.n===1?'portal':'up',to:f.n===1?`main-${BRANCHES[f.zone].entry}`:`${f.zone}-${f.n-1}`,label:'返回主線',used:false});f.objects.push({...f.end,type:f.n===BRANCHES[f.zone].length?'branchExit':'down',to:f.n===BRANCHES[f.zone].length?`main-${BRANCHES[f.zone].entry}`:`${f.zone}-${f.n+1}`,used:false})}
+for(let i=1;i<f.rooms.length;i++){const r=f.rooms[i],spawnCount=ri(1,2)+(f.depth>14&&rand()<.5?1:0);for(let j=0;j<spawnCount;j++){const pos=reserve(r);if(pos){const pool=f.zone==='main'?BIOMES[f.biome].pool:BRANCHES[f.zone].pool;f.enemies.push(makeEnemy(pick(pool),pos,f.depth))}}let pos=reserve(r);if(pos)f.objects.push({...pos,type:i===2?'shrine':i===3?'fountain':'chest',used:false});if(i===1||i===5){pos=reserve(r);if(pos)f.objects.push({...pos,type:'loot',item:i===1?item('food',0,{known:true}):randomLoot(Math.floor(f.depth/4)),used:false})}if(i%2===0){pos=reserve(r);if(pos)f.objects.push({...pos,type:'trap',trap:pick(['spike','poison','alarm']),revealed:false,used:false})}}
+if(f.n%2===1||f.zone!=='main'){const pos=reserve(first);if(pos)f.objects.push({...pos,type:'shop',used:false,stock:['heal','food','identify','uncurse','antidote','mapping',f.zone==='forge'?'plate':pick(['wandFrost','wandFire','ringGuard'])].map(t=>item(t,Math.floor(f.depth/4),{known:true,cursed:false}))})}
+// Doors are traversable after opening; critical routes never depend on hidden doors.
+for(const r of f.rooms.slice(1))for(let y=r.y-1;y<=r.y+r.h;y++)for(let x=r.x-1;x<=r.x+r.w;x++){if(!inside(x,y)||occupied.has(key(x,y))||f.map[key(x,y)]!==0)continue;const edge=x===r.x-1||x===r.x+r.w||y===r.y-1||y===r.y+r.h;if(!edge)continue;const horiz=f.map[key(x-1,y)]===0&&f.map[key(x+1,y)]===0&&f.map[key(x,y-1)]===1&&f.map[key(x,y+1)]===1;const vert=f.map[key(x,y-1)]===0&&f.map[key(x,y+1)]===0&&f.map[key(x-1,y)]===1&&f.map[key(x+1,y)]===1;if((horiz||vert)&&rand()<.42)f.map[key(x,y)]=2}
+// Optional hidden annex: only treasure is behind a secret door, never mandatory stairs.
+let secret=false;for(let tries=0;tries<100&&!secret;tries++){const x=ri(3,W-6),y=ri(3,H-6);if(f.map[key(x-1,y+1)]!==0)continue;let valid=true;for(let yy=y-1;yy<y+4;yy++)for(let xx=x;xx<x+4;xx++)if(f.map[key(xx,yy)]!==1)valid=false;if(!valid)continue;for(let yy=y;yy<y+3;yy++)for(let xx=x+1;xx<x+4;xx++)f.map[key(xx,yy)]=0;f.map[key(x,y+1)]=6;f.objects.push({x:x+2,y:y+1,type:'chest',special:true,used:false});secret=true}
+for(const r of f.rooms.slice(2))for(let j=0;j<3;j++){const x=ri(r.x,r.x+r.w-1),y=ri(r.y,r.y+r.h-1);if(occupied.has(key(x,y)))continue;if(f.biome===2&&rand()<.6)f.map[key(x,y)]=3;if(f.biome===3&&rand()<.7)f.map[key(x,y)]=5;if(f.biome===4&&rand()<.6)f.map[key(x,y)]=4}
+if(f.boss){const pos=reserve(last)||{x:last.cx+1,y:last.cy};f.enemies.push(makeEnemy(f.boss,pos,f.depth));f.objects.push({x:last.x,y:last.y,type:'loot',item:item('heal',0,{known:true,count:2}),used:false})}s.floor=old;return f}
+function createState(raceId,jobId,mode,seed,training=false){rngState=hash(seed);const c=JOBS[jobId],r=RACES[raceId],hp=c.hp+r.hp,mp=Math.max(10,c.mp+r.mp);s={version:VERSION,race:raceId,job:jobId,mode,seed:String(seed),rng:rngState,nextId:1,status:'playing',turn:0,floor:training?'training-1':'main-1',floors:{},identified:['heal','food','identify','uncurse'],appearances:{},logs:[],kills:0,stats:{chests:0,searches:0,shrines:0,identified:0,deepest:1,bosses:0,steps:0},claimed:[],artifacts:[],rescues:mode==='explorer'?3:0,guide:{enabled:true,step:0,count:0,completed:false},training,p:{x:0,y:0,hp,maxHp:hp,mp,maxMp:mp,atk:c.atk+r.atk,def:c.def+r.def,lv:1,xp:0,gold:35+(raceId==='goblin'?30:0),hunger:1000,shield:0,face:{x:1,y:0},status:{poison:0,burn:0,slow:0,might:0,stealth:0,guard:0},cooldowns:[0,0,0,0],inventory:[],equipment:{weapon:null,armor:null,ring:null},relics:[],magicBonus:0,capacityBonus:0,killMana:0}};
+const looks={potion:['紅褐色藥水','天藍色藥水','乳白色藥水','紫色藥水','墨綠色藥水'],scroll:['刻著 KIR 的卷軸','刻著 VERA 的卷軸','刻著 ZEL 的卷軸','刻著 NORA 的卷軸','刻著 FEN 的卷軸','刻著 ALU 的卷軸'],ring:['銅色戒指','骨白戒指','翡翠戒指','黑曜戒指'],wand:['彎曲的魔杖','水晶魔杖','白木魔杖']};for(const [kind,arr]of Object.entries(looks)){const names=shuffle(arr);Object.keys(ITEMS).filter(t=>ITEMS[t].kind===kind).forEach((t,i)=>s.appearances[t]=names[i])}const w=item(jobId==='mage'?'staff':jobId==='rogue'?'dagger':'sword',0,{known:true,cursed:false,power:1,name:'旅行武器'}),a=item('leather',0,{known:true,cursed:false,power:0,name:'旅行斗篷'});addItem(w,false);addItem(a,false);s.p.equipment.weapon=w.id;s.p.equipment.armor=a.id;for(const [type,count]of [['heal',4],['food',4],['identify',2],['uncurse',1]])addItem(item(type,0,{known:true,count,cursed:false}),false);if(training)trainingFloor();else generateFloor('main-1');s.p.x=level().start.x;s.p.y=level().start.y;level().visited=true;target=null;particles=[];auto=false;visibility();s.rng=rngState;s.runId=String(Date.now())+'-'+Math.random().toString(36).slice(2,8);return s}
+function startGame(training=false){if(training)createState('human','warden','explorer','academy',true);else createState(selection.race,selection.job,selection.mode,selection.seed||String(Date.now()));log(training?'歡迎來到餘燼學院。完成 13 個實作任務，學會自己活下來。':'你帶著一盞餘燼燈，踏入第一層礦坑。','#f1c480');close();update();save(false)}
+function trainingFloor(){const f={...floorMeta('training-1'),map:Array(W*H).fill(1),seen:Array(W*H).fill(false),visible:Array(W*H).fill(false),rooms:[{x:4,y:6,w:25,h:18,cx:8,cy:12}],objects:[],enemies:[],allies:[],start:{x:8,y:12},end:{x:25,y:19},bossDead:true,visited:true};s.floors['training-1']=f;for(let y=6;y<24;y++)for(let x=4;x<29;x++)f.map[key(x,y)]=0;f.map[key(10,10)]=1;f.map[key(10,11)]=1;f.map[key(17,16)]=2;f.objects=[{x:11,y:12,type:'chest',training:true,used:false},{x:12,y:17,type:'trap',trap:'spike',revealed:false,used:false},{x:19,y:18,type:'shrine',used:false},{x:25,y:19,type:'trainingExit',used:false}];s.p.hunger=900}
+function los(a,b){let x=a.x,y=a.y,dx=Math.abs(b.x-x),dy=-Math.abs(b.y-y),sx=x<b.x?1:-1,sy=y<b.y?1:-1,err=dx+dy;for(let i=0;i<100;i++){if(x===b.x&&y===b.y)return true;if((x!==a.x||y!==a.y)&&[1,2,6].includes(tile(x,y)))return false;const e=2*err;if(e>=dy){err+=dy;x+=sx}if(e<=dx){err+=dx;y+=sy}}return false}
+function visibility(){const f=level(),p=s.p;f.visible.fill(false);const radius=(s.training?12:7)+(s.race==='elf'?1:0)+(ringEffect('sight')?2:0);for(let y=Math.max(0,p.y-radius);y<=Math.min(H-1,p.y+radius);y++)for(let x=Math.max(0,p.x-radius);x<=Math.min(W-1,p.x+radius);x++)if(Math.hypot(x-p.x,y-p.y)<=radius+.3&&los(p,{x,y})){f.visible[key(x,y)]=true;f.seen[key(x,y)]=true}if(s.race==='dwarf')for(const o of f.objects)if(o.type==='trap'&&!o.used&&distance(o,p)<=1&&!o.revealed){o.revealed=true;log('矮人的礦坑直覺發現了陷阱。','#f1c480')}}
+function travel(to,sourceType){auto=false;const from=s.floor,old=level();let f=s.floors[to];if(!f)f=generateFloor(to);s.floor=to;let arrival=f.objects.find(o=>o.to===from);if(!arrival)arrival=sourceType==='up'?f.objects.find(o=>['down','heart','branchExit'].includes(o.type)):null;const pos=arrival||f.start;s.p.x=pos.x;s.p.y=pos.y;target=null;particles=[];s.stats.deepest=Math.max(s.stats.deepest,f.zone==='main'?f.n:0);if(!f.visited){f.visited=true;s.p.mp=Math.min(s.p.maxMp,s.p.mp+Math.ceil(s.p.maxMp*.45));log(`首次抵達${f.name} ${f.n} 層，恢復部分魔力。`,'#73e2c3')}else log(`返回${f.name} ${f.n} 層。這裡仍保留上次的痕跡。`);for(const a of old.allies.filter(a=>a.hp>0)){let pos=dirs.map(([x,y])=>({x:s.p.x+x,y:s.p.y+y})).find(p=>walkable(p.x,p.y)&&!enemyAt(p.x,p.y)&&!allyAt(p.x,p.y));if(pos)f.allies.push({...a,...pos})}old.allies=[];finishTurn({enemies:false});visibility();update()}
+function teleport(){const safe=[];for(let y=1;y<H-1;y++)for(let x=1;x<W-1;x++)if(walkable(x,y)&&tile(x,y)!==4&&!enemyAt(x,y)&&!allyAt(x,y)&&!level().objects.some(o=>o.type==='trap'&&!o.used&&o.x===x&&o.y===y))safe.push({x,y});if(!safe.length)return false;const a=pick(safe);burst(s.p.x,s.p.y,'#c6a1ff');Object.assign(s.p,a);burst(a.x,a.y,'#c6a1ff');visibility();target=null;return true}
+function tutorialEvent(event){if(!s.training||s.guide.completed)return;const l=LESSONS[s.guide.step];if(event!==l.event)return;if(event==='equip'&&!equipped('weapon')?.training)return;if(event==='uncurse'){const r=equipped('ring');if(!r?.training||r.cursed)return}if(++s.guide.count<(l.need||1))return;s.guide.count=0;s.guide.step++;log(`✓ 完成：${l.title}`,'#73e2c3');toast('完成訓練：'+l.title);const step=s.guide.step;if(step===4)level().enemies.push(makeEnemy('dummy',{x:15,y:12},1));if(step===5){level().enemies=level().enemies.filter(e=>e.type!=='dummy');const e=makeEnemy('dummy',{x:18,y:12},1);e.hp=e.maxHp=50;level().enemies.push(e);s.p.mp=s.p.maxMp}if(step===6){level().enemies=[];s.p.hp=Math.max(5,s.p.maxHp-25)}if(step===7)s.p.hunger=160;if(step===9){addItem(item('ringGuard',0,{known:false,cursed:true,training:true}));if(!countItem('identify'))addItem(item('identify',0,{known:true}));}if(step===10&&!countItem('uncurse'))addItem(item('uncurse',0,{known:true}));if(step>=LESSONS.length){s.guide.completed=true;s.status='trained';trainingComplete()}}
+function hurt(amount,reason,element='physical'){const p=s.p;let n=Math.max(1,Math.floor(amount)-(element==='true'?0:element==='physical'?armor():Math.floor(armor()/2)));if(element==='fire'&&s.artifacts.includes('forgeHeart'))n=Math.ceil(n*.5);if(element==='poison'&&(s.race==='vampire'||s.race==='construct'))n=0;else if(element==='poison'&&s.race==='elf')n=Math.ceil(n*.5);if(p.status.guard>0)n=Math.ceil(n*.5);const block=Math.min(p.shield,n);p.shield-=block;n-=block;if(n){p.hp=Math.max(s.training?1:0,p.hp-n);log(`${reason}：${n} 傷害。`,'#ff94a5');burst(p.x,p.y,'#ff7f98');stopAuto()}if(p.hp<=0){if(s.rescues>0){s.rescues--;p.hp=p.maxHp;p.mp=Math.ceil(p.maxMp*.5);p.shield=20;for(const k in p.status)p.status[k]=0;Object.assign(p,level().start);log(`救援護符重燃！剩 ${s.rescues} 次救援，回到本層入口。`,'#73e2c3');toast('救援護符救了你。剩餘 '+s.rescues+' 次。')}else{s.status='dead';s.cause=reason;log('餘燼燈熄滅了。','#ff94a5')}}return n}
+function statusEffect(type,duration){if(type==='poison'&&(s.race==='vampire'||s.race==='construct')){log('你的種族免疫中毒。','#73e2c3');return}s.p.status[type]=Math.max(s.p.status[type],duration)}
+function damageEnemy(e,amount,element='physical'){if(e.hp<=0)return 0;const d=ENEMIES[e.type];let n=Math.max(1,Math.floor(amount)-(element==='physical'?(d.armor||0):0));if(d.resist===element)n=Math.max(1,Math.floor(n*.35));e.hp=Math.max(0,e.hp-n);e.alert=8;e.lastSeen={x:s.p.x,y:s.p.y};burst(e.x,e.y,d.color);log(`${d.name}受到 ${n}${element==='fire'?' 火焰':element==='cold'?' 寒冰':''} 傷害。`);if(e.hp===0){killEnemy(e);return n}if(level().enemies.filter(e=>e.hp>0).length<60&&d.ai==='split'&&!e.split&&e.hp<e.maxHp*.5){e.split=true;const a=dirs.map(([dx,dy])=>({x:e.x+dx,y:e.y+dy})).find(p=>walkable(p.x,p.y)&&!enemyAt(p.x,p.y)&&!allyAt(p.x,p.y)&&distance(p,s.p)>0);if(a){const child=makeEnemy('slime',a);child.hp=child.maxHp=Math.ceil(e.maxHp*.4);child.split=true;level().enemies.push(child);log('黏液分裂了！','#b0d88b')}}return n}
+function killEnemy(e){const p=s.p,d=ENEMIES[e.type];s.kills++;p.xp+=Math.ceil(e.xp*(s.race==='human'?1.2:1));p.gold+=d.boss?45+level().depth*4:ri(3,8)+Math.floor(level().depth/3);if(s.race==='vampire'){p.hp=Math.min(p.maxHp,p.hp+4);p.hunger=Math.min(1200,p.hunger+70)}p.mp=Math.min(p.maxMp,p.mp+p.killMana);log(`擊敗${d.name}，獲得經驗與金幣。`,'#f1c480');if(d.boss){const f=level();f.bossDead=true;s.stats.bosses++;f.objects.push({x:e.x,y:e.y,type:'relic',branch:f.zone!=='main'?f.zone:null,used:false});log('守衛倒下，出口封印解除。它留下了一份遺物。','#73e2c3');p.hp=Math.min(p.maxHp,p.hp+20)}else if(!s.training&&rand()<.16){level().objects.push({x:e.x,y:e.y,type:'loot',item:rand()<.55?item('food',0,{known:true}):randomLoot(Math.floor(level().depth/4)),used:false})}levelUp();tutorialEvent('kill')}
+function levelUp(){const p=s.p;while(p.xp>=maxXp()){p.xp-=maxXp();p.lv++;p.maxHp+=7;p.hp=Math.min(p.maxHp,p.hp+18+(s.race==='human'?8:0));p.maxMp+=2;p.mp=Math.min(p.maxMp,p.mp+10);p.atk+=1;if(p.lv%3===0)p.def++;log(`升至 ${p.lv} 級！生命、魔力與攻擊提升。`,'#73e2c3');toast('等級提升：LV. '+p.lv)}}
+function melee(e){const p=s.p,w=equipped('weapon');let n=atk()+ri(0,3);const crit=(s.job==='rogue'?.25:.08)+(w?.type==='dagger'?.1:0)+p.relics.filter(r=>r==='feather').length*.05+(p.status.stealth>0?.5:0);if(rand()<crit){n=Math.floor(n*1.75);log('暴擊！','#f1c480')}if(p.status.might>0)n=Math.floor(n*1.35);if(s.race==='orc'&&p.hp<p.maxHp*.35)n=Math.floor(n*1.3);damageEnemy(e,n);p.status.stealth=0}
+function move(dx,dy){if(!allowed())return false;const p=s.p;p.face={x:dx,y:dy};const x=p.x+dx,y=p.y+dy,t=tile(x,y);if(t===1||t===6){log('前方是石牆。');tutorialEvent('wall');update();stopAuto();return false}if(t===2){level().map[key(x,y)]=0;log('你打開了門。');finishTurn();return true}const e=enemyAt(x,y);if(e){melee(e);finishTurn();return true}const ally=allyAt(x,y);if(ally){ally.x=p.x;ally.y=p.y}p.x=x;p.y=y;s.stats.steps++;tutorialEvent('move');enterTile();finishTurn();return true}
+function enterTile(){const f=level(),p=s.p;const loot=f.objects.filter(o=>o.x===p.x&&o.y===p.y&&o.type==='loot'&&!o.used);for(const o of loot)if(addItem(o.item))o.used=true;const trap=f.objects.find(o=>o.x===p.x&&o.y===p.y&&o.type==='trap'&&!o.used);if(trap){trap.used=true;trap.revealed=true;if(trap.trap==='spike')hurt(11+Math.floor(f.depth/2),'尖刺陷阱');if(trap.trap==='poison'){hurt(5,'毒針陷阱');statusEffect('poison',8)}if(trap.trap==='alarm'){for(const e of f.enemies){e.alert=10;e.lastSeen={x:p.x,y:p.y}}log('警報響起！本層敵人被驚動。','#ffb082')}stopAuto()}}
+function pathStep(start,goal,opts={}){const f=level(),q=[{x:goal.x,y:goal.y}],seen=new Set([key(goal.x,goal.y)]),next=new Map();let head=0;while(head<q.length){const a=q[head++];if(a.x===start.x&&a.y===start.y)return next.get(key(a.x,a.y));for(const [dx,dy]of dirs){const x=a.x+dx,y=a.y+dy,k=key(x,y);if(!inside(x,y)||seen.has(k))continue;const t=tile(x,y);if(!walkable(x,y)&&!(opts.doors&&t===2))continue;if(opts.seen&&!f.seen[k])continue;if(opts.safe&&(t===4||f.objects.some(o=>o.type==='trap'&&o.revealed&&!o.used&&o.x===x&&o.y===y)))continue;if(opts.entities){if(enemyAt(x,y)&&!(x===start.x&&y===start.y))continue;if(allyAt(x,y)&&!(x===start.x&&y===start.y))continue}seen.add(k);next.set(k,a);q.push({x,y})}}return null}
+function enemyStrike(e,ranged=false){const d=ENEMIES[e.type],elem=d.ai==='firecaster'?'fire':d.ai==='coldcaster'?'cold':d.ai==='caster'?'arcane':'physical';hurt(e.atk,d.name+(ranged?'的遠程攻擊':''),elem);if(s.status!=='playing')return;if(d.ai==='poison'||d.ai==='caster'&&rand()<.18)statusEffect('poison',6);if(d.ai==='firecaster')statusEffect('burn',5);if(d.ai==='coldcaster')statusEffect('slow',5);if(e.type==='wraith')s.p.mp=Math.max(0,s.p.mp-2)}
+function summonEnemy(e){if(level().enemies.filter(e=>e.hp>0).length>=60)return;const type=e.type==='lich'?'skeleton':e.type==='queen'?'spider':e.type==='infernal'||e.type==='smith'?'imp':e.type==='librarian'?'wraith':e.type==='abyss'?'sentinel':'goblin';let count=0;for(const [dx,dy]of dirs){const pos={x:e.x+dx,y:e.y+dy};if(walkable(pos.x,pos.y)&&!enemyAt(pos.x,pos.y)&&!allyAt(pos.x,pos.y)&&distance(pos,s.p)>0){const a=makeEnemy(type,pos);a.alert=8;a.lastSeen={x:s.p.x,y:s.p.y};level().enemies.push(a);if(++count===2)break}}if(count)log(`${ENEMIES[e.type].name}召喚了援軍。`,'#ffb082')}
+function enemiesTurn(){const f=level(),p=s.p;for(const e of [...f.enemies]){if(e.hp<=0||s.status!=='playing')continue;const d=ENEMIES[e.type];if(e.freeze>0){e.freeze--;continue}const sees=distance(e,p)<=9&&los(e,p)&&(!p.status.stealth||distance(e,p)<=1);if(sees){e.alert=7;e.lastSeen={x:p.x,y:p.y}}else e.alert=Math.max(0,e.alert-1);if(d.ai==='dummy'){if(distance(e,p)===1)enemyStrike(e);continue}if(!e.alert||!e.lastSeen)continue;
+if(d.boss){if(e.charge){const c=e.charge;e.charge=null;for(let y=c.y-1;y<=c.y+1;y++)for(let x=c.x-1;x<=c.x+1;x++)if(inside(x,y))burst(x,y,d.color,3);if(Math.abs(p.x-c.x)<=1&&Math.abs(p.y-c.y)<=1){hurt(e.atk+9,d.name+'的重擊',e.type==='infernal'?'fire':'physical');if(e.type==='queen')statusEffect('poison',8);if(e.type==='colossus')statusEffect('slow',6);if(e.type==='infernal')statusEffect('burn',6)}log(`${d.name}的重擊落下！`);continue}if(e.hp<e.maxHp*.35&&!e.phase){e.phase=1;e.atk+=4;log(`${d.name}狂暴了！`,'#ff94a5')}if(s.turn%5===0&&distance(e,p)<=7){e.charge={x:p.x,y:p.y};log('重擊預告：離開紅色 3×3 區域！','#ff94a5');stopAuto();continue}if(s.turn%9===0&&e.type!=='foreman'){summonEnemy(e);continue}if(e.type==='abyss'&&s.turn%7===0){const squares=[];for(let y=p.y-4;y<=p.y+4;y++)for(let x=p.x-4;x<=p.x+4;x++)if(walkable(x,y)&&!enemyAt(x,y)&&!allyAt(x,y)&&distance({x,y},p)>=2&&distance({x,y},p)<=4)squares.push({x,y});if(squares.length){burst(e.x,e.y,d.color);Object.assign(e,pick(squares));log('深淵編織者扭曲了空間。','#d3a9ff');continue}}}
+const adjAlly=f.allies.find(a=>a.hp>0&&distance(e,a)===1);if(distance(e,p)===1){enemyStrike(e);continue}if(adjAlly){adjAlly.hp=Math.max(0,adjAlly.hp-e.atk);burst(adjAlly.x,adjAlly.y,'#85dccc');continue}if(['ranged','caster','coldcaster','firecaster'].includes(d.ai)&&distance(e,p)<= (d.ai==='ranged'?5:6)&&sees){enemyStrike(e,true);continue}if(e.type==='golem'&&s.turn%2===0)continue;const times=d.ai==='fast'&&s.turn%3===0?2:1;for(let j=0;j<times;j++){const a=pathStep(e,e.lastSeen,{doors:!!d.doors,entities:true});if(!a||enemyAt(a.x,a.y)||allyAt(a.x,a.y)||distance(a,p)===0)break;if(tile(a.x,a.y)===2){f.map[key(a.x,a.y)]=0;break}e.x=a.x;e.y=a.y}}
+f.enemies=f.enemies.filter(e=>e.hp>0);f.allies=f.allies.filter(a=>a.hp>0&&a.ttl>0)}
+function alliesTurn(){const f=level();for(const a of [...f.allies]){if(a.hp<=0||--a.ttl<=0)continue;const enemies=f.enemies.filter(e=>e.hp>0&&distance(e,a)<=8&&los(a,e)).sort((e,b)=>distance(e,a)-distance(b,a));const e=enemies[0];if(e&&distance(e,a)===1){log('骸骨盟友揮出武器。','#73e2c3');damageEnemy(e,a.atk);continue}const goal=e||s.p;if(distance(a,goal)<=1)continue;const pos=pathStep(a,goal,{doors:false,entities:true});if(pos&&!enemyAt(pos.x,pos.y)&&!allyAt(pos.x,pos.y)&&distance(pos,s.p)>0){a.x=pos.x;a.y=pos.y}}}
+function tickStatus(){const p=s.p;if(p.status.poison>0)hurt(4,'中毒','poison');if(s.status!=='playing')return;if(p.status.burn>0)hurt(5,'燃燒','fire');if(s.status!=='playing')return;for(const k in p.status)p.status[k]=Math.max(0,p.status[k]-1);const t=tile(p.x,p.y);if(t===4)hurt(8+Math.floor(level().depth/4),'熔岩','fire');if(t===3&&s.turn%3===0)statusEffect('poison',4);if(t===5&&s.turn%3===0)statusEffect('slow',3);if(s.race!=='construct'&&!s.training){let loss=1+(s.race==='troll'&&s.turn%2===0?1:0)+(weight()>capacity()?1:0);if(ringEffect('satiety')&&s.turn%2===0)loss=0;p.hunger=Math.max(0,p.hunger-loss);if(p.hunger===249)log('你開始飢餓。找口糧，或按 r 進食。','#f1c480');if(p.hunger===0&&s.turn%4===0)hurt(3,'飢餓','true')}if(p.hunger>200||s.race==='construct'){if(s.race==='troll'&&s.turn%6===0)p.hp=Math.min(p.maxHp,p.hp+3);if(s.race==='construct'&&s.turn%10===0)p.hp=Math.min(p.maxHp,p.hp+2);if(ringEffect('regen')&&s.turn%8===0)p.hp=Math.min(p.maxHp,p.hp+3)}if(s.turn%3===0)p.mp=Math.min(p.maxMp,p.mp+1+(s.job==='mage'?1:0));p.cooldowns=p.cooldowns.map(n=>Math.max(0,n-1))}
+function finishTurn(opts={}){s.turn++;tickStatus();if(s.status==='playing'&&opts.enemies!==false){alliesTurn();enemiesTurn();if(s.p.status.slow>0&&s.turn%3===0&&s.status==='playing'){log('遲緩使敵人多行動了一次。');enemiesTurn()}}visibility();update();save(false);if(s.status==='dead')endScreen();}
+function aim(range=6){const a=level().enemies.filter(e=>e.hp>0&&visible(e)&&distance(e,s.p)<=range&&los(s.p,e));return a.find(e=>e.id===target)||a.sort((x,y)=>distance(x,s.p)-distance(y,s.p))[0]}
+function manaCost(base){return Math.max(1,base-(s.artifacts.includes('tome')?1:0))}
+function skill(n){if(!allowed())return false;const p=s.p,bases=[6,9,s.job==='rogue'?2:4,job().cost],cost=manaCost(bases[n]);if(p.cooldowns[n]){log('技能尚在冷卻。');update();return false}if(p.mp<cost){log('魔力不足。等待可額外恢復 2 魔力。');update();return false}let e;if(n===0||n===3&&s.job==='ranger'){e=aim(n===3?7:6);if(!e){log('範圍內沒有可見目標。');update();return false}}
+if(n===2){let x=p.x,y=p.y;for(let i=0;i<3;i++){const a=x+p.face.x,b=y+p.face.y;if(!walkable(a,b)||enemyAt(a,b)||allyAt(a,b))break;x=a;y=b}if(x===p.x&&y===p.y){log('前方無法閃步。');update();return false}p.mp-=cost;burst(p.x,p.y,'#73e2c3');p.x=x;p.y=y;enterTile();log('閃步！');p.cooldowns[n]=4;finishTurn();return true}
+if(n===3&&s.job==='necro'){if(level().allies.length>=2){log('最多可有兩隻骸骨盟友。');update();return false}const a=dirs.map(([x,y])=>({x:p.x+x,y:p.y+y})).find(a=>walkable(a.x,a.y)&&!enemyAt(a.x,a.y)&&!allyAt(a.x,a.y));if(!a){log('周圍沒有召喚空間。');update();return false}level().allies.push({...a,id:s.nextId++,hp:32+p.lv*4,maxHp:32+p.lv*4,atk:7+p.lv*2,ttl:40});log('骸骨盟友受召而來，持續 40 回合。','#73e2c3')}
+p.mp-=cost;if(n===0){const center={x:e.x,y:e.y};for(const a of [...level().enemies])if(distance(a,center)<=1)damageEnemy(a,(16+p.lv*3)*magicMult(),'fire');burst(center.x,center.y,'#ffc283',24);p.cooldowns[n]=4;tutorialEvent('fire')}
+if(n===1){let hits=0;for(const a of [...level().enemies])if(distance(a,p)<=3&&los(p,a)){damageEnemy(a,(8+p.lv*2)*magicMult(),'cold');a.freeze=3;hits++}for(let y=p.y-3;y<=p.y+3;y++)for(let x=p.x-3;x<=p.x+3;x++)if(distance({x,y},p)<=3)burst(x,y,'#99dcff',2);log(`冰霜新星凍結 ${hits} 個目標。`,'#99dcff');p.cooldowns[n]=6}
+if(n===3){if(s.job==='warden'){p.shield+=18+p.lv*3;p.status.guard=5;log('鋼鐵壁壘：護盾與 4 回合減傷。','#73e2c3')}if(s.job==='mage'){for(const a of [...level().enemies])if(visible(a)&&distance(a,p)<=6)damageEnemy(a,(18+p.lv*3)*magicMult(),'arcane');log('秘法洪流席捲可見敵人。','#b8b0ff')}if(s.job==='rogue'){p.status.stealth=5;log('影遁：4 回合隱匿，下一擊暴擊率大幅提高。','#b8b0ff')}if(s.job==='ranger'){damageEnemy(e,atk()+p.lv*2+7);if(e.hp>0)damageEnemy(e,atk()+p.lv*2+7);log('穿心連射！','#f1c480')}if(s.job==='cleric'){p.hp=Math.min(p.maxHp,p.hp+24+p.lv*3);p.status.poison=p.status.burn=p.status.slow=0;log('祈禱恢復生命並清除異常。','#73e2c3')}p.cooldowns[n]=9}finishTurn();return true}
+function ranged(){if(!allowed())return;const e=aim(s.job==='ranger'?7:5),cost=manaCost(2);if(!e){log('射程內沒有可見敵人。');update();return}if(s.p.mp<cost){log('魔力不足。');update();return}s.p.mp-=cost;damageEnemy(e,Math.floor(atk()*.75)+s.p.lv+3+(s.job==='ranger'?4:0));finishTurn()}
+function wait(){if(!allowed())return;s.p.mp=Math.min(s.p.maxMp,s.p.mp+2);log('你等待並凝聚魔力。');finishTurn()}
+function search(){if(!allowed())return;const f=level(),p=s.p;let found=0,trapNear=false;for(const o of f.objects)if(o.type==='trap'&&!o.used&&distance(o,p)<=3){if(!o.revealed){o.revealed=true;found++}trapNear=true}for(let y=p.y-3;y<=p.y+3;y++)for(let x=p.x-3;x<=p.x+3;x++)if(inside(x,y)&&distance({x,y},p)<=3&&tile(x,y)===6){f.map[key(x,y)]=2;f.seen[key(x,y)]=true;found++;log('發現隱藏的門！','#f1c480')}s.stats.searches++;log(found?`搜尋發現 ${found} 處陷阱或暗門。`:'仔細搜尋，沒有發現新的機關。');if(trapNear)tutorialEvent('searchTrap');finishTurn()}
+function autoExplore(){if(!allowed())return;auto=!auto;autoClock=0;toast(auto?'自動探索：遇敵、受傷或發現物件會停止。按任意遊戲鍵停止。':'自動探索已停止')}
+function autoStep(){if(!allowed()||s.training){auto=false;return}const f=level(),p=s.p;if(f.enemies.some(e=>e.hp>0&&visible(e))||p.hp<p.maxHp*.35||p.hunger<180&&s.race!=='construct'||p.status.poison||p.status.burn){auto=false;toast('自動探索已停：敵人或生存風險。');return}const near=f.objects.find(o=>!o.used&&o.type!=='trap'&&o.type!=='loot'&&distance(o,p)<=1&&!['camp','up','portal'].includes(o.type));if(near){auto=false;toast('附近有可互動物件。按 e。');return}const frontiers=[];for(let y=1;y<H-1;y++)for(let x=1;x<W-1;x++){const k=key(x,y);if(!f.seen[k]||(!walkable(x,y)&&tile(x,y)!==2))continue;if(dirs.some(([dx,dy])=>!f.seen[key(x+dx,y+dy)]))frontiers.push({x,y})}frontiers.sort((a,b)=>distance(a,p)-distance(b,p));let next=null;for(const goal of frontiers){next=pathStep(p,goal,{doors:true,seen:true,safe:true});if(next)break}if(!next){auto=false;toast('沒有可安全自動探索的路線；試試搜尋暗門。');return}move(next.x-p.x,next.y-p.y)}
+function markKnown(i){i.known=true;if(!s.identified.includes(i.type))s.identified.push(i.type)}
+function quickUse(type){if(!allowed())return;const i=s.p.inventory.find(i=>i.type===type&&itemKnown(i));if(!i){log(`沒有已知的${ITEMS[type].name}。`);update();return}useItem(i.id)}
+function useItem(id){if(!s||s.status!=='playing')return;const i=s.p.inventory.find(a=>a.id===id);if(!i)return;const d=ITEMS[i.type],p=s.p;if(['weapon','armor','ring'].includes(d.kind)){equipItem(id);return}if(d.effect==='identify'){identifyMenu(i.id);return}if(d.kind==='wand'&&i.charges<=0){toast('魔杖的充能耗盡了。');return}if(d.effect==='heal'&&p.hp===p.maxHp){toast('生命已滿，不浪費補給。');return}if(d.kind==='food'&&s.race==='construct'){toast('魔像不需要進食，可以把口糧賣給商人。');return}if(d.kind==='food'&&p.hunger>=1150){toast('你已經很飽，先把口糧留下。');return}
+let e;if(['fire','cold'].includes(d.effect)){e=aim(6);if(!e){toast('魔杖範圍內沒有可見目標。');return}}close();markKnown(i);log(`使用${d.name}。`,'#f1c480');if(d.kind==='wand')i.charges--;else consume(i);
+if(d.kind==='food'){p.hunger=Math.min(1200,p.hunger+Math.floor(420*(s.race==='goblin'?1.25:s.race==='vampire'?.5:1)));tutorialEvent('food')}
+if(d.effect==='heal'){const amount=d.kind==='wand'?28:38+p.lv*2;p.hp=Math.min(p.maxHp,p.hp+Math.floor(amount*(s.race==='construct'&&d.kind==='potion'?.5:1)));tutorialEvent('heal')}
+if(d.effect==='mana')p.mp=Math.min(p.maxMp,p.mp+24);if(d.effect==='cleanse')p.status.poison=p.status.burn=p.status.slow=0;if(d.effect==='might')p.status.might=13;if(d.effect==='poison')statusEffect('poison',9);
+if(d.effect==='mapping'){level().seen.fill(true);log('卷軸展開，地形浮現。敵人的位置仍需親眼確認。','#bca5ff')}
+if(d.effect==='teleport'){teleport();log('空間折疊，你被傳送了。','#bca5ff')}
+if(d.effect==='enchant'){const w=equipped('weapon');if(w){w.power+=2;log('目前武器攻擊 +2。','#f1c480')}}
+if(d.effect==='uncurse'){for(const slot of ['weapon','armor','ring']){const a=equipped(slot);if(a){a.cursed=false;a.known=true}}log('已裝備物品的詛咒被解除。','#73e2c3');tutorialEvent('uncurse')}
+if(d.effect==='fear'){for(const a of level().enemies)if(visible(a))a.freeze=4;log('可見敵人暫時無法行動。','#bca5ff')}
+if(d.effect==='fire'){const c={x:e.x,y:e.y};for(const a of [...level().enemies])if(distance(a,c)<=1)damageEnemy(a,(20+p.lv*2)*magicMult(),'fire')}
+if(d.effect==='cold'){damageEnemy(e,(16+p.lv*2)*magicMult(),'cold');e.freeze=3}finishTurn()}
+function equipItem(id){if(!s||s.status!=='playing')return;const i=s.p.inventory.find(a=>a.id===id);if(!i)return;const slot=ITEMS[i.type].kind;if(!['weapon','armor','ring'].includes(slot))return;const current=equipped(slot);if(current?.cursed){toast('目前裝備被詛咒綁定！先使用淨咒卷軸。');return}if(current?.id===id){close();s.p.equipment[slot]=null;log('你卸下了'+itemName(i)+'。');finishTurn();return}close();s.p.equipment[slot]=i.id;markKnown(i);log('裝備：'+itemName(i)+(i.cursed?'。詛咒把它綁住了！':'。'),i.cursed?'#ff94a5':'#73e2c3');tutorialEvent('equip');finishTurn()}
+function dropItem(id){if(!s||s.status!=='playing')return;const i=s.p.inventory.find(a=>a.id===id);if(!i)return;if(Object.values(s.p.equipment).includes(id)){toast('先卸下這件裝備。');return}close();s.p.inventory=s.p.inventory.filter(a=>a.id!==id);level().objects.push({x:s.p.x,y:s.p.y,type:'loot',item:i,used:false});log('放下了'+itemName(i)+'。');finishTurn()}
+function identifyMenu(scrollId){const scroll=s.p.inventory.find(i=>i.id===scrollId);if(!scroll)return;const candidates=s.p.inventory.filter(i=>i.id!==scrollId&&!i.known);if(!candidates.length){toast('所有物品都已完整鑑定，保留卷軸。');return}modal(`<div class="eyebrow">IDENTIFICATION / 知識就是生存</div><h2>選一件物品鑑定</h2><p>確認後消耗一張鑑定卷軸與一回合，揭露真名和詛咒。</p><div class="inventory">${candidates.map(i=>`<div class="card"><div class="itemtext"><b>${esc(itemName(i))}</b><small>${esc(ITEMS[i.type].kind)} · 重量 ${ITEMS[i.type].weight}</small></div><button data-identify="${i.id}">鑑定</button></div>`).join('')}</div><div class="footer"><button id="identifyCancel">返回背包</button></div>`,'identify');all('[data-identify]',b=>b.onclick=()=>{const i=s.p.inventory.find(a=>a.id===Number(b.dataset.identify));if(!i)return;close();markKnown(i);consume(scroll);s.stats.identified++;log(`鑑定結果：${ITEMS[i.type].name}${i.cursed?'（詛咒）':'（無詛咒）'}。`,'#f1c480');tutorialEvent('identify');finishTurn()});bind('identifyCancel',()=>inventory())}
+function interact(){if(!allowed())return;const f=level(),p=s.p;let nearby=f.objects.filter(o=>!o.used&&o.type!=='trap'&&distance(o,p)<=1);const priority={relic:0,loot:1,chest:2,shrine:3,shop:4,fountain:5,camp:6,heart:7,trainingExit:7,branchExit:8,down:8,up:9,portal:10};nearby.sort((a,b)=>distance(a,p)-distance(b,p)||(priority[a.type]??20)-(priority[b.type]??20));const o=nearby[0];if(!o){log('附近沒有可互動物件。');update();return}
+if(s.training&&o.type==='chest'&&s.guide.step<2){log('先完成目前的移動任務，寶箱會在第三課使用。');update();return}if(s.training&&o.type==='shrine'&&s.guide.step<11){log('聖壇會在第十二課使用，先完成目前的任務。');update();return}
+if(o.type==='loot'){if(addItem(o.item)){o.used=true;finishTurn()}else update();return}
+if(o.type==='chest'){if(s.p.inventory.length>=35){log('背包太滿，先整理再開箱。');update();return}o.used=true;s.stats.chests++;p.gold+=ri(8,20)+Math.floor(f.depth/2);if(o.training)addItem(item('sword',0,{name:'訓練長劍',known:true,cursed:false,power:6,training:true}));else{addItem(randomLoot(Math.floor(f.depth/4)));if(o.special||rand()<.45)addItem(randomLoot(Math.floor(f.depth/4)));if(s.stats.chests%3===0)addItem(item('heal',0,{known:true}))}log('寶箱裡還有一些金幣。','#f1c480');tutorialEvent('chest');finishTurn();return}
+if(o.type==='shrine'){shrine(o);return}if(o.type==='shop'){shop(o);return}if(o.type==='fountain'){fountain(o);return}if(o.type==='camp'){o.used=true;p.hp=Math.min(p.maxHp,p.hp+25);p.mp=p.maxMp;addItem(item('food',0,{known:true}));log('入口營火恢復生命與魔力；餘燼只能使用一次。','#73e2c3');finishTurn();return}
+if(o.type==='relic'){if(o.branch){o.used=true;claimArtifact(o.branch);finishTurn()}else relicChoice(o);return}
+if(o.type==='trainingExit'){if(s.guide.step<12){log('先完成目前的課程。紫色標記不是逃課出口。');update();return}tutorialEvent('exit');save(false);return}
+if(['down','heart','branchExit'].includes(o.type)&&f.boss&&!f.bossDead){log('出口被守衛的封印鎖住。先擊敗本層守衛。','#bca5ff');update();return}if(o.type==='heart'){s.status='won';log('你取回了餘燼之心，深淵不再掌握你的名字。','#73e2c3');save(false);endScreen();return}if(o.to)travel(o.to,o.type)}
+function shrine(o){modal(`<div class="eyebrow">ALTAR / 一次性的祝福</div><h2>餘燼聖壇</h2><p>選擇一項祝福。每座聖壇只能使用一次，祈禱消耗一回合。</p><div class="grid cards"><button class="card choice" id="blessHeal"><b>生命祝福</b>恢復 ${s.job==='cleric'?55:35} 生命，獲得 12 護盾。</button><button class="card choice" id="blessCurse"><b>淨咒祝福</b>解除全部已裝備物品的詛咒，恢復 12 魔力。</button><button class="card choice" id="blessLearn"><b>智慧祝福</b>獲得 ${s.p.lv*18} 經驗，回滿魔力。</button></div><button id="altarBack">暫時離開</button>`,'shrine');const finish=fn=>{if(o.used)return;close();o.used=true;s.stats.shrines++;fn();log('聖壇回應了你的祈禱。','#73e2c3');tutorialEvent('shrine');finishTurn()};bind('blessHeal',()=>finish(()=>{s.p.hp=Math.min(s.p.maxHp,s.p.hp+(s.job==='cleric'?55:35));s.p.shield+=12}));bind('blessCurse',()=>finish(()=>{for(const slot of Object.keys(s.p.equipment)){const a=equipped(slot);if(a){a.cursed=false;a.known=true}}s.p.mp=Math.min(s.p.maxMp,s.p.mp+12)}));bind('blessLearn',()=>finish(()=>{s.p.xp+=s.p.lv*18;s.p.mp=s.p.maxMp;levelUp()}));bind('altarBack',close)}
+function fountain(o){modal('<div class="eyebrow">FOUNTAIN / 不是每口水都安全</div><h2>地下泉水</h2><p>水中有微弱的魔力。喝下可能恢復生命、恢復魔力，也可能中毒。每口泉水只能喝一次。</p><div class="footer"><button class="primary" id="drink">喝下泉水</button><button id="noDrink">離開</button></div>','fountain');bind('noDrink',close);bind('drink',()=>{close();o.used=true;const n=ri(0,4);if(n<=1){s.p.hp=Math.min(s.p.maxHp,s.p.hp+28);log('清涼泉水恢復 28 生命。','#73e2c3')}else if(n<=3){s.p.mp=s.p.maxMp;log('泉水恢復全部魔力。','#84beff')}else{statusEffect('poison',8);log('水裡有毒！','#ff94a5')}finishTurn()})}
+function relicChoice(o){const options=shuffle(RELICS).slice(0,3);modal(`<div class="eyebrow">RELIC / 守衛的遺產</div><h2>選擇一件永久遺物</h2><p>效果可疊加。選擇後消耗一回合。</p><div class="grid cards">${options.map(r=>`<button class="card choice" data-relic="${r.id}"><b>${r.name}</b>${r.desc}</button>`).join('')}</div><button id="relicBack">稍後再選</button>`,'relic');all('[data-relic]',b=>b.onclick=()=>{const r=RELICS.find(r=>r.id===b.dataset.relic),p=s.p;close();o.used=true;p.relics.push(r.id);if(r.id==='fang')p.atk+=2;if(r.id==='heart'){p.maxHp+=12;p.hp=Math.min(p.maxHp,p.hp+30)}if(r.id==='well'){p.maxMp+=6;p.mp=p.maxMp}if(r.id==='stone')p.def++;if(r.id==='kit'){addItem(item('food',0,{known:true,count:2}));addItem(item('heal',0,{known:true,count:2}))}if(r.id==='spark')p.magicBonus+=.1;if(r.id==='soul')p.killMana+=2;if(r.id==='feather')p.capacityBonus+=3;log('獲得永久遺物：'+r.name+'。','#f1c480');finishTurn()});bind('relicBack',close)}
+function claimArtifact(branch){const b=BRANCHES[branch];if(s.artifacts.includes(b.reward)){log('你已持有這個支線神器。');return}s.artifacts.push(b.reward);const p=s.p;if(b.reward==='forgeHeart')p.def+=3;if(b.reward==='tome'){p.maxMp+=10;p.mp=p.maxMp}if(b.reward==='crown'){p.atk+=4;p.maxHp+=20;p.hp=Math.min(p.maxHp,p.hp+20)}log('尋回支線神器！'+b.desc,'#f1c480');toast('支線完成：'+b.name)}
+function price(i){return Math.max(1,Math.ceil((ITEMS[i.type].price+(['weapon','armor'].includes(ITEMS[i.type].kind)?i.power*4:0))*(s.race==='goblin'?.8:1)))}
+function shop(o){const sellable=s.p.inventory.filter(i=>!Object.values(s.p.equipment).includes(i.id));modal(`<div class="eyebrow">MERCHANT / $ 是商人，不是寶箱</div><h2>流浪商人的補給站</h2><p>金幣 <b>${s.p.gold}</b> · 商人物品已鑑定，無詛咒。交易不消耗回合；商店庫存會保留。</p><h3>購買</h3><div class="inventory">${o.stock.length?o.stock.map(i=>`<div class="card"><div class="itemtext"><b>${esc(itemName(i))}</b><small>${esc(itemDetail(i))}</small></div><button data-buy="${i.id}">${price(i)} 金</button></div>`).join(''):'<p>已售完。</p>'}</div><div class="footer"><button id="rest">營火休息 · 35 金（回滿生命）</button><button id="smith">武器強化 +1 · 40 金</button></div><h3>出售背包物品（每次整組）</h3><div class="inventory">${sellable.map(i=>`<div class="card"><div class="itemtext"><b>${esc(itemName(i))} ×${i.count}</b></div><button data-sell="${i.id}">${Math.max(1,Math.floor(ITEMS[i.type].price*.35))*i.count} 金</button></div>`).join('')}</div><div class="footer"><button class="primary" id="shopLeave">離開商店</button></div>`,'shop');all('[data-buy]',b=>b.onclick=()=>{const i=o.stock.find(i=>i.id===Number(b.dataset.buy));if(!i)return;const cost=price(i);if(s.p.gold<cost){toast('商人：錢不夠。勇氣不能刷卡。');return}if(addItem(i)){s.p.gold-=cost;o.stock=o.stock.filter(a=>a.id!==i.id);save(false);update();shop(o)}});all('[data-sell]',b=>b.onclick=()=>{const i=s.p.inventory.find(i=>i.id===Number(b.dataset.sell));if(!i||Object.values(s.p.equipment).includes(i.id))return;s.p.gold+=Math.max(1,Math.floor(ITEMS[i.type].price*.35))*i.count;s.p.inventory=s.p.inventory.filter(a=>a.id!==i.id);log('出售了'+itemName(i)+'。');save(false);update();shop(o)});bind('rest',()=>{if(s.p.gold<35){toast('需要 35 金幣。');return}if(s.p.hp===s.p.maxHp){toast('生命已滿。');return}s.p.gold-=35;s.p.hp=s.p.maxHp;log('在商人的營火旁休息。','#73e2c3');save(false);update();shop(o)});bind('smith',()=>{const w=equipped('weapon');if(!w){toast('先裝備武器。');return}if(s.p.gold<40){toast('需要 40 金幣。');return}s.p.gold-=40;w.power++;log('武器攻擊 +1。','#f1c480');save(false);update();shop(o)});bind('shopLeave',close)}
+function readStorage(k){try{return localStorage.getItem(k)}catch{return null}}function menu(){modal(`<div class="eyebrow">PRO MAX ULTRA DUO PLUS / 小心名稱超重</div><div class="bigtitle">EMBERFALL II</div><h2>深淵之書</h2><p>一份 HTML，一整座深淵。8 種族 × 6 職業、24 層主線、7 層支線。探索、鑑定、詛咒、生存與戰術，一步一步建立你的傳說。</p><div class="grid cards"><div class="card"><b>學會活下來</b>13 關互動訓練。實際操作後才通過；訓練不會永久死亡。</div><div class="card"><b>每一局都不同</b>固定種子可重現開局。職業、種族、未知物品與支線神器改變玩法。</div><div class="card"><b>深度比樓層更重要</b>持久樓層、雙向階梯、商店庫存、異常狀態、召喚盟友與守衛機制。</div></div><div class="footer"><button class="primary" id="create">建立冒險者</button><button id="train">互動教學 · 建議先玩</button>${readStorage(KEY)?'<button id="continue">繼續正式存檔</button>':''}${readStorage(KEY+'-training')?'<button id="continueTraining">繼續教學進度</button>':''}${s?'<button id="resume">回到目前遊戲</button>':''}<button id="manual">冒險百科</button><button id="importMenu">匯入存檔</button>${readStorage('emberfall-save-v1')?'<button id="legacy">搬移舊版角色</button>':''}</div><p style="font-size:11px">回合制 · 單檔離線 · NetHack 風格的道具與資源管理 · 自動存檔 + JSON 備份<br>教學與正式冒險分開存檔。開始新冒險會取代正式自動存檔，請先匯出要保留的角色。</p>`,'menu');bind('create',creation);bind('train',()=>confirmStart(true));bind('continue',()=>loadGame(false));bind('continueTraining',()=>loadGame(true));bind('resume',close);bind('manual',()=>help('controls'));bind('importMenu',importMenu);bind('legacy',legacyMenu)}
+function creation(){const r=RACES[selection.race],c=JOBS[selection.job];modal(`<div class="eyebrow">CHARACTER CREATION / 48 種起手組合</div><h2>你想用什麼方式活下來？</h2><div class="creation"><div><h3>種族 · 決定體質與生存方式</h3><div class="selectgrid">${Object.entries(RACES).map(([k,r])=>`<button data-race="${k}" class="${selection.race===k?'selected':''}"><b>${r.icon} ${r.name}</b><small>${r.short}</small></button>`).join('')}</div><p>${r.desc}</p></div><div><h3>職業 · 決定戰鬥與專屬技能</h3><div class="selectgrid">${Object.entries(JOBS).map(([k,c])=>`<button data-job="${k}" class="${selection.job===k?'selected':''}"><b>${c.icon} ${c.name}</b><small>${c.ult}</small></button>`).join('')}</div><p>${c.desc}</p></div></div><div class="characterpreview"><b>${r.name} · ${c.name}</b>　生命 ${c.hp+r.hp}　魔力 ${Math.max(10,c.mp+r.mp)}　基礎攻擊 ${c.atk+r.atk}　護甲 ${c.def+r.def}<br><small>推薦初次遊玩：人類守燼者。想召喚軍團：喚骨者。想把午餐從怪物身上拿回來：吸血鬼。</small></div><h3>冒險規則</h3><div class="row"><button data-mode="explorer" class="${selection.mode==='explorer'?'selected':''}">探險模式 · 3 次救援</button><button data-mode="classic" class="${selection.mode==='classic'?'selected':''}">經典模式 · 永久死亡</button></div><div class="seedrow"><label for="seedInput">世界種子</label><input id="seedInput" maxlength="60" placeholder="留空隨機；例如 Andrew" value="${esc(selection.seed)}"></div><small>同種子、同種族與職業、同樣操作可重現世界。敵人和道具仍受你的回合選擇影響。</small><div class="footer"><button class="primary" id="begin">點燃餘燼燈</button><button id="creationTrain">先進訓練場</button><button id="creationBack">返回選單</button></div>`,'create');const capture=()=>selection.seed=$('seedInput').value.trim();all('[data-race]',b=>b.onclick=()=>{capture();selection.race=b.dataset.race;creation()});all('[data-job]',b=>b.onclick=()=>{capture();selection.job=b.dataset.job;creation()});all('[data-mode]',b=>b.onclick=()=>{capture();selection.mode=b.dataset.mode;creation()});bind('begin',()=>{capture();confirmStart(false)});bind('creationTrain',()=>{capture();confirmStart(true)});bind('creationBack',menu)}
+function confirmStart(training){if(s&&s.status==='playing'){modal(`<h2>開始${training?'互動教學':'全新冒險'}？</h2><p>${training?'正式自動存檔會保留，可以從選單繼續。':'這會取代正式自動存檔。要保留目前角色，可先匯出 JSON。'}</p><div class="footer"><button id="confirmNew" class="primary">開始</button><button id="backupBefore">先匯出目前角色</button><button id="cancelNew">返回</button></div>`,'confirm');bind('confirmNew',()=>startGame(training));bind('backupBefore',exportSave);bind('cancelNew',training?menu:creation)}else startGame(training)}
+function inventory(tab=invTab){if(!s)return;invTab=tab;const p=s.p,items=p.inventory.filter(i=>tab==='all'||ITEMS[i.type].kind===tab),slots={weapon:'武器',armor:'護甲',ring:'戒指'};modal(`<div class="eyebrow">INVENTORY / 道具也是你的技能樹</div><h2>冒險背包</h2><div class="row"><span>負重 ${weight()} / ${capacity()}</span><span class="${weight()>capacity()?'highlight':''}">${weight()>capacity()?'超重：飽食消耗增加':'重量正常'}</span><span>金幣 ${p.gold}</span></div><p style="font-size:12px">未知外觀可鑑定。裝備 / 使用 / 丟棄各消耗一回合；打開背包不消耗回合。詛咒裝備先淨咒才可卸下。</p><div class="tabs">${[['all','全部'],['weapon','武器'],['armor','護甲'],['ring','戒指'],['potion','藥水'],['scroll','卷軸'],['wand','魔杖'],['food','食物']].map(([k,t])=>`<button data-invtab="${k}" class="${k===tab?'selected':''}">${t}</button>`).join('')}</div><div class="inventory">${items.map(i=>{const d=ITEMS[i.type],isEquip=Object.values(p.equipment).includes(i.id),gear=['weapon','armor','ring'].includes(d.kind);return`<div class="card"><div class="itemtext"><b>${esc(itemName(i))}${i.count>1?' ×'+i.count:''}</b><small>${esc(itemDetail(i))}</small><div class="statuses">${isEquip?'<span class="tag good">已裝備</span>':''}${i.known&&i.cursed?'<span class="tag bad">詛咒</span>':''}${!itemKnown(i)?'<span class="tag">未知</span>':''}<span class="tag">重量 ${d.weight*i.count}</span></div></div><div class="actions">${s.status==='playing'?`<button data-use="${i.id}">${gear?(isEquip?'卸下':'裝備'):'使用'}</button>${!isEquip?`<button data-drop="${i.id}">丟棄</button>`:''}`:''}</div></div>`}).join('')||'<p>這個分類沒有物品。</p>'}</div><h3>永久遺物 / 支線神器</h3><p style="font-size:12px">${p.relics.map(id=>RELICS.find(r=>r.id===id)?.name||id).map(esc).join('、')||'尚無遺物'}${s.artifacts.length?' · '+s.artifacts.map(id=>Object.values(BRANCHES).find(b=>b.reward===id)?.desc||id).map(esc).join('；'):''}</p><div class="footer"><button class="primary" id="bagBack">返回遊戲</button><button id="exportSave">匯出存檔 JSON</button><button id="importSave">匯入存檔</button></div>`,'inventory');all('[data-invtab]',b=>b.onclick=()=>inventory(b.dataset.invtab));all('[data-use]',b=>b.onclick=()=>useItem(Number(b.dataset.use)));all('[data-drop]',b=>b.onclick=()=>dropItem(Number(b.dataset.drop)));bind('bagBack',close);bind('exportSave',exportSave);bind('importSave',importMenu)}
+const QUESTS=[{id:'hunter',name:'獵人契約',desc:'累計擊敗 12 隻敵人。',check:()=>s.kills>=12,progress:()=>`${s.kills}/12`,reward:'60 金幣 + 淨化藥水',apply:()=>{s.p.gold+=60;addItem(item('antidote',0,{known:true}))}},{id:'seeker',name:'尋寶者',desc:'開啟 8 個寶箱。',check:()=>s.stats.chests>=8,progress:()=>`${s.stats.chests}/8`,reward:'鑑定卷軸 ×2 + 測繪卷軸',apply:()=>{addItem(item('identify',0,{known:true,count:2}));addItem(item('mapping',0,{known:true}))}},{id:'devotion',name:'聖壇行者',desc:'使用 5 座聖壇。',check:()=>s.stats.shrines>=5,progress:()=>`${s.stats.shrines}/5`,reward:'生命上限 +15',apply:()=>{s.p.maxHp+=15;s.p.hp=Math.min(s.p.maxHp,s.p.hp+15)}},{id:'scholar',name:'鑑定學者',desc:'成功鑑定 6 件物品。',check:()=>s.stats.identified>=6,progress:()=>`${s.stats.identified}/6`,reward:'魔力上限 +8',apply:()=>{s.p.maxMp+=8;s.p.mp=Math.min(s.p.maxMp,s.p.mp+8)}}];
+const ACHIEVEMENTS=[{id:'first',name:'第一滴火光',check:()=>s.kills>=1},{id:'hunter',name:'深淵獵人',check:()=>s.kills>=50},{id:'boss',name:'守衛終結者',check:()=>s.stats.bosses>=1},{id:'depth',name:'深入霜裂',check:()=>s.stats.deepest>=13},{id:'expert',name:'辨物大師',check:()=>s.stats.identified>=10},{id:'secrets',name:'機關研究員',check:()=>s.stats.searches>=20},{id:'forge',name:'熔鑄之心',check:()=>s.artifacts.includes('forgeHeart')},{id:'archive',name:'潮汐秘典',check:()=>s.artifacts.includes('tome')},{id:'court',name:'失落王冠',check:()=>s.artifacts.includes('crown')},{id:'all',name:'神器收藏家',check:()=>s.artifacts.length>=3},{id:'win',name:'餘燼重燃',check:()=>s.status==='won'},{id:'classic',name:'一次生命的傳說',check:()=>s.status==='won'&&s.mode==='classic'}];
+function profile(){try{const p=JSON.parse(readStorage(PROFILE_KEY));if(p&&Array.isArray(p.unlocked)&&Array.isArray(p.runs))return p}catch{}return{unlocked:[],runs:[],trained:false}}
+function journal(){if(!s)return;const f=level(),pr=profile();modal(`<div class="eyebrow">JOURNAL / 活下來也要有計畫</div><h2>冒險日誌</h2><div class="note">主線：穿越六個區域，擊敗第 24 層守衛，取回餘燼之心。支線可選；神器會提供永久加成。已生成樓層 ${Object.keys(s.floors).length} / 31（正式世界）。</div><h3>委託 · 完成後在此領取獎勵</h3><div class="grid two">${QUESTS.map(q=>`<div class="card"><b>${q.name}</b>${q.desc} <span class="highlight">${q.progress()}</span><br><small>獎勵：${q.reward}</small><div class="footer"><button data-claim="${q.id}" ${s.training||s.status!=='playing'||!q.check()||s.claimed.includes(q.id)?'disabled':''}>${s.claimed.includes(q.id)?'已領取':'領取獎勵'}</button></div></div>`).join('')}</div><h3>世界路線</h3><div class="grid cards">${BIOMES.map((b,i)=>`<div class="card"><b>${b.name} · ${b.range} 層</b><small>${b.hint}</small><p>守衛：${ENEMIES[b.boss].name}<br>${s.floors[`main-${(i+1)*4}`]?.bossDead?'✓ 已擊敗':'尚未擊敗'}</p></div>`).join('')}</div><div class="grid">${Object.entries(BRANCHES).map(([id,b])=>`<div class="card"><b>${b.name} · ${b.length} 層</b>入口：主線第 ${b.entry} 層的 ✧ 傳送門<br><small>${b.desc}</small><p>${s.artifacts.includes(b.reward)?'✓ 已取得神器':'尚未完成'}</p></div>`).join('')}</div><h3>探索過的樓層</h3><p class="routefloor">${Object.values(s.floors).map(f=>`${esc(f.name)} ${f.n}${f.id===s.floor?'（目前）':''}${f.bossDead&&f.boss?' ✓':''}`).join(' → ')}</p><h3>跨局成就</h3><div class="progresslist">${ACHIEVEMENTS.map(a=>`<div class="${pr.unlocked.includes(a.id)?'done':''}">${pr.unlocked.includes(a.id)?'✓':'○'} ${a.name}</div>`).join('')}</div><p style="font-size:11px">世界種子：<span data-no-i18n>${esc(s.seed)}</span> · 模式：${s.mode==='classic'?'經典永久死亡':'探險救援'} · 尚餘救援 ${s.rescues} 次</p><div class="footer"><button class="primary" id="journalBack">返回遊戲</button><button id="guideList">查看教學課表</button></div>`,'journal');all('[data-claim]',b=>b.onclick=()=>{const q=QUESTS.find(q=>q.id===b.dataset.claim);if(!q||!q.check()||s.claimed.includes(q.id)||s.training||s.status!=='playing')return;if(s.p.inventory.length>33){toast('先整理背包，預留獎勵空間。');return}s.claimed.push(q.id);q.apply();log('完成委託：'+q.name+'。','#f1c480');save(false);update();journal()});bind('journalBack',close);bind('guideList',()=>help('training'))}
+const CONTROL_ROWS=[['w/a/s/d 或方向鍵','移動一格；碰到敵人改為近戰；碰到門先開門'],['e','與腳下 / 相鄰物件互動（寶箱、商人、階梯、聖壇）'],['點選敵人 / tab','瞄準；tab 在可見敵人之間切換'],['1 / 2 / 3','餘燼爆破 / 冰霜新星 / 閃步'],['4','職業專屬技能'],['f','遠程射擊，消耗 2 魔力；巡林者更強'],['q / r','使用已知生命藥水 / 口糧'],['space','等待 1 回合，額外恢復 2 魔力'],['c','搜尋 3 格內的陷阱與暗門'],['x','自動探索；遇敵、受傷、物件或風險停止'],['i / j / h','背包 / 日誌 / 冒險手冊'],['esc','關閉視窗或打開選單']];
+const SYSTEM_ROWS=[['回合','移動、開門、攻擊、技能、搜尋、裝備、喝藥都花一回合。撞牆、空技能、開背包不花回合。交易不花回合。'],['生命與護甲','物理傷害扣除護甲，最少 1；法術類傷害只扣一半護甲。護盾先吸收傷害。藥水、商人、聖壇、升級可回血。'],['魔力與冷卻','每 3 回合自然回魔；織焰師回得更多。等待額外回 2。新樓層首次進入恢復部分魔力，回訪不重複補。'],['飢餓','每回合飽食減少，低於 250 叫飢餓；0 時每 4 回合受傷。巨魔與超重角色消耗更快；魔像不需要食物。'],['負重','物品有重量；超重增加飽食消耗。背包最多 36 組；出售、丟棄或使用可整理。矮人能多背 10。'],['未知物品','每局會打亂藥水、卷軸、戒指與魔杖外觀。鑑定揭露真名與詛咒；使用或裝備也會記住種類。裝備上的詛咒需逐件鑑定確認。'],['詛咒與附魔','詛咒裝備不能卸下或替換。淨咒卷軸 / 聖壇可解除。附魔卷軸強化目前武器 +2；商人可花錢 +1。'],['地形','門擋住視線；開門後可通行。毒池偶爾中毒，冰面偶爾遲緩，熔岩每回合灼傷。自動探索會避免已知熔岩與已揭露陷阱。'],['異常狀態','中毒 / 燃燒每回合傷害；遲緩每 3 回合可能讓敵人多行動一次。淨化藥水與聖諭者能清除這三種狀態。'],['敵人情報','敵人靠視線察覺你，追蹤最後看到的位置；警報會驚動全層。敵人不穿牆。部分敵人會開門；遠程敵人需要視線。'],['召喚盟友','喚骨者可召喚最多 2 隻骸骨，持續 40 回合；自動追擊。走向盟友可交換位置。離開樓層時會跟隨，若入口沒有空位則留下不了。'],['Boss 預告','紅色 3×3 區域在下一次守衛行動時爆發。閃步 3 格可逃離；凍結能延後攻擊。守衛低生命狂暴，部分會召喚。'],['持久樓層','上下樓不重生怪物、不重置寶箱與商店。樓層資料完整保存；不必清空普通層，但守衛層出口有封印。'],['存檔與死亡','每回合自動存檔。經典模式死亡後不能繼續行動；探險模式有 3 次救援。匯出 JSON 可搬到另一部電腦。教學使用獨立自動存檔。']];
+function help(tab=helpTab){helpTab=tab;let content='';if(tab==='controls')content=`<div class="note">建議先玩獨立互動教學。正式冒險先找商人補給，再清理安全走廊；遇到遠程敵人，用牆切視線。藥水喝太晚，通常就不用再喝了。</div><h3>鍵盤與觸控</h3><table><thead><tr><th>操作</th><th>效果</th></tr></thead><tbody>${CONTROL_ROWS.map(([k,t])=>`<tr><td><kbd>${k}</kbd></td><td>${t}</td></tr>`).join('')}</tbody></table>`;
+if(tab==='training')content=`<p>訓練用人類守燼者，避免種族特性跳過基礎課。每一步都有目標、理由、提示與地圖標記；完成後自動進下一課。</p><div class="progresslist">${LESSONS.map((l,i)=>`<div class="${s?.training&&s.guide.step>i?'done':''}">${s?.training&&s.guide.step>i?'✓':'○'} ${l.title}<br><small>${l.goal}</small></div>`).join('')}</div><div class="footer"><button id="startTrainingFromHelp">進入互動教學</button></div>`;
+if(tab==='races')content=`<h3>8 種族：生存方式與抗性</h3><table><tr><th>種族</th><th>體質修正</th><th>特性</th></tr>${Object.values(RACES).map(r=>`<tr><td>${r.icon} ${r.name}</td><td>HP ${r.hp>=0?'+':''}${r.hp}<br>MP ${r.mp>=0?'+':''}${r.mp}</td><td>${r.desc}</td></tr>`).join('')}</table><h3>6 職業：戰鬥與專屬技能</h3><div class="grid two">${Object.values(JOBS).map(c=>`<div class="card"><b>${c.icon} ${c.name} · ${c.ult}</b>${c.desc}<br><small>基礎 HP ${c.hp} / MP ${c.mp} / 攻擊 ${c.atk} / 護甲 ${c.def}</small></div>`).join('')}</div><p>推薦組合：精靈織焰師（高法傷）、矮人守燼者（坦克）、吸血鬼喚骨者（擊殺補血）、哥布林巡林者（補給與遠程）。所有 48 種搭配都可使用。</p>`;
+if(tab==='systems')content=`<table><tr><th>系統</th><th>規則</th></tr>${SYSTEM_ROWS.map(([k,t])=>`<tr><td>${k}</td><td>${t}</td></tr>`).join('')}</table>`;
+if(tab==='world')content=`<div class="grid two">${BIOMES.map(b=>`<div class="card"><b>${b.name} · ${b.range} 層</b>${b.hint}<p>守衛：${ENEMIES[b.boss].name}<br><small>${ENEMIES[b.boss].desc}</small></p></div>`).join('')}</div><h3>三條可選支線</h3><div class="grid">${Object.values(BRANCHES).map(b=>`<div class="card"><b>${b.name} · ${b.length} 層</b>主線第 ${b.entry} 層有入口<br><small>${b.desc}</small></div>`).join('')}</div><p>普通層可以直接下樓，但探索能取得升級與補給。每四層守衛封鎖出口；支線最深層守衛會掉落神器。擊敗第 24 層守衛後，在餘燼之心互動即可通關。</p>`;
+if(tab==='bestiary')content=`<input id="bestiarySearch" placeholder="搜尋怪物名稱、戰術或抗性" style="width:100%;margin-bottom:14px"><div id="bestiaryList" class="grid two">${bestiaryCards('')}</div>`;
+if(tab==='items')content=`<div class="grid two">${Object.values(ITEMS).map(i=>`<div class="card"><b>${i.name}</b>${i.desc}<br><small>${i.kind} · 重量 ${i.weight} · 基礎價格 ${i.price}</small></div>`).join('')}</div>`;
+if(tab==='workshop')content=`<h3>把遊戲當成 AI Coding Workshop 的測試題</h3><div class="grid two"><div class="card"><b>碰撞與路徑</b>隔牆引怪、關門切視線。預期：怪物繞路，沒有視線的弓手不射穿牆。</div><div class="card"><b>回合與無效操作</b>撞牆、沒魔力放技能、空背包按喝藥。預期：回合數不變。</div><div class="card"><b>狀態與生命周期</b>召喚骸骨、上下樓、死亡後移動。預期：盟友按規則跟隨，死人不能行動。</div><div class="card"><b>資料一致性</b>裝備詛咒戒指，存檔重載。預期：加成、綁定、樓層物件與背包一致。</div><div class="card"><b>可重現實驗</b>固定種子與角色，用同樣操作比較。預期：地圖與遊戲隨機結果一致。</div><div class="card"><b>好的 Debug Prompt</b>寫出重現步驟、實際結果、預期結果與修改範圍，再要求 AI 分析原因。</div></div><div class="note">例：主線第 5 層，我站在關閉的門後，弓手仍造成傷害。請檢查視線判斷是否把關門視為遮擋，只修改遠程攻擊相關邏輯，並測試開門 / 關門兩個情境。</div>`;
+modal(`<div class="eyebrow">THE FIELD CODEX / 隨時可查，不需要背整本</div><h2>冒險百科</h2><div class="tabs">${[['controls','操作'],['training','教學課表'],['races','種族 / 職業'],['systems','深層規則'],['world','世界路線'],['bestiary','怪物圖鑑'],['items','道具圖鑑'],['workshop','Debug 教室']].map(([k,n])=>`<button data-help="${k}" class="${k===tab?'selected':''}">${n}</button>`).join('')}</div><div class="helpbody">${content}</div><div class="footer"><button class="primary" id="manualBack">${s?'返回目前遊戲':'返回選單'}</button></div>`,'help');all('[data-help]',b=>b.onclick=()=>help(b.dataset.help));bind('manualBack',()=>s?close():menu());bind('startTrainingFromHelp',()=>confirmStart(true));if(tab==='bestiary')$('bestiarySearch').oninput=e=>$('bestiaryList').innerHTML=bestiaryCards(e.target.value)}
+function bestiaryCards(q){return Object.values(ENEMIES).filter(d=>{const text=d.name+d.desc+(d.resist==='fire'?'火焰抗性':d.resist==='cold'?'寒冰抗性':'');return(text+(typeof englishText==='function'?englishText(text):'')).toLowerCase().includes(q.toLowerCase())}).map(d=>`<div class="card"><b><span style="color:${d.color}">${d.glyph}</span> ${d.name}${d.boss?' · 守衛':''}</b>${d.desc}<br><small>基礎 HP ${d.hp} / 攻擊 ${d.atk}${d.resist?' / '+(d.resist==='fire'?'火':'冰')+'抗 65%':''}；普通怪物隨深度提升。</small></div>`).join('')||'<p>沒有符合的怪物。</p>'}
+function trainingComplete(){const pr=profile();pr.trained=true;writeStorage(PROFILE_KEY,pr);modal('<div class="eyebrow">ACADEMY COMPLETE / 你已取得不白給資格</div><h2>13 關教學完成！</h2><p>你已實際完成移動、碰撞、開箱、裝備、近戰、瞄準施法、補血、進食、搜尋、鑑定、解除詛咒、聖壇祈禱和階梯互動。</p><div class="note">下一步：選擇種族與職業。建議第一局使用探險模式；活下來後再挑戰經典永久死亡。</div><div class="footer"><button class="primary" id="graduate">建立正式角色</button><button id="trainedMap">看看訓練場</button><button id="trainedMenu">回選單</button></div>','trained');bind('graduate',creation);bind('trainedMap',close);bind('trainedMenu',menu)}
+function endScreen(){const won=s.status==='won';recordRun();modal(`<div class="eyebrow">${won?'THE EMBER LIVES ON':'A STORY FOR THE NEXT ADVENTURER'}</div><h2>${won?'餘燼重燃 · 深淵之書完結':'餘燼燈熄滅了'}</h2><p>${won?'你走過六個區域，擊敗深淵編織者，帶回餘燼之心。故事沒有奪走你的名字。':'最後原因：'+esc(s.cause||'深淵')+'。下一趟記住：藥水不是傳家寶，金幣也不是防彈衣。'}</p><div class="grid cards"><div class="card"><b>最深 ${s.stats.deepest} 層</b>擊敗 ${s.kills} 隻敵人 / ${s.stats.bosses} 位守衛</div><div class="card"><b>LV. ${s.p.lv}</b>${RACES[s.race].name} ${JOBS[s.job].name} · ${s.turn} 回合</div><div class="card"><b>${s.artifacts.length} / 3 神器</b>${s.p.relics.length} 份永久遺物</div></div><div class="footer"><button class="primary" id="newRun">再開一局</button><button id="endJournal">冒險紀錄</button><button id="endExport">匯出存檔</button><button id="endLook">查看地圖</button></div>`,'end');bind('newRun',creation);bind('endJournal',journal);bind('endExport',exportSave);bind('endLook',close)}
+function guideHint(){if(!s){help();return}if(s.training&&!s.guide.completed){const l=LESSONS[s.guide.step];modal(`<div class="eyebrow">GUIDED PRACTICE / ${s.guide.step+1} OF ${LESSONS.length}</div><h2>${l.title}</h2><div class="note">任務：${l.goal}</div><p>${l.why}</p><h3>具體操作</h3><p>${l.hint}</p><div class="footer"><button class="primary" id="hintBack">我來試試</button><button id="hintManual">查完整手冊</button></div>`,'hint');bind('hintBack',close);bind('hintManual',()=>help('training'))}else help('systems')}
+function update(){if(!s)return;const p=s.p,f=level(),c=job(),r=race();$('heroIcon').textContent=c.icon;$('heroName').textContent=c.name;$('heroSub').textContent=`${r.name} · LV. ${p.lv}`;for(const [id,val,max]of [['hp',p.hp,p.maxHp],['mp',p.mp,p.maxMp],['hunger',s.race==='construct'?1200:p.hunger,1200],['xp',p.xp,maxXp()]]){ $(id+'Bar').style.width=Math.max(0,Math.min(100,val/max*100))+'%';$(id+'Text').textContent=id==='hunger'?(s.race==='construct'?'不需要進食':`${p.hunger} / 1200`):`${val} / ${max}`} $('hungerName').textContent=s.race==='vampire'?'血飽':'飽食';$('xpLabel').textContent='經驗';$('stats').innerHTML=[['攻擊',atk()],['護甲',armor()],['金幣',p.gold],['負重',`${weight()}/${capacity()}`]].map(([a,b])=>`<div><span>${a}</span><b>${b}</b></div>`).join('');const names={poison:'中毒',burn:'燃燒',slow:'遲緩',might:'巨力',stealth:'隱匿',guard:'壁壘'};$('statuses').innerHTML=Object.entries(p.status).filter(([k,n])=>n>0).map(([k,n])=>`<span class="tag ${['poison','burn','slow'].includes(k)?'bad':'good'}">${names[k]} ${n}</span>`).join('')+(p.shield?`<span class="tag good">護盾 ${p.shield}</span>`:'')+(p.hunger<250&&s.race!=='construct'?'<span class="tag bad">飢餓</span>':'');const defs=[['✦ 餘燼爆破',6],['❋ 冰霜新星',9],['➤ 閃步',s.job==='rogue'?2:4],[c.icon+' '+c.ult,c.cost]];$('skills').innerHTML=defs.map(([name,cost],i)=>`<button class="skill" data-skill="${i}" ${s.status!=='playing'||p.cooldowns[i]||p.mp<manaCost(cost)?'disabled':''}><span>${name} <kbd>${i+1}</kbd></span><small>${p.cooldowns[i]?'冷卻 '+p.cooldowns[i]:manaCost(cost)+' 魔力'}</small></button>`).join('');all('[data-skill]',b=>b.onclick=()=>{stopAuto();skill(Number(b.dataset.skill))});$('potCount').textContent=p.inventory.filter(i=>i.type==='heal'&&itemKnown(i)).reduce((n,i)=>n+i.count,0)+' 瓶';$('foodCount').textContent=countItem('food')+' 份';$('floorTitle').textContent=s.training?f.name:`${f.name} · ${f.n} 層${f.zone==='main'?' / 24':' / '+BRANCHES[f.zone].length}`;$('floorDesc').textContent=s.training?'完成實作才能過關 · 訓練不會永久死亡':`${f.zone==='main'?'主線':'可選支線'} · ${BIOMES[f.biome].hint}`;$('turnText').textContent=`TURN ${s.turn}`;
+if(s.training){const l=LESSONS[Math.min(s.guide.step,LESSONS.length-1)];$('guideCopy').innerHTML=s.guide.completed?'<strong>✓ 互動教學完成</strong> · 在選單建立你的正式角色。':`<strong>${l.title}</strong> · ${l.goal}<br><small>${l.why}</small><div class="guideprogress"><div style="width:${s.guide.step/LESSONS.length*100}%"></div></div>`;$('guideHint').textContent='詳細提示'}else{let text=p.status.poison?'你中毒了：用淨化藥水或聖諭者技能解除。':p.hp<p.maxHp*.35?'生命偏低：先補血，再繼續探索。':p.hunger<250&&s.race!=='construct'?'你飢餓了：按 r 進食。':weight()>capacity()?'背包超重：出售或丟棄物品可降低消耗。':f.enemies.some(e=>e.charge)?'守衛正在預告重擊！離開紅色範圍，或用冰霜延後它。':f.boss&&!f.bossDead?'本層出口有封印：擊敗守衛，取得遺物。':'按 c 搜尋暗門；點敵人瞄準；下樓前補給。';$('guideCopy').innerHTML=`<strong>冒險提示</strong> · ${text}`;$('guideHint').textContent='查規則'}$('guidebar').classList.toggle('hidden',!s.guide.enabled);
+const remain=f.enemies.filter(e=>e.hp>0).length;$('quest').innerHTML=s.training?`<b>完成第 ${Math.min(s.guide.step+1,13)} / 13 課</b><br>${s.guide.completed?'✓ 可開始正式冒險':LESSONS[s.guide.step].goal}`:s.status==='won'?'<b>✓ 已帶回餘燼之心</b>':s.status==='dead'?'<b>冒險結束 · 新的一局等著你</b>':`<b>${f.boss&&!f.bossDead?'擊敗本層守衛':f.zone==='main'?(f.n===24?'取得餘燼之心':'尋找下行階梯'):f.n===BRANCHES[f.zone].length?'取得神器，返回主線':'繼續深入支線'}</b><br>本層敵人：${remain}<br>神器：${s.artifacts.length} / 3 · 救援：${s.rescues}<br><small>樓層保留；上樓可以回訪。</small>`;const e=f.enemies.find(e=>e.id===target&&e.hp>0&&visible(e));if(e){const d=ENEMIES[e.type];$('enemyInfo').innerHTML=`<b>${d.name}</b> · HP ${e.hp}/${e.maxHp}<br>距離 ${distance(e,p)} 格 · ${los(p,e)?'視線通暢':'視線受阻'}<br><small>${d.desc}</small>`}else $('enemyInfo').textContent='點選可見敵人瞄準；tab 切換目標。';$('equipment').innerHTML=['weapon','armor','ring'].map(slot=>{const i=equipped(slot);return `${{weapon:'武器',armor:'護甲',ring:'戒指'}[slot]}：<b>${i?esc(itemName(i)):'—'}</b>${i?.cursed?' <span style="color:#ff94a5">綁定</span>':''}`}).join('<br>')+`<br><small>永久遺物 ${p.relics.length} · 骸骨盟友 ${f.allies.length}</small>`;$('log').innerHTML=s.logs.map(l=>`<p style="color:${/^#[\da-f]{6}$/i.test(l.color)?l.color:'#acbdd2'}"><small style="font-size:9px">${l.turn}</small> ${esc(l.t)}</p>`).join('');const near=f.objects.find(o=>!o.used&&o.type!=='trap'&&distance(o,p)<=1);$('context').textContent=near?`附近：${OBJECT_LABELS[near.type]||near.type}${near.label?' · '+near.label:''} · 按 e 互動`:e?`瞄準 ${ENEMIES[e.type].name} · 距離 ${distance(e,p)} 格 · 遠程 f / 技能 1`:`位置 (${p.x},${p.y}) · WASD 移動 · e 互動 · c 搜尋 · x 自動探索`;drawMini()}
+const OBJECT_LABELS={up:'上行階梯',down:'下行階梯',heart:'餘燼之心',portal:'支線傳送門',branchExit:'返回主線出口',chest:'寶箱',shrine:'聖壇',fountain:'泉水',shop:'商人',camp:'入口營火',relic:'守衛遺物',loot:'地上物品',trainingExit:'教學出口'};
+function writeStorage(k,value){try{localStorage.setItem(k,JSON.stringify(value));return true}catch{return false}}
+function achievements(){if(s.training)return;const pr=profile();let changed=false;for(const a of ACHIEVEMENTS)if(!pr.unlocked.includes(a.id)&&a.check()){pr.unlocked.push(a.id);changed=true;toast('成就解鎖：'+a.name)}if(changed)writeStorage(PROFILE_KEY,pr)}
+function recordRun(){if(s.training||s.recorded)return;s.recorded=true;const pr=profile(),id=s.runId||s.seed+'-'+s.race+'-'+s.job;if(!pr.runs.some(r=>r.id===id))pr.runs.unshift({id,race:s.race,job:s.job,depth:s.stats.deepest,kills:s.kills,turn:s.turn,won:s.status==='won',date:Date.now()});pr.runs=pr.runs.slice(0,20);writeStorage(PROFILE_KEY,pr);s.rng=rngState;writeStorage(KEY,s)}
+function save(manual=false){if(!s)return;s.rng=rngState;achievements();const ok=writeStorage(s.training?KEY+'-training':KEY,s);if(manual)toast(ok?'冒險已存檔。':'瀏覽器不允許儲存；請從背包匯出 JSON。')}
+function exportSave(){if(!s)return;s.rng=rngState;const a=document.createElement('a'),url=URL.createObjectURL(new Blob([JSON.stringify(s)],{type:'application/json'}));a.href=url;a.download=`emberfall-${s.training?'training':s.race+'-'+s.job}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);toast('已匯出目前冒險。')}
+function validFloorId(id){if(typeof id!=='string')return false;if(id==='training-1')return true;const m=/^(main|forge|archive|court)-(\d+)$/.exec(id);if(!m)return false;const n=Number(m[2]);return Number.isInteger(n)&&n>=1&&n<=(m[1]==='main'?24:BRANCHES[m[1]].length)}
+function validate(a){const num=(v,lo,hi)=>Number.isFinite(v)&&v>=lo&&v<=hi;const integer=(v,lo,hi)=>Number.isInteger(v)&&num(v,lo,hi);const coord=o=>o&&inside(o.x,o.y);const arr=(v,max)=>Array.isArray(v)&&v.length<=max;const itemValid=i=>i&&integer(i.id,1,1e9)&&ITEMS[i.type]&&integer(i.count,1,9999)&&num(i.power,0,10000)&&integer(i.charges,0,10000)&&typeof i.cursed==='boolean'&&typeof i.known==='boolean'&&(!i.name||typeof i.name==='string'&&i.name.length<=100);
+if(!a||a.version!==VERSION||!RACES[a.race]||!JOBS[a.job]||!['explorer','classic'].includes(a.mode)||typeof a.seed!=='string'||a.seed.length>100||!integer(a.rng,-2147483648,4294967295)||!integer(a.nextId,1,1e9)||!['playing','dead','won','trained'].includes(a.status)||!integer(a.turn,0,1e9)||!validFloorId(a.floor)||!a.floors||typeof a.floors!=='object'||Array.isArray(a.floors)||Object.keys(a.floors).length>32||!a.floors[a.floor])throw Error('存檔版本或世界資料不正確');
+if(typeof a.training!=='boolean'||a.training!==(a.floor==='training-1')||Object.keys(a.floors).some(k=>a.training?k!=='training-1':k==='training-1'))throw Error('訓練與正式世界混合');
+const p=a.p;if(!p||!coord(p))throw Error('角色位置無效');for(const k of ['hp','maxHp','mp','maxMp','atk','def','lv','xp','gold','hunger','shield','magicBonus','capacityBonus','killMana'])if(!num(p[k],0,1e7))throw Error('角色數值無效');if(p.maxHp<1||p.hp>p.maxHp||p.mp>p.maxMp||p.lv<1||p.hunger>1200||a.status==='playing'&&p.hp===0)throw Error('生命、魔力或等級無效');if(!p.face||!dirs.some(([x,y])=>p.face.x===x&&p.face.y===y))throw Error('面向無效');if(!p.status||!['poison','burn','slow','might','stealth','guard'].every(k=>integer(p.status[k],0,10000))||!arr(p.cooldowns,4)||p.cooldowns.length!==4||!p.cooldowns.every(v=>integer(v,0,10000)))throw Error('異常與技能狀態無效');if(!arr(p.inventory,36)||!p.inventory.every(itemValid)||new Set(p.inventory.map(i=>i.id)).size!==p.inventory.length)throw Error('背包無效');if(!p.equipment||!['weapon','armor','ring'].every(slot=>p.equipment[slot]===null||p.inventory.some(i=>i.id===p.equipment[slot]&&ITEMS[i.type].kind===slot)))throw Error('裝備與背包不一致');if(!arr(p.relics,100)||!p.relics.every(id=>RELICS.some(r=>r.id===id)))throw Error('遺物無效');if(!arr(a.identified,40)||!a.identified.every(t=>ITEMS[t])||!a.appearances||!Object.entries(a.appearances).every(([t,v])=>ITEMS[t]&&typeof v==='string'&&v.length<100))throw Error('鑑定資料無效');if(!arr(a.artifacts,3)||!a.artifacts.every(id=>Object.values(BRANCHES).some(b=>b.reward===id))||new Set(a.artifacts).size!==a.artifacts.length||!arr(a.claimed,10)||!a.claimed.every(id=>QUESTS.some(q=>q.id===id)))throw Error('任務資料無效');if(!arr(a.logs,100)||!a.logs.every(l=>l&&typeof l.t==='string'&&l.t.length<1000&&num(l.turn,0,1e9)))throw Error('日誌無效');if(!integer(a.kills,0,1e8)||!integer(a.rescues,0,3)||!a.stats||!['chests','searches','shrines','identified','deepest','bosses','steps'].every(k=>integer(a.stats[k],0,1e8)))throw Error('進度無效');if(!a.guide||!integer(a.guide.step,0,LESSONS.length)||!integer(a.guide.count,0,1000)||typeof a.guide.enabled!=='boolean'||typeof a.guide.completed!=='boolean')throw Error('教學狀態無效');
+for(const [id,f]of Object.entries(a.floors)){if(!validFloorId(id)||!f||f.id!==id)throw Error('樓層識別無效');const meta=floorMeta(id);if(f.zone!==meta.zone||f.n!==meta.n||f.depth!==meta.depth||f.biome!==meta.biome||f.boss!==meta.boss)throw Error('樓層屬性無效');if(!Array.isArray(f.map)||f.map.length!==W*H||!f.map.every(t=>integer(t,0,6))||!Array.isArray(f.seen)||f.seen.length!==W*H||!f.seen.every(v=>typeof v==='boolean')||!Array.isArray(f.visible)||f.visible.length!==W*H||!f.visible.every(v=>typeof v==='boolean'))throw Error('地圖無效');if(!coord(f.start)||!coord(f.end)||!terrainPass(f.map[key(f.start.x,f.start.y)])||!terrainPass(f.map[key(f.end.x,f.end.y)]))throw Error('樓梯位置無效');if(!arr(f.rooms,30)||!f.rooms.every(r=>integer(r.x,0,W-1)&&integer(r.y,0,H-1)&&integer(r.w,1,W)&&integer(r.h,1,H)&&r.x+r.w<=W&&r.y+r.h<=H))throw Error('房間無效');if(!arr(f.enemies,300)||!f.enemies.every(e=>coord(e)&&ENEMIES[e.type]&&integer(e.id,1,1e9)&&num(e.hp,0,100000)&&num(e.maxHp,1,100000)&&e.hp<=e.maxHp&&num(e.atk,0,10000)&&num(e.xp,0,10000)&&integer(e.freeze,0,10000)&&integer(e.alert,0,10000)&&integer(e.phase,0,1)&&(!e.charge||coord(e.charge))&&(!e.lastSeen||coord(e.lastSeen))))throw Error('敵人無效');if(!arr(f.allies,2)||!f.allies.every(e=>coord(e)&&integer(e.id,1,1e9)&&num(e.hp,0,100000)&&num(e.maxHp,1,100000)&&num(e.atk,0,10000)&&integer(e.ttl,0,1000)))throw Error('盟友無效');const objectTypes=[...Object.keys(OBJECT_LABELS),'trap'];if(!arr(f.objects,300)||!f.objects.every(o=>coord(o)&&objectTypes.includes(o.type)&&typeof o.used==='boolean'&&(!o.to||validFloorId(o.to))&&(o.type!=='loot'||itemValid(o.item))&&(o.type!=='trap'||['spike','poison','alarm'].includes(o.trap)&&typeof o.revealed==='boolean')&&(o.type!=='shop'||arr(o.stock,30)&&o.stock.every(itemValid))&&(!o.branch||BRANCHES[o.branch])))throw Error('物件無效');}
+if(![0,3,4,5].includes(a.floors[a.floor].map[key(p.x,p.y)]))throw Error('角色站在牆內');return true}
+function restore(a){validate(a);s=a;rngState=s.rng;particles=[];target=null;auto=false;visibility();close();update();if(s.status==='dead'||s.status==='won')endScreen();if(s.status==='trained')trainingComplete()}
+function loadGame(training=false){try{const raw=readStorage(training?KEY+'-training':KEY);if(!raw)throw Error('找不到存檔');restore(JSON.parse(raw))}catch(e){modal(`<h2>存檔無法讀取</h2><p>${esc(e.message)}</p><div class="footer"><button id="loadBack">回選單</button><button id="loadImport">匯入備份</button></div>`,'error');bind('loadBack',menu);bind('loadImport',importMenu)}}
+function importMenu(){modal('<div class="eyebrow">IMPORT / 冒險備份</div><h2>匯入存檔</h2><p>選擇 Emberfall JSON 存檔。匯入後會取代同類型的自動存檔（教學 / 正式）；若要保留目前角色，先匯出。</p><input id="fileInput" type="file" accept=".json,application/json"><p id="importMessage"></p><div class="footer"><button id="importBackup">先匯出目前冒險</button><button id="importBack">返回選單</button></div>','import');bind('importBack',menu);bind('importBackup',exportSave);$('fileInput').onchange=async e=>{try{const f=e.target.files[0];if(!f)return;if(f.size>8*1024*1024)throw Error('存檔超過 8 MB');const a=JSON.parse(await f.text());if(a.version===1){migrateLegacy(a);toast('舊版角色已搬移；世界依新版規則重新生成。')}else restore(a);save(false)}catch(e){$('importMessage').textContent='無法匯入：'+e.message}}}
+function legacyMenu(){modal('<h2>搬移第一版角色</h2><p>保留職業、等級、生命、攻擊、護甲、金幣與藥水。新版本增加種族與世界系統，會將角色設為人類並重新生成對應深度的地圖。</p><div class="footer"><button class="primary" id="migrate">搬移並取代新版正式存檔</button><button id="legacyBack">返回</button></div>','legacy');bind('legacyBack',menu);bind('migrate',()=>{try{migrateLegacy(JSON.parse(readStorage('emberfall-save-v1')));save(false);toast('舊版角色已搬移。')}catch(e){toast('搬移失敗：'+e.message)}})}
+function migrateLegacy(a){if(!a||a.version!==1||!['warden','mage','rogue'].includes(a.class)||!a.p||!Number.isInteger(a.depth)||a.depth<1||a.depth>5)throw Error('無效的第一版存檔');for(const k of ['hp','maxHp','mp','maxMp','atk','def','lv','xp','gold','potions'])if(!Number.isFinite(a.p[k])||a.p[k]<0||a.p[k]>1e6)throw Error('舊角色數值無效');if(a.p.maxHp<1||a.p.maxMp<1)throw Error('舊角色生命或魔力無效');createState('human',a.class,'explorer',String(a.seed||Date.now()));for(const k of ['maxHp','maxMp','atk','def','lv','xp','gold'])s.p[k]=a.p[k];s.p.lv=Math.max(1,Math.floor(s.p.lv));s.p.hp=Math.max(1,Math.min(s.p.maxHp,a.p.hp));s.p.mp=Math.min(s.p.maxMp,a.p.mp);const pot=s.p.inventory.find(i=>i.type==='heal');if(a.p.potions===0)s.p.inventory=s.p.inventory.filter(i=>i!==pot);else pot.count=Math.min(9999,Math.floor(a.p.potions));if(a.depth>1){const id='main-'+a.depth;if(!s.floors[id])generateFloor(id);s.floor=id;Object.assign(s.p,level().start);level().visited=true;s.stats.deepest=a.depth}s.status='playing';log('舊版角色已搬移，地圖按新版規則重建。','#73e2c3');close();visibility();update()}
+function glyph(x,y,color,text,size=18){ctx.font=`bold ${size}px system-ui`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.shadowBlur=7;ctx.shadowColor=color;ctx.fillStyle=color;ctx.fillText(text,(x+.5)*T,(y+.54)*T);ctx.shadowBlur=0}
+function drawMini(){const f=level(),sx=280/W,sy=196/H;mini.fillStyle='#060c16';mini.fillRect(0,0,280,196);for(let y=0;y<H;y++)for(let x=0;x<W;x++){const k=key(x,y);if(!f.seen[k])continue;const t=f.map[k];mini.fillStyle=[1,6].includes(t)?'#2b3c50':t===2?'#926f45':t===4?'#8c4037':f.visible[k]?'#647d8b':'#324959';mini.fillRect(x*sx,y*sy,sx-1,sy-1)}for(const o of f.objects)if(f.seen[key(o.x,o.y)]&&!o.used&&['up','down','portal','heart','branchExit','trainingExit','shop'].includes(o.type)){mini.fillStyle=o.type==='shop'?'#efbd76':o.type==='portal'?'#78d5e1':'#bc9aff';mini.fillRect(o.x*sx,o.y*sy,sx,sy)}for(const e of f.enemies)if(e.hp>0&&visible(e)){mini.fillStyle='#ff879b';mini.fillRect(e.x*sx+1,e.y*sy+1,4,4)}mini.fillStyle='#87f1d0';mini.fillRect(s.p.x*sx,s.p.y*sy,sx,sy)}
+function render(time){const dt=Math.min(.04,(time-lastTime)/1000||0);lastTime=time;ctx.fillStyle='#060b13';ctx.fillRect(0,0,1000,700);if(s){const f=level(),b=BIOMES[f.biome];for(let y=0;y<H;y++)for(let x=0;x<W;x++){const k=key(x,y);if(!f.seen[k])continue;const lit=f.visible[k],t=f.map[k];ctx.globalAlpha=lit?1:.42;if(t===1||t===6){ctx.fillStyle=b.wall;ctx.fillRect(x*T,y*T,T-1,T-1);ctx.fillStyle='#ffffff18';ctx.fillRect(x*T,y*T,T-1,3);ctx.fillStyle='#0004';ctx.fillRect(x*T+T-4,y*T+3,3,T-4);ctx.fillRect(x*T+2,y*T+12,T-7,1)}else{ctx.fillStyle=b.floor;ctx.fillRect(x*T,y*T,T,T);ctx.fillStyle=(x+y)%2?'#ffffff03':'#0000000c';ctx.fillRect(x*T,y*T,T,T);ctx.fillStyle='#ffffff0b';ctx.fillRect(x*T+4+(x*7+y)%14,y*T+18,2,1);if(t===2){ctx.fillStyle='#765938';ctx.fillRect(x*T+4,y*T+2,17,21);ctx.strokeStyle='#bd9460';ctx.strokeRect(x*T+4,y*T+2,17,21);glyph(x,y,'#e2bc86','+',17)}if(t===3){ctx.fillStyle='#6eae6544';ctx.fillRect(x*T+1,y*T+1,T-2,T-2);glyph(x,y,'#84bba8','≈',15)}if(t===4){ctx.fillStyle='#ce5a3044';ctx.fillRect(x*T,y*T,T,T);glyph(x,y,'#f39d63','≈',18)}if(t===5){ctx.fillStyle='#86ccec25';ctx.fillRect(x*T+2,y*T+2,T-4,T-4);glyph(x,y,'#93c9de','·',18)}}ctx.globalAlpha=1}
+const objectStyles={chest:['#edc17e','▣'],shrine:['#7bdfc0','✚'],fountain:['#83cee8','♥'],shop:['#edc17e','$'],up:['#c5a5ff','▲'],down:['#bda0f8','▼'],heart:['#ffd995','✦'],portal:['#81d5e7','✧'],branchExit:['#bda0f8','▼'],trainingExit:['#bda0f8','▼'],camp:['#efab71','♨'],relic:['#ffe69b','★']};for(const o of f.objects){if(o.used||!f.visible[key(o.x,o.y)])continue;if(o.type==='trap'){if(o.revealed)glyph(o.x,o.y,'#ff999d','⌃',18);continue}if(o.type==='loot'){const kind=ITEMS[o.item.type].kind;glyph(o.x,o.y,'#d4caa4',kind==='potion'?'!':kind==='scroll'?'?':kind==='weapon'?')':kind==='armor'?'[':kind==='ring'?'=':kind==='food'?'%':'/',17);continue}const style=objectStyles[o.type];if(style)glyph(o.x,o.y,...style)}
+for(const e of f.enemies){if(e.charge){ctx.fillStyle=`rgba(255,70,96,${.22+Math.sin(time/180)*.05})`;ctx.strokeStyle='#ff8195';for(let y=e.charge.y-1;y<=e.charge.y+1;y++)for(let x=e.charge.x-1;x<=e.charge.x+1;x++)if(inside(x,y)&&f.visible[key(x,y)]){ctx.fillRect(x*T,y*T,T,T);ctx.strokeRect(x*T+.5,y*T+.5,T-1,T-1)}}if(e.hp<=0||!visible(e))continue;const d=ENEMIES[e.type];ctx.fillStyle='#0b101bee';ctx.beginPath();ctx.arc((e.x+.5)*T,(e.y+.5)*T,d.boss?12:10,0,Math.PI*2);ctx.fill();glyph(e.x,e.y,e.freeze?'#a3e6ff':d.color,d.glyph,d.boss?23:17);ctx.fillStyle='#08111c';ctx.fillRect(e.x*T+2,e.y*T-2,21,3);ctx.fillStyle=e.freeze?'#9bddff':'#ff869a';ctx.fillRect(e.x*T+2,e.y*T-2,21*e.hp/e.maxHp,3);if(e.id===target){ctx.strokeStyle='#f1c480';ctx.lineWidth=1.5;ctx.strokeRect(e.x*T+1,e.y*T+1,T-2,T-2)}}for(const a of f.allies)if(a.hp>0&&visible(a)){glyph(a.x,a.y,'#7be1c1','s',17);ctx.fillStyle='#7be1c1';ctx.fillRect(a.x*T+3,a.y*T-2,19*Math.max(0,a.hp/a.maxHp),2)}
+if(s.training&&!s.guide.completed){const l=LESSONS[s.guide.step];if(l.at){const {x,y}=l.at;ctx.strokeStyle='#f2d293';ctx.lineWidth=2;ctx.setLineDash([4,4]);ctx.strokeRect(x*T-1,y*T-1,T+2,T+2);ctx.setLineDash([]);ctx.fillStyle='#f1ce94';ctx.font='10px system-ui';ctx.textAlign='center';ctx.fillText(typeof t==='function'?t('目標'):'目標',(x+.5)*T,y*T-8)}}const p=s.p,px=(p.x+.5)*T,py=(p.y+.5)*T;const light=ctx.createRadialGradient(px,py,0,px,py,65);light.addColorStop(0,'#83f1cc18');light.addColorStop(1,'#83f1cc00');ctx.fillStyle=light;ctx.fillRect(px-65,py-65,130,130);glyph(p.x,p.y,s.status==='dead'?'#909dab':p.status.stealth?'#b2a6db':'#9bf7d8',s.status==='dead'?'×':'◆',21);ctx.strokeStyle=p.shield?'#a3dcff':'#9bf7d850';ctx.lineWidth=1;ctx.beginPath();ctx.arc(px,py,12,0,Math.PI*2);ctx.stroke();ctx.fillStyle='#c5fae3';ctx.fillRect(px+p.face.x*10-1,py+p.face.y*10-1,2,2);for(const a of particles){a.life-=dt;a.x+=a.vx*dt;a.y+=a.vy*dt;ctx.globalAlpha=Math.max(0,a.life/a.max);ctx.fillStyle=a.color;ctx.fillRect(a.x,a.y,3,3)}ctx.globalAlpha=1;particles=particles.filter(a=>a.life>0)}else{ctx.fillStyle='#102033';for(let y=0;y<H;y++)for(let x=0;x<W;x++)if((x*13+y*19)%7<3)ctx.fillRect(x*T+1,y*T+1,T-2,T-2)}
+if(auto){autoClock+=dt;if(autoClock>.16){autoClock=0;autoStep()}}if(toastUntil&&Date.now()>toastUntil){$('toast').classList.add('hidden');toastUntil=0}requestAnimationFrame(render)}
+function cycleTarget(){if(!allowed())return;const enemies=level().enemies.filter(e=>e.hp>0&&visible(e)).sort((a,b)=>distance(a,s.p)-distance(b,s.p));if(!enemies.length){toast('目前沒有可見敵人。');return}const i=enemies.findIndex(e=>e.id===target);target=enemies[(i+1)%enemies.length].id;update()}
+const MOVE_KEYS={w:[0,-1],a:[-1,0],s:[0,1],d:[1,0],ArrowUp:[0,-1],ArrowDown:[0,1],ArrowLeft:[-1,0],ArrowRight:[1,0]};document.addEventListener('keydown',e=>{if(['INPUT','SELECT','TEXTAREA'].includes(e.target.tagName)||e.ctrlKey||e.metaKey||e.altKey)return;const k=e.key.length===1?e.key.toLowerCase():e.key;if(k==='Escape'){stopAuto();if(view){if(s)close();else menu()}else menu();return}if(view||e.repeat)return;stopAuto();if(MOVE_KEYS[k]){e.preventDefault();move(...MOVE_KEYS[k])}else if(k===' '){e.preventDefault();wait()}else if(['1','2','3','4'].includes(k))skill(Number(k)-1);else if(k==='q')quickUse('heal');else if(k==='r')quickUse('food');else if(k==='e')interact();else if(k==='c')search();else if(k==='f')ranged();else if(k==='x')autoExplore();else if(k==='i')inventory();else if(k==='j')journal();else if(k==='h'||k==='?')help();else if(k==='Tab'){e.preventDefault();cycleTarget()}});
+canvas.addEventListener('click',e=>{if(!allowed())return;stopAuto();const r=canvas.getBoundingClientRect(),x=Math.floor((e.clientX-r.left)/r.width*W),y=Math.floor((e.clientY-r.top)/r.height*H);if(!inside(x,y))return;const a=enemyAt(x,y);if(a&&visible(a)){target=a.id;log('瞄準：'+ENEMIES[a.type].name+'。');update()}else if(level().visible[key(x,y)]){const o=objectAt(x,y);if(o&&o.type!=='trap'){toast((OBJECT_LABELS[o.type]||'物品')+'：靠近後按 e 互動。')}else toast(`(${x},${y}) · ${tile(x,y)===1?'牆壁':tile(x,y)===2?'關閉的門':tile(x,y)===4?'熔岩':tile(x,y)===3?'毒池':tile(x,y)===5?'冰面':'地板'}`)}canvas.focus()});all('[data-move]',b=>b.onclick=()=>{stopAuto();move(...b.dataset.move.split(',').map(Number))});bind('inventoryBtn',()=>inventory());bind('journalBtn',journal);bind('helpBtn',()=>help());bind('saveBtn',()=>save(true));bind('menuBtn',menu);bind('guideHint',guideHint);bind('rangedBtn',ranged);bind('potionBtn',()=>quickUse('heal'));bind('foodBtn',()=>quickUse('food'));bind('searchBtn',search);bind('waitBtn',wait);bind('interactBtn',interact);bind('autoBtn',autoExplore);requestAnimationFrame(render);menu();
+// Local, offline localization. Saved game data stays language-independent.
+const LANGUAGE_KEY='emberfall-language';
+const EN=new Map();function phrase(zh,en){if(zh&&en)EN.set(zh,en)}
+function translateRows(db,rows,fields){for(const [id,values]of Object.entries(rows)){if(!db[id])throw Error('Missing localization key: '+id);fields.forEach((field,i)=>phrase(db[id][field],values[i]))}}
+translateRows(RACES,{
+human:['Human','Quick learner. Gain 20% more experience and recover 8 extra HP on every level-up.','Experience +20%'],elf:['Elf','Arcane affinity. Spell damage +20%, vision +1; poison damage is halved.','Spellpower / vision'],dwarf:['Dwarf','Born in the mines. Armor +2, carrying capacity +10; automatically detect adjacent traps.','Armor / trap detection'],goblin:['Goblin','Master trader. Shop prices -20%, starting gold +30, food effectiveness +25%.','Trading / supplies'],orc:['Orc','Berserker blood. Attack +3; melee damage +30% below 35% health.','Low-health fury'],troll:['Troll','Regeneration. Recover 3 HP every 6 turns while fed, but consume food faster.','Regeneration / appetite'],vampire:['Vampire','Feed on victory. Each kill restores 4 HP and 70 blood satiety. Ordinary food is half as effective. Immune to poison.','Lifesteal / blood hunger'],construct:['Construct','Needs no food and is immune to poison. Repairs 2 HP every 10 turns; healing potions are half as effective.','No hunger / poison immunity']},['name','desc','short']);
+translateRows(JOBS,{
+warden:['Ember Warden','Iron Bulwark','High health and armor. Your class skill grants a shield and temporary damage reduction.'],mage:['Flameweaver','Arcane Torrent','Spell damage +30%. Your class skill damages nearby visible enemies.'],rogue:['Shadowwalker','Shadow Veil','Critical chance 25%; Blink costs half mana. Shadow Veil grants 4 turns of stealth and a critical bonus.'],ranger:['Ranger','Heartpiercer Volley','Ranged damage +4. Your class skill shoots the same target twice.'],cleric:['Cleric','Cleansing Prayer','Your class skill restores health and removes poison, burning, and slow. Stronger altar blessings.'],necro:['Bonecaller','Bone Pact','Summon a skeleton ally for 40 turns. Swap places by walking into an ally. Maximum 2 allies.']},['name','ult','desc']);
+BIOMES.forEach((b,i)=>{const en=[['Ember Mines','Miners left chests and secret doors. The fourth-floor Foreman telegraphs heavy strikes.'],['Bone Crypts','Skeletons guard the dark. Archers need line of sight; the Lich summons reinforcements.'],['Fungal Marsh','Poison and spiders drain your supplies. Poison resistance or cleansing potions help.'],['Frost Labyrinth','Ice may slow you. Frost creatures resist cold damage.'],['Obsidian City','Lava and burning are dangerous. Fire creatures resist fireballs.'],['Astral Abyss','Sentinels and sorcerers guard the Ember Heart. The final guardian teleports and summons.']][i];phrase(b.name,en[0]);phrase(b.hint,en[1])});
+translateRows(BRANCHES,{
+forge:['Dwarven Forge','Recover the Forge Heart: armor +3 and 50% fire resistance.'],archive:['Drowned Archive','Recover the Tidal Grimoire: maximum mana +10 and skill mana costs -1.'],court:['Lost Court','Recover the Lost Crown: attack +4 and maximum health +20.']},['name','desc']);
+translateRows(ENEMIES,{
+rat:['Cave Hound','Tracks your steps. Lure it into narrow corridors.'],goblin:['Mine Goblin','Opens doors and finds a path around walls.'],bat:['Blood Bat','May move twice every 3 turns. Low health.'],shaman:['Corrupted Shaman','Casts with line of sight; attacks may poison you.'],skeleton:['Skeleton Soldier','A sturdy melee guard.'],archer:['Tomb Archer','Shoots within 5 tiles with line of sight; uses melee up close.'],wraith:['Nameless Wraith','Attacks drain 2 mana. Cannot pass through walls.'],spider:['Venom Spider','Melee hits inflict poison.'],slime:['Splitting Slime','Splits the first time its health falls below half. Use area attacks.'],stalker:['Spore Stalker','Closes in quickly. Avoid being surrounded in open rooms.'],wolf:['Frostfang Wolf','65% cold resistance. Fireballs work well.'],frostmage:['Frost Mage','Ranged attacks inflict slow.'],sentinel:['Rune Sentinel','Has innate armor. Spells bypass its physical armor.'],imp:['Fire Imp','65% fire resistance; inflicts burning.'],golem:['Obsidian Golem','High health and armor, but moves slowly.'],demon:['Rift Demon','Strong melee attacks and high fire resistance.'],sorcerer:['Astral Sorcerer','Casts within 6 tiles. Walls and closed doors break its line of sight.'],mimic:['Chest Mimic','Not everything golden is safe to touch.'],foreman:['Ironhammer Foreman','Locks onto your position and strikes a 3×3 area on its next turn.'],lich:['Bone Lich','Heavy strikes and skeleton summons. Enrages at low health.'],queen:['Spore Queen','Heavy strikes inflict poison. Summons spiders.'],colossus:['Frost Colossus','Heavy strikes inflict slow. Resists cold damage.'],infernal:['Infernal Tyrant','Heavy strikes inflict burning. Summons imps.'],abyss:['Abyss Weaver','Teleports, summons, enrages, and telegraphs heavy strikes. Guards the Ember Heart.'],smith:['Runaway Furnace','Forge guardian. Defeat it to recover the Forge Heart.'],librarian:['Drowned Librarian','Guards the Tidal Grimoire and summons wraiths.'],king:['Crownless King','Court guardian. Defeat it to recover the Lost Crown.'],dummy:['Training Dummy','A patient practice partner. Does not move.']},['name','desc']);
+translateRows(ITEMS,{
+heal:['Healing Potion','Restores 38 + level × 2 HP.'],mana:['Mana Potion','Restores 24 mana.'],antidote:['Cleansing Potion','Removes poison, burning, and slow.'],might:['Potion of Might','Melee damage +35% for 12 turns.'],poison:['Poison Potion','Poisons you when drunk. Identify it first.'],food:['Travel Rations','Restores 420 satiety.'],identify:['Scroll of Identification','Identifies one item and reveals its type and curse.'],mapping:['Scroll of Mapping','Reveals this floor’s terrain, not unseen enemies.'],teleport:['Scroll of Teleportation','Teleports you to a random safe tile on this floor.'],enchant:['Scroll of Enchantment','Improves your equipped weapon by +2 attack.'],uncurse:['Scroll of Unbinding','Removes curses from all equipped items.'],fear:['Scroll of Dread','Stops visible enemies for 4 turns.'],wandFire:['Wand of Fire','Fire burst within 6 tiles. Uses 1 charge.'],wandFrost:['Wand of Frost','Damages and freezes a target within 6 tiles.'],wandHeal:['Wand of Repair','Restores 28 HP. Uses 1 charge.'],sword:['Embersteel Sword','A balanced melee weapon.'],axe:['Stonecleaver Axe','Higher attack, heavier weight.'],dagger:['Shadow Dagger','Light weapon. Critical chance +10%.'],staff:['Runic Staff','Spell damage +20% while equipped.'],leather:['Hunter’s Leather','Lightweight armor.'],plate:['Runic Plate','Higher armor, heavier weight.'],ringGuard:['Ring of Protection','Armor +2.'],ringSight:['Ring of Sight','Vision +2.'],ringRegen:['Ring of Regeneration','Restores 3 HP every 8 turns while fed.'],ringSatiety:['Ring of Satiety','Halves satiety consumption.']},['name','desc']);
+translateRows(Object.fromEntries(RELICS.map(r=>[r.id,r])),{
+fang:['Hunter’s Fang','Base attack +2.'],heart:['Undying Spark','Maximum HP +12; restores 30 HP.'],well:['Arcane Well','Maximum mana +6; fully restores mana.'],stone:['Basalt Shard','Base armor +1.'],kit:['Traveller’s Pack','Rations ×2 and Healing Potions ×2.'],spark:['Ember Charm','Permanent spell damage +10%.'],soul:['Soul Vessel','Each kill restores 2 extra mana.'],feather:['Wind Feather','Permanent critical chance +5%; carrying capacity +3.']},['name','desc']);
+const EN_LESSONS=[
+['01 · The World Waits','Successfully move 3 tiles.','Every valid action takes one turn. When you stop, enemies stop too.','Use w/a/s/d or the arrow keys. Take three steps near your starting point.'],
+['02 · Walls Are Not Fatal','Walk into a wall once.','Bumping a wall takes no turn. Opening a closed door does.','A stone pillar is northeast of the start at (10,10). Stand next to it and try to walk into it.'],
+['03 · Interact and Loot','Approach the golden chest and press e.','Interact with objects on your tile or an adjacent tile. Loot enters your inventory.','The chest is at (11,12). Approach it and press e or the Interact button.'],
+['04 · Equip to Get Stronger','Open inventory with i and equip the Training Sword.','A weapon in your bag grants no bonus. Equip it to improve your attack.','Press i, find the Training Sword, choose Equip, and return to the game.'],
+['05 · Melee and Health','Walk toward the Training Dummy and defeat it.','Walking into an enemy makes a melee attack. Enemies act after your turn.','The dummy is at (15,12). Attack, then heal if needed. Training has no permanent death.'],
+['06 · Aim and Cast','Use 1, Ember Burst, on the second dummy.','Skills cost mana and have cooldowns. Click an enemy to target it; otherwise, the nearest visible enemy is chosen.','The second dummy is at (18,12). Get within 6 tiles with line of sight, click it, then press 1.'],
+['07 · Supplies Cost Turns','Press q to drink a Healing Potion.','Drinking takes a turn, so enemies can act. Do not wait until you have 1 HP.','Your health has been reduced. Press q or the Healing Potion button on the left.'],
+['08 · More Than a Health Bar','Press r to eat a ration.','Satiety decreases each turn. Hunger stops regeneration; an empty meter causes damage.','Your training character is Human and needs food. Press r. Constructs do not eat in a real run.'],
+['09 · Search for Traps','Approach (12,17), then press c to reveal the trap.','Hidden traps trigger when stepped on. Searching has a 3-tile radius and costs one turn.','Get within 3 tiles of the marked trap and press c. Hidden traps are not marked in a real run.'],
+['10 · Identify the Unknown','Use an Identification Scroll on the unknown ring in your bag.','Appearances change each run. Identification reveals types and curses; cursed equipment binds to you.','Press i → Use the Identification Scroll → choose Identify on the unknown ring.'],
+['11 · Curses Are Real','Equip the identified cursed ring, then use an Unbinding Scroll.','Cursed equipment cannot be replaced or removed. Use an Unbinding Scroll first.','Equip the ring marked Cursed in your inventory, then use the Unbinding Scroll.'],
+['12 · Altar Blessings','Approach the altar, press e, and choose a blessing.','Altars restore health or bless equipment. Each altar can be used only once.','The altar is at (19,18). Walk over, press e, and choose a blessing.'],
+['13 · Ready for the Depths','Approach the purple stairs and press e to graduate.','The real world has 24 main floors, three branches, and six regional guardians. Floors persist, and you can go back upstairs.','The stairs are at (25,19). After graduating, choose your race and class to begin a real run.']];
+LESSONS.forEach((l,i)=>['title','goal','why','hint'].forEach((field,j)=>phrase(l[field],EN_LESSONS[i][j])));
+const EN_CONTROLS=[['w/a/s/d or arrow keys','Move one tile; bump enemies to attack and closed doors to open them.'],['e','Interact on your tile or next to it: chests, merchants, stairs, and altars.'],['Click an enemy / tab','Select a target; tab cycles through visible enemies.'],['1 / 2 / 3','Ember Burst / Frost Nova / Blink.'],['4','Your class skill.'],['f','Ranged shot. Costs 2 mana; Rangers deal more damage.'],['q / r','Use a known Healing Potion / eat rations.'],['space','Wait one turn and recover 2 extra mana.'],['c','Search within 3 tiles for traps and secret doors.'],['x','Auto-explore; stops for enemies, damage, objects, or danger.'],['i / j / h','Inventory / Journal / Field Codex.'],['esc','Close a window or open the menu.']];
+CONTROL_ROWS.forEach((row,i)=>row.forEach((text,j)=>phrase(text,EN_CONTROLS[i][j])));
+const EN_SYSTEMS=[
+['Turns','Moving, opening doors, attacking, casting, searching, equipping, and drinking cost one turn. Invalid actions and opening inventory are free. Trading is free.'],
+['Health and Armor','Physical damage is reduced by armor, to a minimum of 1. Spell damage uses half your armor. Shields absorb damage first. Potions, merchants, altars, and level-ups restore health.'],
+['Mana and Cooldowns','Recover mana naturally every 3 turns; Flameweavers recover more. Waiting restores 2 extra mana. Entering a new floor restores some mana once; revisiting does not.'],
+['Hunger','Satiety decreases each turn. Below 250 you are hungry; at 0, you take damage every 4 turns. Trolls and overburdened characters consume more. Constructs need no food.'],
+['Carrying Weight','Items have weight. Being overburdened increases food consumption. Your bag holds 36 stacks. Sell, drop, or use items to make room. Dwarves carry 10 extra weight.'],
+['Unknown Items','Potion, scroll, ring, and wand appearances are shuffled each run. Identify to reveal names and curses. Using or equipping teaches you the type; each equipment curse must be checked individually.'],
+['Curses and Enchantment','Cursed equipment cannot be removed or replaced. Unbinding Scrolls and altars remove curses. Enchantment Scrolls add +2 attack to your current weapon; merchants can add +1 for gold.'],
+['Terrain','Doors block sight until opened. Poison pools may poison you; ice may slow you; lava burns each turn. Auto-explore avoids known lava and revealed traps.'],
+['Status Effects','Poison and burning damage you each turn. Slow may give enemies an extra action every 3 turns. Cleansing Potions and Clerics remove these three effects.'],
+['Enemy Awareness','Enemies spot you by line of sight and pursue your last known position. Alarms alert the whole floor. Enemies never walk through walls; some open doors. Ranged attacks need line of sight.'],
+['Summoned Allies','Bonecallers summon up to 2 skeletons for 40 turns. They attack automatically. Walk into one to swap places. They follow between floors if there is room at the entrance.'],
+['Boss Telegraphs','The red 3×3 area erupts on the guardian’s next action. Blink 3 tiles to escape; freezing delays the strike. Guardians enrage at low health, and some summon enemies.'],
+['Persistent Floors','Changing floors does not respawn monsters or reset chests and shops. Floor state is saved. You may skip ordinary enemies, but guardian floors have sealed exits.'],
+['Saves and Death','Auto-save occurs every turn. Classic mode ends on death; Explorer mode grants 3 rescues. Export JSON to move a run to another device. Training has a separate auto-save.']];
+SYSTEM_ROWS.forEach((row,i)=>row.forEach((text,j)=>phrase(text,EN_SYSTEMS[i][j])));
+translateRows(Object.fromEntries(QUESTS.map(q=>[q.id,q])),{
+hunter:['Hunter’s Contract','Defeat 12 enemies in total.','60 gold + Cleansing Potion'],seeker:['Treasure Seeker','Open 8 chests.','Identification Scrolls ×2 + Mapping Scroll'],devotion:['Altar Pilgrim','Use 5 altars.','Maximum HP +15'],scholar:['Identification Scholar','Identify 6 items.','Maximum mana +8']},['name','desc','reward']);
+const EN_ACHIEVEMENTS=['First Spark','Abyss Hunter','Guardian Slayer','Into the Frost','Master Identifier','Trap Researcher','Forge Heart','Tidal Grimoire','Lost Crown','Artifact Collector','Rekindled Ember','One-Life Legend'];ACHIEVEMENTS.forEach((a,i)=>phrase(a.name,EN_ACHIEVEMENTS[i]));
+const UI_EN=`
+深淵之書|The Book of the Abyss
+小心名稱超重|Warning: the name exceeds carrying capacity
+一份 HTML，一整座深淵。8 種族 × 6 職業、24 層主線、7 層支線。探索、鑑定、詛咒、生存與戰術，一步一步建立你的傳說。|One HTML file. An entire abyss. 8 races × 6 classes, 24 main floors and 7 branch floors. Explore, identify, survive, and build your legend one turn at a time.
+學會活下來|Learn to Survive
+13 關互動訓練。實際操作後才通過；訓練不會永久死亡。|13 hands-on lessons. Complete the actions to advance. Training has no permanent death.
+每一局都不同|Every Run Is Different
+固定種子可重現開局。職業、種族、未知物品與支線神器改變玩法。|Seeds reproduce your opening world. Races, classes, unknown items, and branch artifacts change how you play.
+深度比樓層更重要|Depth Beyond Floor Numbers
+持久樓層、雙向階梯、商店庫存、異常狀態、召喚盟友與守衛機制。|Persistent floors, two-way stairs, lasting shop stock, status effects, summoned allies, and guardian mechanics.
+回合制 · 單檔離線 · NetHack 風格的道具與資源管理 · 自動存檔 + JSON 備份|Turn-based · Single-file offline play · NetHack-style items and resource management · Auto-save + JSON backups
+教學與正式冒險分開存檔。開始新冒險會取代正式自動存檔，請先匯出要保留的角色。|Training and real runs save separately. A new run replaces your real-run auto-save. Export any character you want to keep first.
+建立冒險者|Create Adventurer
+互動教學 · 建議先玩|Interactive Training · Start Here
+繼續正式存檔|Continue Adventure
+繼續教學進度|Continue Training
+回到目前遊戲|Resume Current Game
+冒險百科|Field Codex
+匯入存檔|Import Save
+搬移舊版角色|Migrate Original Character
+48 種起手組合|48 Starting Combinations
+你想用什麼方式活下來？|How Will You Survive?
+種族 · 決定體質與生存方式|Race · Your Body and Survival Traits
+職業 · 決定戰鬥與專屬技能|Class · Your Combat Style and Unique Skill
+基礎攻擊|Base Attack
+推薦初次遊玩：人類守燼者。想召喚軍團：喚骨者。想把午餐從怪物身上拿回來：吸血鬼。|First run? Try a Human Ember Warden. Want a skeleton army? Choose Bonecaller. Want to get lunch back from the monsters? Try Vampire.
+冒險規則|Adventure Rules
+探險模式 · 3 次救援|Explorer · 3 Rescues
+經典模式 · 永久死亡|Classic · Permanent Death
+世界種子|World Seed
+留空隨機；例如 Andrew|Leave blank for random; try Andrew
+同種子、同種族與職業、同樣操作可重現世界。敵人和道具仍受你的回合選擇影響。|The same seed, race, class, and actions reproduce the world. Your turn choices still affect enemies and items.
+點燃餘燼燈|Light the Ember Lantern
+先進訓練場|Train First
+返回選單|Back to Menu
+正式自動存檔會保留，可以從選單繼續。|Your real-run auto-save will remain available from the menu.
+這會取代正式自動存檔。要保留目前角色，可先匯出 JSON。|This replaces your real-run auto-save. Export JSON first if you want to keep your current character.
+先匯出目前角色|Export Current Character First
+全新冒險|a New Adventure
+互動教學|Interactive Training
+返回遊戲|Return to Game
+冒險背包|Inventory
+道具也是你的技能樹|Items Are Part of Your Skill Tree
+未知外觀可鑑定。裝備 / 使用 / 丟棄各消耗一回合；打開背包不消耗回合。詛咒裝備先淨咒才可卸下。|Identify unknown appearances. Equipping, using, or dropping costs a turn; opening inventory is free. Remove curses before taking off bound equipment.
+超重：飽食消耗增加|Overburdened: increased food consumption
+重量正常|Normal Carrying Weight
+這個分類沒有物品。|No items in this category.
+永久遺物 / 支線神器|Permanent Relics / Branch Artifacts
+尚無遺物|No relics yet
+匯出存檔 JSON|Export Save JSON
+冒險日誌|Adventure Journal
+活下來也要有計畫|Survival Needs a Plan
+主線：穿越六個區域，擊敗第 24 層守衛，取回餘燼之心。支線可選；神器會提供永久加成。已生成樓層|Main quest: cross six regions, defeat the floor-24 guardian, and recover the Ember Heart. Branches are optional; artifacts grant permanent bonuses. Generated floors:
+正式世界|Full World
+委託 · 完成後在此領取獎勵|Contracts · Claim Rewards Here
+已領取|Claimed
+領取獎勵|Claim Reward
+世界路線|World Routes
+尚未擊敗|Not Defeated Yet
+尚未完成|Not Completed Yet
+已擊敗|Defeated
+已取得神器|Artifact Recovered
+入口：主線第|Entrance: main floor
+層的 ✧ 傳送門|, through the ✧ portal
+探索過的樓層|Explored Floors
+跨局成就|Across-Run Achievements
+經典永久死亡|Classic: Permanent Death
+探險救援|Explorer: Rescues
+尚餘救援|Rescues Remaining:
+查看教學課表|View Training Lessons
+隨時可查，不需要背整本|Look It Up; No Memorization Required
+鍵盤與觸控|Keyboard and Touch
+操作|Controls
+效果|Effect
+教學課表|Training Lessons
+種族 / 職業|Races / Classes
+深層規則|Deep Rules
+怪物圖鑑|Bestiary
+道具圖鑑|Item Codex
+Debug 教室|Debug Classroom
+進入互動教學|Enter Interactive Training
+返回目前遊戲|Return to Current Game
+三條可選支線|Three Optional Branches
+主線第|Main Floor
+種族：生存方式與抗性|Races: Survival Traits and Resistances
+職業：戰鬥與專屬技能|Classes: Combat and Unique Skills
+體質修正|Stat Modifiers
+特性|Traits
+基礎 HP|Base HP
+推薦組合：精靈織焰師（高法傷）、矮人守燼者（坦克）、吸血鬼喚骨者（擊殺補血）、哥布林巡林者（補給與遠程）。所有 48 種搭配都可使用。|Suggested builds: Elf Flameweaver (spell damage), Dwarf Ember Warden (tank), Vampire Bonecaller (healing on kills), and Goblin Ranger (supplies and range). All 48 combinations are available.
+訓練用人類守燼者，避免種族特性跳過基礎課。每一步都有目標、理由、提示與地圖標記；完成後自動進下一課。|Training uses a Human Ember Warden so racial traits do not skip the basics. Each lesson includes a goal, reason, hint, and map marker. Complete it to advance automatically.
+普通層可以直接下樓，但探索能取得升級與補給。每四層守衛封鎖出口；支線最深層守衛會掉落神器。擊敗第 24 層守衛後，在餘燼之心互動即可通關。|You can descend through ordinary floors immediately, but exploration earns upgrades and supplies. Guardians seal every fourth floor. Branch guardians drop artifacts. Defeat the final guardian on floor 24, then interact with the Ember Heart to win.
+搜尋怪物名稱、戰術或抗性|Search monsters, tactics, or resistances
+沒有符合的怪物。|No matching monsters.
+普通怪物隨深度提升。|Ordinary enemies scale with depth.
+火焰抗性|Fire Resistance
+寒冰抗性|Cold Resistance
+火抗 65%|Fire Resistance 65%
+寒冰抗性 65%|Cold Resistance 65%
+把遊戲當成 AI Coding Workshop 的測試題|Use the Game as an AI Coding Workshop Test
+碰撞與路徑|Collision and Pathfinding
+隔牆引怪、關門切視線。預期：怪物繞路，沒有視線的弓手不射穿牆。|Lure enemies around a wall and close doors to break sight. Expected: enemies take a route around walls; archers never shoot through blocked sight.
+回合與無效操作|Turns and Invalid Actions
+撞牆、沒魔力放技能、空背包按喝藥。預期：回合數不變。|Bump a wall, cast without mana, and try drinking with no potion. Expected: the turn counter does not change.
+狀態與生命周期|State and Lifecycle
+召喚骸骨、上下樓、死亡後移動。預期：盟友按規則跟隨，死人不能行動。|Summon skeletons, change floors, then try moving after death. Expected: allies follow correctly; dead characters cannot act.
+資料一致性|Data Consistency
+裝備詛咒戒指，存檔重載。預期：加成、綁定、樓層物件與背包一致。|Equip a cursed ring, save, and reload. Expected: bonuses, binding, floor objects, and inventory remain consistent.
+可重現實驗|Reproducible Experiments
+固定種子與角色，用同樣操作比較。預期：地圖與遊戲隨機結果一致。|Fix the seed and character, then repeat the same actions. Expected: maps and random gameplay outcomes match.
+好的 Debug Prompt|A Useful Debug Prompt
+寫出重現步驟、實際結果、預期結果與修改範圍，再要求 AI 分析原因。|Give reproduction steps, actual results, expected results, and the allowed scope. Then ask AI to analyze the cause.
+例：主線第 5 層，我站在關閉的門後，弓手仍造成傷害。請檢查視線判斷是否把關門視為遮擋，只修改遠程攻擊相關邏輯，並測試開門 / 關門兩個情境。|Example: On main floor 5, an archer damages me through a closed door. Check whether line of sight treats closed doors as obstacles. Modify only ranged-attack logic and test both open and closed doors.
+你已取得不白給資格|Certified to Stop Giving Monsters Free Kills
+13 關教學完成！|All 13 Training Lessons Complete!
+你已實際完成移動、碰撞、開箱、裝備、近戰、瞄準施法、補血、進食、搜尋、鑑定、解除詛咒、聖壇祈禱和階梯互動。|You practiced movement, collision, looting, equipment, melee, targeting, spells, healing, food, searching, identification, curse removal, altar blessings, and stairs.
+下一步：選擇種族與職業。建議第一局使用探險模式；活下來後再挑戰經典永久死亡。|Next: choose a race and class. Start with Explorer mode, then try Classic permanent death when you are ready.
+建立正式角色|Create Your Real Character
+看看訓練場|View Training Grounds
+回選單|Back to Menu
+餘燼重燃 · 深淵之書完結|Ember Rekindled · The Book Complete
+餘燼燈熄滅了|Your Ember Lantern Went Out
+你走過六個區域，擊敗深淵編織者，帶回餘燼之心。故事沒有奪走你的名字。|You crossed six regions, defeated the Abyss Weaver, and recovered the Ember Heart. The story did not take your name.
+下一趟記住：藥水不是傳家寶，金幣也不是防彈衣。|Next time: potions are not heirlooms, and gold is not body armor.
+最後原因|Final Cause
+最深|Deepest Floor:
+隻敵人|enemies
+位守衛|guardians
+永久遺物|Permanent Relics
+再開一局|New Run
+冒險紀錄|Adventure Record
+匯出存檔|Export Save
+查看地圖|View Map
+任務|Goal
+具體操作|What to Do
+我來試試|Let Me Try
+查完整手冊|Open Full Codex
+查規則|Rules
+詳細提示|Detailed Hint
+冒險提示|Adventure Tip
+互動教學完成|Training Complete
+在選單建立你的正式角色。|Create your real character in the menu.
+你中毒了：用淨化藥水或聖諭者技能解除。|Poisoned: use a Cleansing Potion or your Cleric skill.
+生命偏低：先補血，再繼續探索。|Low health: heal before exploring further.
+你飢餓了：按 r 進食。|Hungry: press r to eat.
+背包超重：出售或丟棄物品可降低消耗。|Overburdened: sell or drop items to reduce food consumption.
+守衛正在預告重擊！離開紅色範圍，或用冰霜延後它。|Heavy strike incoming! Leave the red area or freeze the guardian to delay it.
+本層出口有封印：擊敗守衛，取得遺物。|The exit is sealed. Defeat the guardian and collect its relic.
+按 c 搜尋暗門；點敵人瞄準；下樓前補給。|Press c for secret doors, click enemies to aim, and resupply before descending.
+已帶回餘燼之心|Ember Heart Recovered
+冒險結束 · 新的一局等著你|Run Ended · A New Adventure Awaits
+擊敗本層守衛|Defeat This Floor’s Guardian
+取得餘燼之心|Recover the Ember Heart
+尋找下行階梯|Find the Down Stairs
+取得神器，返回主線|Collect the Artifact and Return
+繼續深入支線|Explore the Branch Further
+本層敵人|Enemies on This Floor
+樓層保留；上樓可以回訪。|Floors persist; take the stairs back to revisit.
+點選可見敵人瞄準；tab 切換目標。|Click a visible enemy to aim; tab cycles targets.
+點選可見敵人瞄準。|Click a visible enemy to aim.
+視線通暢|Clear Line of Sight
+視線受阻|Blocked Line of Sight
+上行階梯|Up Stairs
+下行階梯|Down Stairs
+餘燼之心|Ember Heart
+支線傳送門|Branch Portal
+返回主線出口|Return to Main Dungeon
+入口營火|Entrance Campfire
+守衛遺物|Guardian Relic
+地上物品|Ground Item
+教學出口|Training Exit
+完成實作才能過關 · 訓練不會永久死亡|Practice to Advance · Training Has No Permanent Death
+隨機世界 · 永久死亡 · 戰術探索|Random World · Permanent Death · Tactical Exploration
+深淵之書 · THE BOOK OF THE ABYSS|THE BOOK OF THE ABYSS
+你思考時，世界也會等待。|The world waits while you think.
+無效操作不扣回合；打開背包不扣回合。|Invalid actions and opening inventory take no turn.
+遠程射擊|Ranged Shot
+喝生命藥水|Drink Healing Potion
+搜尋陷阱 / 暗門|Search Traps / Secrets
+餘燼爆破|Ember Burst
+冰霜新星|Frost Nova
+閃步|Blink
+探索目標|Objective
+回合制地下城。使用 WASD 或方向鍵移動。|Turn-based dungeon. Move with WASD or arrow keys.
+存檔無法讀取|Unable to Load Save
+存檔版本或世界資料不正確|Invalid save version or world data
+冒險備份|Adventure Backup
+選擇 Emberfall JSON 存檔。匯入後會取代同類型的自動存檔（教學 / 正式）；若要保留目前角色，先匯出。|Choose an Emberfall JSON save. Import replaces the matching auto-save (training or adventure). Export your current character first if you want to keep it.
+先匯出目前冒險|Export Current Adventure First
+搬移第一版角色|Migrate Your Original Character
+保留職業、等級、生命、攻擊、護甲、金幣與藥水。新版本增加種族與世界系統，會將角色設為人類並重新生成對應深度的地圖。|Keep your class, level, HP, attack, armor, gold, and potions. The new race and world systems make your character Human and regenerate the map at the corresponding depth.
+搬移並取代新版正式存檔|Migrate and Replace Adventure Save
+舊版角色已搬移；世界依新版規則重新生成。|Original character migrated; the world was rebuilt under the new rules.
+舊版角色已搬移，地圖按新版規則重建。|Original character migrated; maps now follow the new rules.
+舊版角色已搬移。|Original character migrated.
+冒險已存檔。|Adventure Saved.
+瀏覽器不允許儲存；請從背包匯出 JSON。|Browser storage is unavailable. Export JSON from inventory.
+已匯出目前冒險。|Current Adventure Exported.
+找不到存檔|No Save Found
+無法匯入|Import Failed
+搬移失敗|Migration Failed
+存檔超過 8 MB|Save Exceeds 8 MB
+無效的第一版存檔|Invalid Original Save
+舊角色數值無效|Invalid Original Character Stats
+舊角色生命或魔力無效|Invalid Original HP or Mana
+訓練與正式世界混合|Training and Adventure Worlds Are Mixed
+角色位置無效|Invalid Character Position
+角色數值無效|Invalid Character Stats
+生命、魔力或等級無效|Invalid HP, Mana, or Level
+面向無效|Invalid Facing Direction
+異常與技能狀態無效|Invalid Status Effects or Cooldowns
+背包無效|Invalid Inventory
+裝備與背包不一致|Equipment and Inventory Do Not Match
+遺物無效|Invalid Relics
+鑑定資料無效|Invalid Identification Data
+任務資料無效|Invalid Quest Data
+日誌無效|Invalid Journal
+進度無效|Invalid Progress
+教學狀態無效|Invalid Training Progress
+樓層識別無效|Invalid Floor Identifier
+樓層屬性無效|Invalid Floor Properties
+地圖無效|Invalid Map
+樓梯位置無效|Invalid Stair Positions
+房間無效|Invalid Rooms
+敵人無效|Invalid Enemies
+盟友無效|Invalid Allies
+物件無效|Invalid Objects
+角色站在牆內|Character Is Inside a Wall
+旅行武器|Traveller’s Weapon
+旅行斗篷|Traveller’s Cloak
+訓練長劍|Training Sword
+餘燼學院 · 安全訓練場|Ember Academy · Safe Training Grounds
+返回主線|Return to Main Dungeon
+未裝備|Unequipped
+詛咒綁定|Curse-Bound
+已裝備|Equipped
+尚未鑑定；可用鑑定卷軸確認。|Unidentified; use an Identification Scroll to check.
+未知物品|Unknown Item
+全部|All
+武器|Weapon
+護甲|Armor
+戒指|Ring
+藥水|Potions
+卷軸|Scrolls
+魔杖|Wands
+食物|Food
+卸下|Unequip
+裝備|Equip
+使用|Use
+丟棄|Drop
+未知|Unknown
+詛咒|Cursed
+綁定|Bound
+背包|Inventory
+日誌|Journal
+手冊|Codex
+存檔|Save
+選單|Menu
+探險者|Adventurer
+目標情報|Target Info
+最近事件|Recent Events
+探索|Explore
+提示|Hint
+目標|Target
+英雄|Hero
+生命|HP
+魔力|Mana
+血飽|Blood Satiety
+飽食|Satiety
+經驗|Experience
+負重|Weight
+重量|Weight
+攻擊|Attack
+護盾|Shield
+金幣|Gold
+金|g
+額外回魔|Extra Mana
+等待|Wait
+進食|Eat
+近戰|Melee
+中毒|Poisoned
+燃燒|Burning
+遲緩|Slowed
+巨力|Might
+隱匿|Stealth
+壁壘|Bulwark
+飢餓|Hungry
+基礎價格|Base Price
+主線|Main Dungeon
+可選支線|Optional Branch
+支線|Branch
+回合|Turns
+獎勵|Reward
+模式|Mode
+神器|Artifacts
+救援|Rescues
+聖壇|Altar
+泉水|Fountain
+寶箱|Chest
+商人|Merchant
+敵人|Enemies
+你|You
+牆壁|Wall
+關閉的門|Closed Door
+熔岩|Lava
+毒池|Poison Pool
+冰面|Ice
+地板|Floor
+迷霧|Fog
+門|Door
+附近|Nearby
+位置|Position
+距離|Range
+瞄準|Target
+冷卻|Cooldown
+火抗|Fire Resist
+冰抗|Cold Resist
+目前|Current
+完成|Completed
+特性|Traits
+開始|Start
+取消|Cancel
+返回|Back
+暫時離開|Leave for Now
+暫時|For Now
+稍後再選|Choose Later
+離開商店|Leave Shop
+離開|Leave
+尚未取得|None Yet
+層|Floor
+課|Lesson
+格|Tiles
+瓶|Bottles
+份|Units
+次|Times
+隻|Units
+生命藥水|Healing Potion
+物品|Items
+`;UI_EN.trim().split('\n').forEach(line=>{const i=line.indexOf('|');phrase(line.slice(0,i),line.slice(i+1))});
+const LOG_EN=`
+骸骨盟友|Skeleton Allies
+完成第|Lesson
+可開始正式冒險|Ready for a Real Adventure
+層有入口|has an Entrance
+移動 · e 互動 · c 搜尋 · x 自動探索|Move · e Interact · c Search · x Auto-explore
+建議先玩獨立互動教學。正式冒險先找商人補給，再清理安全走廊；遇到遠程敵人，用牆切視線。藥水喝太晚，通常就不用再喝了。|Start with interactive training. In a real run, buy supplies and clear safe corridors. Use walls against ranged enemies. If you drink a potion too late, you probably will not need it anymore.
+歡迎來到餘燼學院。完成 13 個實作任務，學會自己活下來。|Welcome to Ember Academy. Complete 13 hands-on tasks and learn to survive.
+你帶著一盞餘燼燈，踏入第一層礦坑。|With an ember lantern in hand, you enter the first mine floor.
+矮人的礦坑直覺發現了陷阱。|Your dwarven instincts reveal a nearby trap.
+守衛倒下，出口封印解除。它留下了一份遺物。|The guardian falls. The exit is unsealed, and a relic remains.
+你的種族免疫中毒。|Your race is immune to poison.
+前方是石牆。|A stone wall blocks your way.
+你打開了門。|You open the door.
+尖刺陷阱|Spike Trap
+毒針陷阱|Poison Dart Trap
+警報響起！本層敵人被驚動。|An alarm rings! Enemies across the floor are alerted.
+黏液分裂了！|The slime splits!
+重擊預告：離開紅色 3×3 區域！|Heavy strike telegraph: leave the red 3×3 area!
+深淵編織者扭曲了空間。|The Abyss Weaver twists space.
+骸骨盟友揮出武器。|Your skeleton ally strikes.
+遲緩使敵人多行動了一次。|Slow gives enemies an extra action.
+技能尚在冷卻。|That skill is on cooldown.
+魔力不足。等待可額外恢復 2 魔力。|Not enough mana. Waiting restores 2 extra mana.
+範圍內没有可見目標。|No visible target in range.
+範圍內沒有可見目標。|No visible target in range.
+前方無法閃步。|You cannot Blink in that direction.
+閃步！|Blink!
+最多可有兩隻骸骨盟友。|You can have at most two skeleton allies.
+周圍沒有召喚空間。|No adjacent space for summoning.
+骸骨盟友受召而來，持續 40 回合。|A skeleton answers your call for 40 turns.
+鋼鐵壁壘：護盾與 4 回合減傷。|Iron Bulwark: a shield and 4 turns of damage reduction.
+秘法洪流席捲可見敵人。|Arcane Torrent sweeps through visible enemies.
+影遁：4 回合隱匿，下一擊暴擊率大幅提高。|Shadow Veil: 4 turns of stealth and a greatly increased critical chance on your next hit.
+穿心連射！|Heartpiercer Volley!
+祈禱恢復生命並清除異常。|Your prayer restores health and clears harmful effects.
+射程內沒有可見敵人。|No visible enemy within shooting range.
+魔力不足。|Not enough mana.
+你等待並凝聚魔力。|You wait and gather mana.
+你開始飢餓。找口糧，或按 r 進食。|You are getting hungry. Find rations or press r to eat.
+發現隱藏的門！|You discover a secret door!
+仔細搜尋，沒有發現新的機關。|You search carefully but find no new mechanisms.
+自動探索：遇敵、受傷或發現物件會停止。按任意遊戲鍵停止。|Auto-explore stops for enemies, damage, or objects. Press a game key to stop it.
+自動探索已停止|Auto-explore stopped
+自動探索已停止。|Auto-explore stopped.
+自動探索已停：敵人或生存風險。|Auto-explore stopped: enemy or survival risk.
+附近有可互動物件。按 e。|An interactive object is nearby. Press e.
+沒有可安全自動探索的路線；試試搜尋暗門。|No safe auto-explore route. Try searching for secret doors.
+魔杖的充能耗盡了。|The wand is out of charges.
+生命已滿，不浪費補給。|Health is full. Save your supplies.
+魔像不需要進食，可以把口糧賣給商人。|Constructs need no food. Sell rations to a merchant instead.
+你已經很飽，先把口糧留下。|You are already full. Keep your rations.
+魔杖範圍內沒有可見目標。|No visible target within wand range.
+卷軸展開，地形浮現。敵人的位置仍需親眼確認。|The scroll reveals the terrain. Enemy positions still need to be seen firsthand.
+空間折疊，你被傳送了。|Space folds, and you teleport.
+目前武器攻擊 +2。|Current weapon attack +2.
+已裝備物品的詛咒被解除。|Curses on your equipped items are removed.
+可見敵人暫時無法行動。|Visible enemies are temporarily unable to act.
+目前裝備被詛咒綁定！先使用淨咒卷軸。|Your equipment is curse-bound! Use an Unbinding Scroll first.
+先卸下這件裝備。|Unequip this item first.
+所有物品都已完整鑑定，保留卷軸。|Everything is fully identified. Keep the scroll.
+選一件物品鑑定|Choose an Item to Identify
+知識就是生存|Knowledge Is Survival
+確認後消耗一張鑑定卷軸與一回合，揭露真名和詛咒。|Confirming consumes one Identification Scroll and one turn to reveal its name and curse.
+返回背包|Back to Inventory
+附近沒有可互動物件。|Nothing nearby to interact with.
+先完成目前的移動任務，寶箱會在第三課使用。|Finish your movement tasks first. The chest is used in lesson 3.
+聖壇會在第十二課使用，先完成目前的任務。|The altar is used in lesson 12. Finish your current task first.
+背包太滿，先整理再開箱。|Your bag is too full. Make room before opening the chest.
+寶箱裡還有一些金幣。|The chest also contains some gold.
+入口營火恢復生命與魔力；餘燼只能使用一次。|The entrance campfire restores HP and mana. Its ember can be used only once.
+先完成目前的課程。紫色標記不是逃課出口。|Finish your current lesson. The purple marker is not a shortcut out of class.
+出口被守衛的封印鎖住。先擊敗本層守衛。|The guardian’s seal locks the exit. Defeat this floor’s guardian first.
+你取回了餘燼之心，深淵不再掌握你的名字。|You reclaim the Ember Heart. The abyss no longer owns your name.
+餘燼聖壇|Ember Altar
+一次性的祝福|A One-Time Blessing
+選擇一項祝福。每座聖壇只能使用一次，祈禱消耗一回合。|Choose a blessing. Each altar can be used once; praying costs a turn.
+生命祝福|Healing Blessing
+淨咒祝福|Unbinding Blessing
+智慧祝福|Wisdom Blessing
+解除全部已裝備物品的詛咒，恢復 12 魔力。|Remove all equipped-item curses and restore 12 mana.
+聖壇回應了你的祈禱。|The altar answers your prayer.
+不是每口水都安全|Not Every Sip Is Safe
+地下泉水|Underground Fountain
+水中有微弱的魔力。喝下可能恢復生命、恢復魔力，也可能中毒。每口泉水只能喝一次。|The water holds faint magic. A drink may restore health or mana, or poison you. Each fountain can be used once.
+喝下泉水|Drink from Fountain
+清涼泉水恢復 28 生命。|Cool spring water restores 28 HP.
+泉水恢復全部魔力。|The fountain fully restores your mana.
+水裡有毒！|The water is poisoned!
+守衛的遺產|The Guardian’s Legacy
+選擇一件永久遺物|Choose a Permanent Relic
+效果可疊加。選擇後消耗一回合。|Effects stack. Choosing costs one turn.
+你已持有這個支線神器。|You already have this branch artifact.
+流浪商人的補給站|Wandering Merchant’s Supply Camp
+$ 是商人，不是寶箱|$ Is a Merchant, Not a Chest
+商人物品已鑑定，無詛咒。交易不消耗回合；商店庫存會保留。|Shop items are identified and uncursed. Trading is free; stock persists.
+購買|Buy
+營火休息 · 35 金（回滿生命）|Campfire Rest · 35 Gold (Full HP)
+武器強化 +1 · 40 金|Weapon Upgrade +1 · 40 Gold
+出售背包物品（每次整組）|Sell Inventory Items (Whole Stack)
+商人：錢不夠。勇氣不能刷卡。|Merchant: Not enough gold. Courage is not a credit card.
+需要 35 金幣。|You need 35 gold.
+需要 40 金幣。|You need 40 gold.
+生命已滿。|Health is full.
+在商人的營火旁休息。|You rest by the merchant’s campfire.
+先裝備武器。|Equip a weapon first.
+武器攻擊 +1。|Weapon attack +1.
+先整理背包，預留獎勵空間。|Make room in your bag for the reward first.
+背包格數已滿！先丟棄或出售物品。|Your bag has no empty slots! Drop or sell items first.
+不需要進食|Needs No Food
+不需要食物|Needs No Food
+沒有可見敌人|No Visible Enemies
+目前沒有可見敵人。|No enemies are currently visible.
+靠近後按 e 互動。|Approach it and press e to interact.
+字母：敵人|Letters: Enemies
+訓練長劍|Training Sword
+紅褐色藥水|Russet Potion
+天藍色藥水|Sky-Blue Potion
+乳白色藥水|Milky Potion
+紫色藥水|Violet Potion
+墨綠色藥水|Dark-Green Potion
+刻著 KIR 的卷軸|Scroll Inscribed KIR
+刻著 VERA 的卷軸|Scroll Inscribed VERA
+刻著 ZEL 的卷軸|Scroll Inscribed ZEL
+刻著 NORA 的卷軸|Scroll Inscribed NORA
+刻著 FEN 的卷軸|Scroll Inscribed FEN
+刻著 ALU 的卷軸|Scroll Inscribed ALU
+銅色戒指|Copper Ring
+骨白戒指|Bone-White Ring
+翡翠戒指|Jade Ring
+黑曜戒指|Obsidian Ring
+彎曲的魔杖|Crooked Wand
+水晶魔杖|Crystal Wand
+白木魔杖|Whitewood Wand
+每一步都有代價|Every Action Has a Cost
+餘燼行者|Ember Traveller
+向前|Forward
+已售完|Sold Out
+無詛咒|Uncursed
+系統|System
+規則|Rules
+種族|Race
+職業|Class
+種起手組合|Starting Combinations
+冒險|Adventure
+教學|Training
+鑑定結果|Identification Result
+鑑定|Identify
+成就解鎖|Achievement Unlocked
+升級|Level Up
+等級提升|Level Up
+完成訓練|Training Complete
+完成委託|Contract Completed
+獲得永久遺物|Permanent Relic Acquired
+獲得經驗與金幣。|earned experience and gold.
+尋回支線神器！|Branch Artifact Recovered!
+支線完成|Branch Completed
+搜尋發現|Search Found
+處陷阱或暗門。|traps or secret doors.
+冰霜新星凍結|Frost Nova Froze
+個目標。|targets.
+剩餘|Remaining
+剩|Remaining:
+救援護符救了你。剩餘|A rescue charm saved you. Remaining:
+救援護符重燃！剩|Your rescue charm rekindles! Remaining:
+次救援，回到本層入口。|rescues. Returned to this floor’s entrance.
+首次抵達|First Visit:
+層，恢復部分魔力。|; some mana restored.
+層。這裡仍保留上次的痕跡。|. Everything remains as you left it.
+詛咒把它綁住了！|The curse binds it to you!
+你卸下了|You unequip
+放下了|Dropped
+出售了|Sold
+的遠程攻擊|’s ranged attack
+的重擊落下！|’s heavy strike lands!
+的重擊|’s heavy strike
+召喚了援軍。| summons reinforcements.
+狂暴了！| enrages!
+升至|Reached Level
+級！生命、魔力與攻擊提升。|! Health, mana, and attack increase.
+受到| takes
+傷害|damage
+火焰|fire
+寒冰|cold
+暴擊|Critical Hit
+獲得|Received
+恢復|Restore
+回滿生命|Full Health
+回滿魔力|Full Mana
+已匯出|Exported
+沒有已知的|No known
+獲得 12 護盾。|and gain 12 shield.
+經驗，回滿魔力。|experience and fully restore mana.
+充能|Charges
+尚無|None
+守衛|Guardian
+火|Fire
+冰|Cold
+抗|Resist
+按|Press
+靠近|Approach
+互動|Interact
+下樓|Descend
+上樓|Ascend
+備份|Backup
+補給|Supplies
+位置|Position
+深淵|Abyss
+擊敗|Defeated
+格|tiles
+`;LOG_EN.trim().split('\n').forEach(line=>{const i=line.indexOf('|');phrase(line.slice(0,i),line.slice(i+1))});
+let LANGUAGE_CHOICE='auto';try{LANGUAGE_CHOICE=localStorage.getItem(LANGUAGE_KEY)||'auto'}catch{}
+if(!['auto','zh','en'].includes(LANGUAGE_CHOICE))LANGUAGE_CHOICE='auto';
+function recommendedLanguage(languages){for(const l of languages||[]){const code=String(l).toLowerCase();if(code==='zh'||code.startsWith('zh-'))return'zh';if(code==='en'||code.startsWith('en-'))return'en'}return'en'}
+let LANGUAGE=LANGUAGE_CHOICE==='auto'?recommendedLanguage(navigator.languages?.length?navigator.languages:[navigator.language]):LANGUAGE_CHOICE;
+const EN_RE=new RegExp([...EN.keys()].sort((a,b)=>b.length-a.length).map(k=>k.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|'),'g');
+function englishText(source){source=String(source).replace(/^(.+) · (\d+) 層/, '$1 · Floor $2').replace(/^恢復 (\d+) 生命，獲得 (\d+) 護盾。$/, 'Restore $1 HP and gain $2 shield.').replace(/^獲得 (\d+) 經驗，回滿魔力。$/, 'Gain $1 experience and fully restore mana.').replace(/^主線第 (\d+) 層有入口$/, 'Entrance on main floor $1').replace(/^完成第 (\d+) \/ (\d+) 課$/, 'Lesson $1 / $2');return source.replace(EN_RE,m=>EN.get(m)).replace(/，/g,', ').replace(/。/g,'.').replace(/：/g,': ').replace(/；/g,'; ').replace(/！/g,'!').replace(/？/g,'?').replace(/（/g,' (').replace(/）/g,')').replace(/「|」/g,'').replace(/、/g,', ').replace(/\s+([,.;!?])/g,'$1')}
+function t(source){return LANGUAGE==='en'?englishText(source):source}
+const localText=new WeakMap(),localAttributes=new WeakMap();
+const languageSelect=document.createElement('select');languageSelect.id='languageSelect';languageSelect.setAttribute('aria-label','Language / 語言');languageSelect.innerHTML='<option value="auto">瀏覽器推薦 / Auto</option><option value="zh">繁體中文</option><option value="en">English</option>';languageSelect.value=LANGUAGE_CHOICE;document.querySelector('.toptools').prepend(languageSelect);
+const languageObserver=new MutationObserver(()=>localizePage());
+function localizePage(){languageObserver.disconnect();document.documentElement.lang=LANGUAGE==='zh'?'zh-Hant':'en';document.title=LANGUAGE==='zh'?'EMBERFALL II · 深淵之書':'EMBERFALL II · The Book of the Abyss';const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);let n;while(n=walker.nextNode()){if(n.parentElement?.closest('script,style,#languageSelect,input,textarea,[data-no-i18n]'))continue;let saved=localText.get(n);if(!saved||n.nodeValue!==saved.rendered)saved={source:n.nodeValue,rendered:null};const translated=t(saved.source);if(n.nodeValue!==translated)n.nodeValue=translated;saved.rendered=translated;localText.set(n,saved)}document.querySelectorAll('[placeholder],[aria-label],[title]').forEach(el=>{if(el===languageSelect)return;const values=localAttributes.get(el)||{};for(const attr of ['placeholder','aria-label','title'])if(el.hasAttribute(attr)){const current=el.getAttribute(attr);let saved=values[attr];if(!saved||current!==saved.rendered)saved={source:current};const translated=t(saved.source);if(current!==translated)el.setAttribute(attr,translated);saved.rendered=translated;values[attr]=saved}localAttributes.set(el,values)});languageSelect.options[0].text=LANGUAGE==='zh'?'瀏覽器推薦':'Browser recommendation';languageSelect.title=LANGUAGE==='zh'?'依瀏覽器偏好推薦；手動選擇會記住設定':'Recommended from browser languages; manual choices are remembered';languageObserver.observe(document.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['placeholder','aria-label','title']})}
+function setLanguage(choice){LANGUAGE_CHOICE=choice;LANGUAGE=choice==='auto'?recommendedLanguage(navigator.languages?.length?navigator.languages:[navigator.language]):choice;try{localStorage.setItem(LANGUAGE_KEY,choice)}catch{}localizePage()}
+languageSelect.addEventListener('change',()=>setLanguage(languageSelect.value));
+localizePage();
+
+</script></body></html>
