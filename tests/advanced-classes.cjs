@@ -4,7 +4,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const html = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
-const script = html.match(/<script>([\s\S]*)<\/script>/)[1];
+const script = [...html.matchAll(/<script defer src="([^"]+)"><\/script>/g)].map(m=>fs.readFileSync(path.join(__dirname, '..', m[1]), 'utf8')).join('\n');
 new Function(script);
 const core = script.split('const MOVE_KEYS=')[0];
 const stubs = "const nodes=new Map();const noop=()=>{};const context=new Proxy({}, {get:(o,k)=>o[k]||noop,set:(o,k,v)=>(o[k]=v,true)});\nconst document={getElementById(id){if(!nodes.has(id))nodes.set(id,{style:{},classList:{add:noop,remove:noop,toggle:noop},getContext:()=>context,focus:noop,innerHTML:'',textContent:''});return nodes.get(id)},querySelectorAll:()=>[]};\nconst storage=new Map();const localStorage={getItem:k=>storage.get(k)||null,setItem:(k,v)=>storage.set(k,v)};\n";
@@ -15,3 +15,4 @@ const pairs = script.slice(script.indexOf('for(const [zh,en]of'), script.indexOf
 const translator = script.slice(script.indexOf('const EN_RE='), script.indexOf('const localText='));
 const languageChecks = new Function(stubs + core + locale + pairs + "let LANGUAGE='en';" + translator + "\nlet count=0;const check=x=>{if(/[\\u3400-\\u9fff]/.test(t(x)))throw Error('Untranslated: '+x);count++};\nfor(const j of ['alchemist','spirit'])for(const k of ['name','ult','desc'])check(JOBS[j][k]);for(const rule of Object.values(RACE_POLICIES))check(rule.reason[0]);for(const x of Object.values(ELEMENT_NAMES))check(x);for(const row of CONTROL_ROWS)for(const x of row)check(x);\nfor(const x of ['調製藥劑','共鳴療癒','試劑 2 · 魔力 4','擊殺取得試劑；炸彈消耗 1 試劑。','元素召喚消耗 2 共鳴；盟友命中補充共鳴。','60 種合法組合'])check(x);\nreturn count;\n")();
 console.log(checks + ' behavior checks and ' + languageChecks + ' localization checks passed.');
+
