@@ -424,8 +424,8 @@ const LOG_EN=`
 擊敗守衛|Guardians Defeated
 最深樓層|Deepest Floor
 
-天使與惡魔是高位生命，機制複雜，新手不推薦。5 召喚，6 使用種族能力；每次有效操作消耗一回合。全部召喚共用兩名盟友上限，盟友會跟隨上下樓；走向盟友可交換位置。資源上限 100，冷卻、召喚壽命與反噬隨回合推進，打開介面不會推進。|Angels and Demons are higher beings with complex mechanics, not recommended for beginners. Press 5 to summon and 6 for your racial ability. Each valid action costs a turn. All summons share a two-ally limit. Allies follow between floors; walk into them to swap places. Resources cap at 100. Cooldowns, summon lifetimes and Backlash advance with turns, not menus.
-高位生命 · 機制複雜，新手不推薦。種族召喚與職業召喚共用兩名盟友上限。|Higher being · Advanced, not recommended for beginners. Racial and class summons share a two-ally limit.
+天使與惡魔機制複雜，新手不推薦。5 召喚，6 使用種族能力；每次有效操作消耗一回合。全部召喚共用兩名盟友上限，盟友會跟隨上下樓；走向盟友可交換位置。資源上限 100，冷卻、召喚壽命與反噬隨回合推進，打開介面不會推進。|Angels and Demons have complex mechanics, not recommended for beginners. Press 5 to summon and 6 for your racial ability. Each valid action costs a turn. All summons share a two-ally limit. Allies follow between floors; walk into them to swap places. Resources cap at 100. Cooldowns, summon lifetimes and Backlash advance with turns, not menus.
+機制複雜，新手不推薦。種族召喚與職業召喚共用兩名盟友上限。|Advanced, not recommended for beginners. Racial and class summons share a two-ally limit.
 機制複雜，新手不推薦|Complex mechanics; not recommended for beginners
 種族能力尚在冷卻。|Racial abilities are on cooldown.
 種族資源或魔力不足。|Not enough racial resource or mana.
@@ -441,7 +441,7 @@ const LOG_EN=`
 召喚天界護衛|Summon Guardian
 召喚深淵獵犬|Summon Hellhound
 契約反噬|Pact Backlash
-高位生命資源無效|Invalid higher-being resources
+種族資源無效|Invalid racial resources
 恩典|Grace
 靈魂|Souls
 反噬|Backlash
