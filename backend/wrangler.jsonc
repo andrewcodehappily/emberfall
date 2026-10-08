@@ -1,0 +1,6 @@
+{
+ "name": "emberfall-stats", "main": "worker.mjs", "compatibility_date": "2026-10-01",
+ "vars": { "GAME_ORIGIN": "https://andrewcodehappily.github.io" },
+ "d1_databases": [{ "binding": "DB", "database_name": "emberfall-stats", "database_id": "REPLACE_WITH_DATABASE_ID", "migrations_dir": "migrations" }],
+ "triggers": { "crons": ["0 4 * * *"] }
+}
