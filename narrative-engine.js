@@ -43,6 +43,7 @@ if(topic==='past')line=chapter.past;if(topic==='secret')line=chapter.secret;if(t
 if(topic==='race')line=PLOT_RACES[s.race].lines[Object.keys(PLOT_THREADS).indexOf(id)];if(topic==='job')line=PLOT_JOBS[s.job].line;
 if(topic==='promise')line=stage&&plotChosen(id,stage-1)!==undefined?plotScene(id,stage-1).choices[plotChosen(id,stage-1)].result:chapter.past;
 if(topic==='evidence')line=plotHasClue(id,stage)?chapter.secret:N('「如果還沒有證據，請先看我們留下的東西。記憶遺物就在這層入口附近，你也可以用自己的能力調查。」','“Without evidence, first look at what we left. The memory relic is near this floor’s entrance; you may also investigate with your abilities.”');
+line=identityScene(id,stage,topic,line);
 recordPlotTalk(id,stage,topic);const chosen=a.choices[id][stage],done=chosen!==undefined,previous=stage>0?a.choices[id][stage-1]:undefined;
 const prior=previous!==undefined?`<div class="note"><b>目前承諾</b><p>${esc(nt(plotScene(id,stage-1).choices[previous].label))}</p><p>${esc(nt(plotScene(id,stage-1).choices[previous].result))}</p></div>`:'';
 const combo=PLOT_COMBOS.find(c=>c.race===s.race&&c.job===s.job&&c.thread===id);
