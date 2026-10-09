@@ -28,7 +28,7 @@ await page.screenshot({path:path.resolve(__dirname,'..','browser-mobile.png')});
 await page.evaluate(()=>{createState('human','warden','classic','browser-end');generateFloor('main-24');s.floor='main-24';const f=level();f.enemies=[];f.env=[];f.objects=f.objects.filter(o=>o.type==='heart');f.bossDead=true;s.p.x=f.end.x;s.p.y=f.end.y;close();interact()});
 await page.waitForSelector('[data-plot-ending="seal"]');await page.click('[data-plot-ending="seal"]');
 if(await page.evaluate(()=>s.status)!=='playing')throw Error('Finale skipped battle');
-await page.evaluate(()=>{const e=level().enemies.find(e=>e.id===s.plot.finalBoss);damageEnemy(e,100000);Object.assign(s.p,level().end);close();interact()});
+await page.evaluate(()=>{const e=level().enemies.find(e=>e.id===s.plot.finalBoss);damageEnemy(e,100000);finishTurn({enemies:false});enemiesTurn();if(level().enemies.some(a=>a.id===s.plot.finalBoss))throw Error("Final boss was not removed");Object.assign(s.p,level().end);close();interact()});
 await page.click('#plotFinalConfirm');await page.waitForSelector('#newRun');
 if(await page.evaluate(()=>s.plot.ending)!=='seal')throw Error('Wrong ending');
 await page.selectOption('#languageSelect','en');await page.waitForTimeout(100);body=await page.locator('#modal').innerText();

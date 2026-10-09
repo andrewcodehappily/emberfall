@@ -1,6 +1,6 @@
 'use strict';
 const {spawnSync}=require('node:child_process'),path=require('node:path');
-for(const test of ['ascendant-races','race-chronicles','advanced-classes','expedition-systems','narrative','duo-classes','identity-stories','analytics']){
+for(const test of ['ascendant-races','race-chronicles','advanced-classes','expedition-systems','narrative','duo-classes','identity-stories','sandbox-systems','sandbox-mount-save','pr14-review-regressions','analytics']){
   const result=spawnSync(process.execPath,[path.join(__dirname,test+'.cjs')],{stdio:'inherit'});
   if(result.error)throw result.error;
   if(result.status!==0)process.exit(result.status||1);
