@@ -6,18 +6,18 @@ async function secureEqual(a,b){
  const [x,y]=await Promise.all([hash(a),hash(b)]);let d=0;for(let i=0;i<x.length;i++)d|=x[i]^y[i];return d===0;
 }
 export default {
- async scheduled(event,env){await env.DB.prepare('DELETE FROM sessions WHERE last_seen < ?').bind(Date.now()-30*86400000).run();},
+ async scheduled(){ /* Retain all sessions, including when an old cron still exists. */ },
  async fetch(req,env){
  const url=new URL(req.url),origin=req.headers.get('Origin');
  const cors=origin===env.GAME_ORIGIN?{'Access-Control-Allow-Origin':origin,'Vary':'Origin'}:{};
  const reply=(v,s=200)=>json(v,s,cors);
- if(url.pathname==='/admin'&&req.method==='GET')return new Response(dashboard,{headers:{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','Content-Security-Policy':"default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'self'; base-uri 'none'; frame-ancestors 'none'",'X-Content-Type-Options':'nosniff'}});
+ if(['/admin','/aaadminnn'].includes(url.pathname)&&req.method==='GET')return new Response(dashboard,{headers:{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','Content-Security-Policy':"default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'self'; base-uri 'none'; frame-ancestors 'none'",'X-Content-Type-Options':'nosniff'}});
  if(url.pathname==='/api/stats'){
  if(req.method!=='GET')return reply({error:'Method not allowed'},405);
  const supplied=req.headers.get('Authorization')||'';
  if(!env.ADMIN_TOKEN||env.ADMIN_TOKEN.length<24||!await secureEqual(supplied,'Bearer '+env.ADMIN_TOKEN))return reply({error:'Unauthorized'},401);
- const now=Date.now();const days=Math.min(30,Math.max(1,Number(url.searchParams.get('days'))||7));
- const from=now-days*86400000;const page=Math.max(0,Math.min(10000,parseInt(url.searchParams.get('page'))||0));
+ const now=Date.now();const range=url.searchParams.get('days');const days=range===null||range==='all'||range==='0'?0:Math.min(36500,Math.max(1,Number(range)||7));
+ const from=days===0?0:now-days*86400000;const page=Math.max(0,Math.min(10000,parseInt(url.searchParams.get('page'))||0));
  const summary=await env.DB.prepare('SELECT COUNT(*) sessions, COUNT(DISTINCT visitor) players, COUNT(DISTINCT ip) ips, COALESCE(SUM(active_ms),0) active_ms FROM sessions WHERE started >= ?').bind(from).first();
  const online=await env.DB.prepare('SELECT COUNT(DISTINCT visitor) players FROM sessions WHERE ended IS NULL AND active=1 AND last_seen > ?').bind(now-60000).first();
  const rows=await env.DB.prepare('SELECT id,visitor,ip,started,last_seen,ended,active_ms,active,race,job,floor FROM sessions WHERE started >= ? ORDER BY started DESC LIMIT 100 OFFSET ?').bind(from,page*100).all();

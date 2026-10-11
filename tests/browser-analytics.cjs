@@ -5,16 +5,16 @@ await page.route('https://stats.test/api/session',async route=>{if(route.request
 // The old opt-in setting is no longer a control. Each launch shows the notice.
 await page.addInitScript(()=>localStorage.setItem('emberfall-stats-consent','no'));
 await page.goto('https://game.test/');assert.equal(events.length,0);
-assert(await page.locator('#statsNotice').isVisible());
-assert((await page.locator('#statsNotice').innerText()).includes('IP'));
-assert((await page.locator('#statsNotice').innerText()).includes('不同意請關閉遊戲'));
+assert.equal(await page.locator('#statsNotice').count(),0);
+await page.getByRole('button',{name:'繁體中文',exact:true}).click();
+assert.equal(await page.locator('#statsNotice').count(),0);
 assert.equal(await page.locator('#statsNotice button,#statsNotice input').count(),0);
-await page.evaluate(()=>startGame(true));await page.waitForFunction(()=>document.querySelector('#statsNotice')!==null);
+await page.evaluate(()=>startGame(true));
 await page.waitForTimeout(1300);assert.equal(events.length,1);assert.equal(events[0].type,'start');assert.equal(events[0].floor,1);
-await page.locator('#statsNotice').waitFor({state:'detached'});
+assert.equal(await page.locator('#statsNotice').count(),0);
 assert.equal(await page.getByRole('button',{name:'統計設定 / Stats',exact:true}).count(),0);
 // End automatically when the game ends; no settings interaction is needed.
 await page.evaluate(()=>{s.status='dead'});await page.waitForTimeout(1300);assert.equal(events[1].type,'end');
-await page.reload();assert(await page.locator('#statsNotice').isVisible());assert.equal(await page.locator('#statsNotice button,#statsNotice input').count(),0);
+await page.reload();assert.equal(await page.locator('#statsNotice').count(),0);
 const html=(await import('../backend/dashboard.mjs')).default;await page.route('https://stats.test/admin',route=>route.fulfill({body:html,contentType:'text/html'}));await page.route('https://stats.test/api/stats*',route=>{if(route.request().headers().authorization!=='Bearer abcdefghijklmnopqrstuvwxyz0123456789')return route.fulfill({status:401,json:{error:'Unauthorized'}});return route.fulfill({json:{summary:{players:1,sessions:1,ips:1,active_ms:20000},online:1,now:Date.now(),rows:[{visitor:'<img src=x onerror=alert(1)>',ip:'203.0.113.7',started:Date.now(),last_seen:Date.now(),ended:null,active:1,active_ms:20000,race:'angel',job:'warden',floor:3}]}})});
 await page.goto('https://stats.test/admin');await page.locator('#token').fill('abcdefghijklmnopqrstuvwxyz0123456789');await page.locator('#login button').click();await page.waitForSelector('#dashboard:not([hidden])');assert.equal(await page.locator('#rows tr').count(),1);assert.equal(await page.locator('#rows img').count(),0);assert((await page.locator('#rows').innerText()).includes('203.0.113.7'));await page.locator('#logout').click();assert(await page.locator('#login').isVisible());assert.equal(await page.locator('#rows tr').count(),0);assert.deepEqual(errors,[]);console.log('Browser analytics: startup notice, no toggles, automatic collection, no menu tracking, start/end, metadata, login, safe rendering and logout passed');}finally{await browser.close();}})().catch(e=>{console.error(e);process.exit(1)});
