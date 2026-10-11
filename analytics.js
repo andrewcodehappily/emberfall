@@ -20,7 +20,6 @@
  for(const event of ['keydown','pointerdown','touchstart'])document.addEventListener(event,()=>{lastInput=Date.now();},{passive:true});
  document.addEventListener('visibilitychange',()=>{if(document.hidden)end();else{lastInput=Date.now();tick();}});
  window.addEventListener('pagehide',end);
- // The startup language chooser shows the one-time bilingual disclosure.
  setInterval(()=>{
   if(playing()){
    if(!session&&Date.now()>=nextStartAttempt)tick();

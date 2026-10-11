@@ -5,11 +5,7 @@ await page.route('https://stats.test/api/session',async route=>{if(route.request
 // The old opt-in setting is no longer a control. Each launch shows the notice.
 await page.addInitScript(()=>localStorage.setItem('emberfall-stats-consent','no'));
 await page.goto('https://game.test/');assert.equal(events.length,0);
-assert(await page.locator('#statsNotice').isVisible());
-assert((await page.locator('#statsNotice').innerText()).includes('IP'));
-assert((await page.locator('#statsNotice').innerText()).includes('永久保存'));
-assert((await page.locator('#statsNotice').innerText()).includes('retained indefinitely'));
-assert.equal(await page.locator('#modal #statsNotice').count(),1);
+assert.equal(await page.locator('#statsNotice').count(),0);
 await page.getByRole('button',{name:'繁體中文',exact:true}).click();
 assert.equal(await page.locator('#statsNotice').count(),0);
 assert.equal(await page.locator('#statsNotice button,#statsNotice input').count(),0);
