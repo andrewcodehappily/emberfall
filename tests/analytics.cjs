@@ -17,5 +17,10 @@ db.prepare('UPDATE sessions SET last_seen=? WHERE id=?').run(Date.now()-20000,se
 await request({type:'end',visitor,...session});eq((await request({type:'beat',visitor,...session})).status,404);data=await(await stats(env.ADMIN_TOKEN)).json();eq(data.online,0);assert(data.rows[0].ended);checks++;
 await request({type:'start',visitor});data=await(await stats(env.ADMIN_TOKEN)).json();eq(data.summary.players,1);eq(data.summary.sessions,2);
 res=await worker.fetch(new Request('https://stats.test/api/session',{method:'POST',headers:{Origin:env.GAME_ORIGIN},body:'a'.repeat(3000)}),env);eq(res.status,413);
-db.prepare('UPDATE sessions SET last_seen=?').run(Date.now()-31*86400000);await worker.scheduled({},env);eq(db.prepare('SELECT COUNT(*) n FROM sessions').get().n,0);
+db.prepare('UPDATE sessions SET last_seen=?').run(Date.now()-31*86400000);await worker.scheduled({},env);eq(db.prepare('SELECT COUNT(*) n FROM sessions').get().n,2);
+ data=await(await stats(env.ADMIN_TOKEN)).json();eq(data.summary.sessions,2);
+ db.prepare('UPDATE sessions SET started=?').run(Date.now()-366*86400000);
+ data=await(await stats(env.ADMIN_TOKEN)).json();eq(data.summary.sessions,2);
+ data=await(await worker.fetch(new Request('https://stats.test/api/stats?days=7',{headers:{Authorization:'Bearer '+env.ADMIN_TOKEN}}),env)).json();eq(data.summary.sessions,0);
+ data=await(await worker.fetch(new Request('https://stats.test/api/stats?days=all',{headers:{Authorization:'Bearer '+env.ADMIN_TOKEN}}),env)).json();eq(data.summary.sessions,2);
 res=await worker.fetch(new Request('https://stats.test/admin'),env);eq(res.status,200);assert(res.headers.get('Content-Security-Policy').includes("frame-ancestors 'none'"));checks++;console.log(checks+' analytics checks passed');})().catch(e=>{console.error(e);process.exit(1)});
